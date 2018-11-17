@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CoCompusMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CoCompus" >
+        <id column="compus_id" property="compusId" jdbcType="INTEGER" />
+        <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+        <result column="compus_name" property="compusName" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        compus_id, college_id, compus_name, remark, create_time, create_userid
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoCompusExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from co_compus
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_compus
+        where compus_id = #{compusId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from co_compus
+        where compus_id = #{compusId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CoCompusExample" >
+        delete from co_compus
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CoCompus" >
+        insert into co_compus (compus_id, college_id, compus_name, 
+            remark, create_time, create_userid
+            )
+        values (#{compusId,jdbcType=INTEGER}, #{collegeId,jdbcType=VARCHAR}, #{compusName,jdbcType=VARCHAR}, 
+            #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CoCompus" >
+        insert into co_compus
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="compusId != null" >
+                compus_id,
+            </if>
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="compusName != null" >
+                compus_name,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="compusId != null" >
+                #{compusId,jdbcType=INTEGER},
+            </if>
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="compusName != null" >
+                #{compusName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CoCompusExample" resultType="java.lang.Integer" >
+        select count(*) from co_compus
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update co_compus
+        <set >
+            <if test="record.compusId != null" >
+                compus_id = #{record.compusId,jdbcType=INTEGER},
+            </if>
+            <if test="record.collegeId != null" >
+                college_id = #{record.collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.compusName != null" >
+                compus_name = #{record.compusName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserid != null" >
+                create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update co_compus
+        set compus_id = #{record.compusId,jdbcType=INTEGER},
+            college_id = #{record.collegeId,jdbcType=VARCHAR},
+            compus_name = #{record.compusName,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            create_userid = #{record.createUserid,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CoCompus" >
+        update co_compus
+        <set >
+            <if test="collegeId != null" >
+                college_id = #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="compusName != null" >
+                compus_name = #{compusName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where compus_id = #{compusId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CoCompus" >
+        update co_compus
+        set college_id = #{collegeId,jdbcType=VARCHAR},
+            compus_name = #{compusName,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=VARCHAR}
+        where compus_id = #{compusId,jdbcType=INTEGER}
+    </update>
+</mapper>

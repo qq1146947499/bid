@@ -1,0 +1,1081 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CoOrderDmandMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CoOrderDmand" >
+        <id column="dmain_id" property="dmainId" jdbcType="CHAR" />
+        <result column="order_main_id" property="orderMainId" jdbcType="VARCHAR" />
+        <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+        <result column="device_id" property="deviceId" jdbcType="INTEGER" />
+        <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+        <result column="unit" property="unit" jdbcType="VARCHAR" />
+        <result column="inquire_price" property="inquirePrice" jdbcType="VARCHAR" />
+        <result column="price_company" property="priceCompany" jdbcType="VARCHAR" />
+        <result column="is_standard" property="isStandard" jdbcType="VARCHAR" />
+        <result column="after_service" property="afterService" jdbcType="VARCHAR" />
+        <result column="status3" property="status3" jdbcType="VARCHAR" />
+        <result column="init_bid_id" property="initBidId" jdbcType="VARCHAR" />
+        <result column="bid_id" property="bidId" jdbcType="VARCHAR" />
+        <result column="is_cheapest" property="isCheapest" jdbcType="VARCHAR" />
+        <result column="init_time" property="initTime" jdbcType="VARCHAR" />
+        <result column="init_user_id" property="initUserId" jdbcType="VARCHAR" />
+        <result column="init_username" property="initUsername" jdbcType="VARCHAR" />
+        <result column="user_init_reason" property="userInitReason" jdbcType="VARCHAR" />
+        <result column="close_reason" property="closeReason" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="bid_price" property="bidPrice" jdbcType="VARCHAR" />
+        <result column="bid_amount" property="bidAmount" jdbcType="VARCHAR" />
+        <result column="bid_amount_renminbi" property="bidAmountRenminbi" jdbcType="VARCHAR" />
+        <result column="deliver_time" property="deliverTime" jdbcType="TIMESTAMP" />
+        <result column="deliver_userid" property="deliverUserid" jdbcType="VARCHAR" />
+        <result column="deliver_username" property="deliverUsername" jdbcType="VARCHAR" />
+        <result column="deliver_remark" property="deliverRemark" jdbcType="VARCHAR" />
+        <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+        <result column="receive_userid" property="receiveUserid" jdbcType="VARCHAR" />
+        <result column="receive_remark" property="receiveRemark" jdbcType="VARCHAR" />
+        <result column="receive_username" property="receiveUsername" jdbcType="VARCHAR" />
+        <result column="acception_time" property="acceptionTime" jdbcType="TIMESTAMP" />
+        <result column="acception_userid" property="acceptionUserid" jdbcType="VARCHAR" />
+        <result column="acception_username" property="acceptionUsername" jdbcType="VARCHAR" />
+        <result column="acception_remark" property="acceptionRemark" jdbcType="VARCHAR" />
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+        <result column="register_userid" property="registerUserid" jdbcType="VARCHAR" />
+        <result column="register_username" property="registerUsername" jdbcType="VARCHAR" />
+        <result column="register_remark" property="registerRemark" jdbcType="VARCHAR" />
+        <result column="buyer_is_assessed" property="buyerIsAssessed" jdbcType="VARCHAR" />
+        <result column="seller_is_assessed" property="sellerIsAssessed" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="last_update_userid" property="lastUpdateUserid" jdbcType="VARCHAR" />
+        <result column="last_update_username" property="lastUpdateUsername" jdbcType="VARCHAR" />
+        <result column="is_reaudit" property="isReaudit" jdbcType="VARCHAR" />
+        <result column="re_audit_time" property="reAuditTime" jdbcType="TIMESTAMP" />
+        <result column="re_audit_userid" property="reAuditUserid" jdbcType="VARCHAR" />
+        <result column="re_audit_username" property="reAuditUsername" jdbcType="VARCHAR" />
+        <result column="re_audit_reason" property="reAuditReason" jdbcType="VARCHAR" />
+        <result column="diffrences_desc" property="diffrencesDesc" jdbcType="VARCHAR" />
+        <result column="is_auto_submit" property="isAutoSubmit" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        dmain_id, order_main_id, college_id, order_code, device_id, order_num, unit, inquire_price, 
+        price_company, is_standard, after_service, status3, init_bid_id, bid_id, is_cheapest, 
+        init_time, init_user_id, init_username, user_init_reason, close_reason, company_id, 
+        company_name, bid_price, bid_amount, bid_amount_renminbi, deliver_time, deliver_userid, 
+        deliver_username, deliver_remark, receive_time, receive_userid, receive_remark, receive_username, 
+        acception_time, acception_userid, acception_username, acception_remark, register_time, 
+        register_userid, register_username, register_remark, buyer_is_assessed, seller_is_assessed, 
+        remark, create_time, create_userid, create_username, is_dx_center, is_dx_college, 
+        last_update_time, last_update_userid, last_update_username, is_reaudit, re_audit_time, 
+        re_audit_userid, re_audit_username, re_audit_reason, diffrences_desc, is_auto_submit
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoOrderDmandExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from co_order_dmand
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_order_dmand
+        where dmain_id = #{dmainId,jdbcType=CHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from co_order_dmand
+        where dmain_id = #{dmainId,jdbcType=CHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CoOrderDmandExample" >
+        delete from co_order_dmand
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CoOrderDmand" >
+        insert into co_order_dmand (dmain_id, order_main_id, college_id, 
+            order_code, device_id, order_num, 
+            unit, inquire_price, price_company, 
+            is_standard, after_service, status3, 
+            init_bid_id, bid_id, is_cheapest, 
+            init_time, init_user_id, init_username, 
+            user_init_reason, close_reason, company_id, 
+            company_name, bid_price, bid_amount, 
+            bid_amount_renminbi, deliver_time, deliver_userid, 
+            deliver_username, deliver_remark, receive_time, 
+            receive_userid, receive_remark, receive_username, 
+            acception_time, acception_userid, acception_username, 
+            acception_remark, register_time, register_userid, 
+            register_username, register_remark, buyer_is_assessed, 
+            seller_is_assessed, remark, create_time, 
+            create_userid, create_username, is_dx_center, 
+            is_dx_college, last_update_time, last_update_userid, 
+            last_update_username, is_reaudit, re_audit_time, 
+            re_audit_userid, re_audit_username, re_audit_reason, 
+            diffrences_desc, is_auto_submit)
+        values (#{dmainId,jdbcType=CHAR}, #{orderMainId,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, 
+            #{orderCode,jdbcType=VARCHAR}, #{deviceId,jdbcType=INTEGER}, #{orderNum,jdbcType=INTEGER}, 
+            #{unit,jdbcType=VARCHAR}, #{inquirePrice,jdbcType=VARCHAR}, #{priceCompany,jdbcType=VARCHAR}, 
+            #{isStandard,jdbcType=VARCHAR}, #{afterService,jdbcType=VARCHAR}, #{status3,jdbcType=VARCHAR}, 
+            #{initBidId,jdbcType=VARCHAR}, #{bidId,jdbcType=VARCHAR}, #{isCheapest,jdbcType=VARCHAR}, 
+            #{initTime,jdbcType=VARCHAR}, #{initUserId,jdbcType=VARCHAR}, #{initUsername,jdbcType=VARCHAR}, 
+            #{userInitReason,jdbcType=VARCHAR}, #{closeReason,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+            #{companyName,jdbcType=VARCHAR}, #{bidPrice,jdbcType=VARCHAR}, #{bidAmount,jdbcType=VARCHAR}, 
+            #{bidAmountRenminbi,jdbcType=VARCHAR}, #{deliverTime,jdbcType=TIMESTAMP}, #{deliverUserid,jdbcType=VARCHAR}, 
+            #{deliverUsername,jdbcType=VARCHAR}, #{deliverRemark,jdbcType=VARCHAR}, #{receiveTime,jdbcType=TIMESTAMP}, 
+            #{receiveUserid,jdbcType=VARCHAR}, #{receiveRemark,jdbcType=VARCHAR}, #{receiveUsername,jdbcType=VARCHAR}, 
+            #{acceptionTime,jdbcType=TIMESTAMP}, #{acceptionUserid,jdbcType=VARCHAR}, #{acceptionUsername,jdbcType=VARCHAR}, 
+            #{acceptionRemark,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, #{registerUserid,jdbcType=VARCHAR}, 
+            #{registerUsername,jdbcType=VARCHAR}, #{registerRemark,jdbcType=VARCHAR}, #{buyerIsAssessed,jdbcType=VARCHAR}, 
+            #{sellerIsAssessed,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, #{isDxCenter,jdbcType=VARCHAR}, 
+            #{isDxCollege,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{lastUpdateUserid,jdbcType=VARCHAR}, 
+            #{lastUpdateUsername,jdbcType=VARCHAR}, #{isReaudit,jdbcType=VARCHAR}, #{reAuditTime,jdbcType=TIMESTAMP}, 
+            #{reAuditUserid,jdbcType=VARCHAR}, #{reAuditUsername,jdbcType=VARCHAR}, #{reAuditReason,jdbcType=VARCHAR}, 
+            #{diffrencesDesc,jdbcType=VARCHAR}, #{isAutoSubmit,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CoOrderDmand" >
+        insert into co_order_dmand
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="dmainId != null" >
+                dmain_id,
+            </if>
+            <if test="orderMainId != null" >
+                order_main_id,
+            </if>
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="orderCode != null" >
+                order_code,
+            </if>
+            <if test="deviceId != null" >
+                device_id,
+            </if>
+            <if test="orderNum != null" >
+                order_num,
+            </if>
+            <if test="unit != null" >
+                unit,
+            </if>
+            <if test="inquirePrice != null" >
+                inquire_price,
+            </if>
+            <if test="priceCompany != null" >
+                price_company,
+            </if>
+            <if test="isStandard != null" >
+                is_standard,
+            </if>
+            <if test="afterService != null" >
+                after_service,
+            </if>
+            <if test="status3 != null" >
+                status3,
+            </if>
+            <if test="initBidId != null" >
+                init_bid_id,
+            </if>
+            <if test="bidId != null" >
+                bid_id,
+            </if>
+            <if test="isCheapest != null" >
+                is_cheapest,
+            </if>
+            <if test="initTime != null" >
+                init_time,
+            </if>
+            <if test="initUserId != null" >
+                init_user_id,
+            </if>
+            <if test="initUsername != null" >
+                init_username,
+            </if>
+            <if test="userInitReason != null" >
+                user_init_reason,
+            </if>
+            <if test="closeReason != null" >
+                close_reason,
+            </if>
+            <if test="companyId != null" >
+                company_id,
+            </if>
+            <if test="companyName != null" >
+                company_name,
+            </if>
+            <if test="bidPrice != null" >
+                bid_price,
+            </if>
+            <if test="bidAmount != null" >
+                bid_amount,
+            </if>
+            <if test="bidAmountRenminbi != null" >
+                bid_amount_renminbi,
+            </if>
+            <if test="deliverTime != null" >
+                deliver_time,
+            </if>
+            <if test="deliverUserid != null" >
+                deliver_userid,
+            </if>
+            <if test="deliverUsername != null" >
+                deliver_username,
+            </if>
+            <if test="deliverRemark != null" >
+                deliver_remark,
+            </if>
+            <if test="receiveTime != null" >
+                receive_time,
+            </if>
+            <if test="receiveUserid != null" >
+                receive_userid,
+            </if>
+            <if test="receiveRemark != null" >
+                receive_remark,
+            </if>
+            <if test="receiveUsername != null" >
+                receive_username,
+            </if>
+            <if test="acceptionTime != null" >
+                acception_time,
+            </if>
+            <if test="acceptionUserid != null" >
+                acception_userid,
+            </if>
+            <if test="acceptionUsername != null" >
+                acception_username,
+            </if>
+            <if test="acceptionRemark != null" >
+                acception_remark,
+            </if>
+            <if test="registerTime != null" >
+                register_time,
+            </if>
+            <if test="registerUserid != null" >
+                register_userid,
+            </if>
+            <if test="registerUsername != null" >
+                register_username,
+            </if>
+            <if test="registerRemark != null" >
+                register_remark,
+            </if>
+            <if test="buyerIsAssessed != null" >
+                buyer_is_assessed,
+            </if>
+            <if test="sellerIsAssessed != null" >
+                seller_is_assessed,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time,
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid,
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username,
+            </if>
+            <if test="isReaudit != null" >
+                is_reaudit,
+            </if>
+            <if test="reAuditTime != null" >
+                re_audit_time,
+            </if>
+            <if test="reAuditUserid != null" >
+                re_audit_userid,
+            </if>
+            <if test="reAuditUsername != null" >
+                re_audit_username,
+            </if>
+            <if test="reAuditReason != null" >
+                re_audit_reason,
+            </if>
+            <if test="diffrencesDesc != null" >
+                diffrences_desc,
+            </if>
+            <if test="isAutoSubmit != null" >
+                is_auto_submit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="dmainId != null" >
+                #{dmainId,jdbcType=CHAR},
+            </if>
+            <if test="orderMainId != null" >
+                #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCode != null" >
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceId != null" >
+                #{deviceId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNum != null" >
+                #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="unit != null" >
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="inquirePrice != null" >
+                #{inquirePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="priceCompany != null" >
+                #{priceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="isStandard != null" >
+                #{isStandard,jdbcType=VARCHAR},
+            </if>
+            <if test="afterService != null" >
+                #{afterService,jdbcType=VARCHAR},
+            </if>
+            <if test="status3 != null" >
+                #{status3,jdbcType=VARCHAR},
+            </if>
+            <if test="initBidId != null" >
+                #{initBidId,jdbcType=VARCHAR},
+            </if>
+            <if test="bidId != null" >
+                #{bidId,jdbcType=VARCHAR},
+            </if>
+            <if test="isCheapest != null" >
+                #{isCheapest,jdbcType=VARCHAR},
+            </if>
+            <if test="initTime != null" >
+                #{initTime,jdbcType=VARCHAR},
+            </if>
+            <if test="initUserId != null" >
+                #{initUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="initUsername != null" >
+                #{initUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="userInitReason != null" >
+                #{userInitReason,jdbcType=VARCHAR},
+            </if>
+            <if test="closeReason != null" >
+                #{closeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null" >
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="bidPrice != null" >
+                #{bidPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="bidAmount != null" >
+                #{bidAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="bidAmountRenminbi != null" >
+                #{bidAmountRenminbi,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverTime != null" >
+                #{deliverTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deliverUserid != null" >
+                #{deliverUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverUsername != null" >
+                #{deliverUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverRemark != null" >
+                #{deliverRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveTime != null" >
+                #{receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiveUserid != null" >
+                #{receiveUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveRemark != null" >
+                #{receiveRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUsername != null" >
+                #{receiveUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptionTime != null" >
+                #{acceptionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="acceptionUserid != null" >
+                #{acceptionUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptionUsername != null" >
+                #{acceptionUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptionRemark != null" >
+                #{acceptionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="registerTime != null" >
+                #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerUserid != null" >
+                #{registerUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="registerUsername != null" >
+                #{registerUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="registerRemark != null" >
+                #{registerRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="buyerIsAssessed != null" >
+                #{buyerIsAssessed,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerIsAssessed != null" >
+                #{sellerIsAssessed,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isReaudit != null" >
+                #{isReaudit,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditTime != null" >
+                #{reAuditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reAuditUserid != null" >
+                #{reAuditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditUsername != null" >
+                #{reAuditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditReason != null" >
+                #{reAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="diffrencesDesc != null" >
+                #{diffrencesDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isAutoSubmit != null" >
+                #{isAutoSubmit,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CoOrderDmandExample" resultType="java.lang.Integer" >
+        select count(*) from co_order_dmand
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update co_order_dmand
+        <set >
+            <if test="record.dmainId != null" >
+                dmain_id = #{record.dmainId,jdbcType=CHAR},
+            </if>
+            <if test="record.orderMainId != null" >
+                order_main_id = #{record.orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.collegeId != null" >
+                college_id = #{record.collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderCode != null" >
+                order_code = #{record.orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceId != null" >
+                device_id = #{record.deviceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderNum != null" >
+                order_num = #{record.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.unit != null" >
+                unit = #{record.unit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.inquirePrice != null" >
+                inquire_price = #{record.inquirePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="record.priceCompany != null" >
+                price_company = #{record.priceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isStandard != null" >
+                is_standard = #{record.isStandard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.afterService != null" >
+                after_service = #{record.afterService,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status3 != null" >
+                status3 = #{record.status3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.initBidId != null" >
+                init_bid_id = #{record.initBidId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidId != null" >
+                bid_id = #{record.bidId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isCheapest != null" >
+                is_cheapest = #{record.isCheapest,jdbcType=VARCHAR},
+            </if>
+            <if test="record.initTime != null" >
+                init_time = #{record.initTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.initUserId != null" >
+                init_user_id = #{record.initUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.initUsername != null" >
+                init_username = #{record.initUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userInitReason != null" >
+                user_init_reason = #{record.userInitReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.closeReason != null" >
+                close_reason = #{record.closeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.companyId != null" >
+                company_id = #{record.companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.companyName != null" >
+                company_name = #{record.companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidPrice != null" >
+                bid_price = #{record.bidPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidAmount != null" >
+                bid_amount = #{record.bidAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidAmountRenminbi != null" >
+                bid_amount_renminbi = #{record.bidAmountRenminbi,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deliverTime != null" >
+                deliver_time = #{record.deliverTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.deliverUserid != null" >
+                deliver_userid = #{record.deliverUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deliverUsername != null" >
+                deliver_username = #{record.deliverUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deliverRemark != null" >
+                deliver_remark = #{record.deliverRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiveTime != null" >
+                receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.receiveUserid != null" >
+                receive_userid = #{record.receiveUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiveRemark != null" >
+                receive_remark = #{record.receiveRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiveUsername != null" >
+                receive_username = #{record.receiveUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.acceptionTime != null" >
+                acception_time = #{record.acceptionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.acceptionUserid != null" >
+                acception_userid = #{record.acceptionUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.acceptionUsername != null" >
+                acception_username = #{record.acceptionUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.acceptionRemark != null" >
+                acception_remark = #{record.acceptionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.registerTime != null" >
+                register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.registerUserid != null" >
+                register_userid = #{record.registerUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.registerUsername != null" >
+                register_username = #{record.registerUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.registerRemark != null" >
+                register_remark = #{record.registerRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.buyerIsAssessed != null" >
+                buyer_is_assessed = #{record.buyerIsAssessed,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sellerIsAssessed != null" >
+                seller_is_assessed = #{record.sellerIsAssessed,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserid != null" >
+                create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createUsername != null" >
+                create_username = #{record.createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter != null" >
+                is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege != null" >
+                is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateTime != null" >
+                last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastUpdateUserid != null" >
+                last_update_userid = #{record.lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateUsername != null" >
+                last_update_username = #{record.lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isReaudit != null" >
+                is_reaudit = #{record.isReaudit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reAuditTime != null" >
+                re_audit_time = #{record.reAuditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.reAuditUserid != null" >
+                re_audit_userid = #{record.reAuditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reAuditUsername != null" >
+                re_audit_username = #{record.reAuditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reAuditReason != null" >
+                re_audit_reason = #{record.reAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.diffrencesDesc != null" >
+                diffrences_desc = #{record.diffrencesDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isAutoSubmit != null" >
+                is_auto_submit = #{record.isAutoSubmit,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update co_order_dmand
+        set dmain_id = #{record.dmainId,jdbcType=CHAR},
+            order_main_id = #{record.orderMainId,jdbcType=VARCHAR},
+            college_id = #{record.collegeId,jdbcType=VARCHAR},
+            order_code = #{record.orderCode,jdbcType=VARCHAR},
+            device_id = #{record.deviceId,jdbcType=INTEGER},
+            order_num = #{record.orderNum,jdbcType=INTEGER},
+            unit = #{record.unit,jdbcType=VARCHAR},
+            inquire_price = #{record.inquirePrice,jdbcType=VARCHAR},
+            price_company = #{record.priceCompany,jdbcType=VARCHAR},
+            is_standard = #{record.isStandard,jdbcType=VARCHAR},
+            after_service = #{record.afterService,jdbcType=VARCHAR},
+            status3 = #{record.status3,jdbcType=VARCHAR},
+            init_bid_id = #{record.initBidId,jdbcType=VARCHAR},
+            bid_id = #{record.bidId,jdbcType=VARCHAR},
+            is_cheapest = #{record.isCheapest,jdbcType=VARCHAR},
+            init_time = #{record.initTime,jdbcType=VARCHAR},
+            init_user_id = #{record.initUserId,jdbcType=VARCHAR},
+            init_username = #{record.initUsername,jdbcType=VARCHAR},
+            user_init_reason = #{record.userInitReason,jdbcType=VARCHAR},
+            close_reason = #{record.closeReason,jdbcType=VARCHAR},
+            company_id = #{record.companyId,jdbcType=VARCHAR},
+            company_name = #{record.companyName,jdbcType=VARCHAR},
+            bid_price = #{record.bidPrice,jdbcType=VARCHAR},
+            bid_amount = #{record.bidAmount,jdbcType=VARCHAR},
+            bid_amount_renminbi = #{record.bidAmountRenminbi,jdbcType=VARCHAR},
+            deliver_time = #{record.deliverTime,jdbcType=TIMESTAMP},
+            deliver_userid = #{record.deliverUserid,jdbcType=VARCHAR},
+            deliver_username = #{record.deliverUsername,jdbcType=VARCHAR},
+            deliver_remark = #{record.deliverRemark,jdbcType=VARCHAR},
+            receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+            receive_userid = #{record.receiveUserid,jdbcType=VARCHAR},
+            receive_remark = #{record.receiveRemark,jdbcType=VARCHAR},
+            receive_username = #{record.receiveUsername,jdbcType=VARCHAR},
+            acception_time = #{record.acceptionTime,jdbcType=TIMESTAMP},
+            acception_userid = #{record.acceptionUserid,jdbcType=VARCHAR},
+            acception_username = #{record.acceptionUsername,jdbcType=VARCHAR},
+            acception_remark = #{record.acceptionRemark,jdbcType=VARCHAR},
+            register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+            register_userid = #{record.registerUserid,jdbcType=VARCHAR},
+            register_username = #{record.registerUsername,jdbcType=VARCHAR},
+            register_remark = #{record.registerRemark,jdbcType=VARCHAR},
+            buyer_is_assessed = #{record.buyerIsAssessed,jdbcType=VARCHAR},
+            seller_is_assessed = #{record.sellerIsAssessed,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            create_username = #{record.createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+            last_update_userid = #{record.lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{record.lastUpdateUsername,jdbcType=VARCHAR},
+            is_reaudit = #{record.isReaudit,jdbcType=VARCHAR},
+            re_audit_time = #{record.reAuditTime,jdbcType=TIMESTAMP},
+            re_audit_userid = #{record.reAuditUserid,jdbcType=VARCHAR},
+            re_audit_username = #{record.reAuditUsername,jdbcType=VARCHAR},
+            re_audit_reason = #{record.reAuditReason,jdbcType=VARCHAR},
+            diffrences_desc = #{record.diffrencesDesc,jdbcType=VARCHAR},
+            is_auto_submit = #{record.isAutoSubmit,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CoOrderDmand" >
+        update co_order_dmand
+        <set >
+            <if test="orderMainId != null" >
+                order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                college_id = #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCode != null" >
+                order_code = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceId != null" >
+                device_id = #{deviceId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNum != null" >
+                order_num = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="unit != null" >
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="inquirePrice != null" >
+                inquire_price = #{inquirePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="priceCompany != null" >
+                price_company = #{priceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="isStandard != null" >
+                is_standard = #{isStandard,jdbcType=VARCHAR},
+            </if>
+            <if test="afterService != null" >
+                after_service = #{afterService,jdbcType=VARCHAR},
+            </if>
+            <if test="status3 != null" >
+                status3 = #{status3,jdbcType=VARCHAR},
+            </if>
+            <if test="initBidId != null" >
+                init_bid_id = #{initBidId,jdbcType=VARCHAR},
+            </if>
+            <if test="bidId != null" >
+                bid_id = #{bidId,jdbcType=VARCHAR},
+            </if>
+            <if test="isCheapest != null" >
+                is_cheapest = #{isCheapest,jdbcType=VARCHAR},
+            </if>
+            <if test="initTime != null" >
+                init_time = #{initTime,jdbcType=VARCHAR},
+            </if>
+            <if test="initUserId != null" >
+                init_user_id = #{initUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="initUsername != null" >
+                init_username = #{initUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="userInitReason != null" >
+                user_init_reason = #{userInitReason,jdbcType=VARCHAR},
+            </if>
+            <if test="closeReason != null" >
+                close_reason = #{closeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null" >
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="bidPrice != null" >
+                bid_price = #{bidPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="bidAmount != null" >
+                bid_amount = #{bidAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="bidAmountRenminbi != null" >
+                bid_amount_renminbi = #{bidAmountRenminbi,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverTime != null" >
+                deliver_time = #{deliverTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deliverUserid != null" >
+                deliver_userid = #{deliverUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverUsername != null" >
+                deliver_username = #{deliverUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverRemark != null" >
+                deliver_remark = #{deliverRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveTime != null" >
+                receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiveUserid != null" >
+                receive_userid = #{receiveUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveRemark != null" >
+                receive_remark = #{receiveRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUsername != null" >
+                receive_username = #{receiveUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptionTime != null" >
+                acception_time = #{acceptionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="acceptionUserid != null" >
+                acception_userid = #{acceptionUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptionUsername != null" >
+                acception_username = #{acceptionUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptionRemark != null" >
+                acception_remark = #{acceptionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="registerTime != null" >
+                register_time = #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerUserid != null" >
+                register_userid = #{registerUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="registerUsername != null" >
+                register_username = #{registerUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="registerRemark != null" >
+                register_remark = #{registerRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="buyerIsAssessed != null" >
+                buyer_is_assessed = #{buyerIsAssessed,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerIsAssessed != null" >
+                seller_is_assessed = #{sellerIsAssessed,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isReaudit != null" >
+                is_reaudit = #{isReaudit,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditTime != null" >
+                re_audit_time = #{reAuditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reAuditUserid != null" >
+                re_audit_userid = #{reAuditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditUsername != null" >
+                re_audit_username = #{reAuditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditReason != null" >
+                re_audit_reason = #{reAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="diffrencesDesc != null" >
+                diffrences_desc = #{diffrencesDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isAutoSubmit != null" >
+                is_auto_submit = #{isAutoSubmit,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where dmain_id = #{dmainId,jdbcType=CHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CoOrderDmand" >
+        update co_order_dmand
+        set order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            college_id = #{collegeId,jdbcType=VARCHAR},
+            order_code = #{orderCode,jdbcType=VARCHAR},
+            device_id = #{deviceId,jdbcType=INTEGER},
+            order_num = #{orderNum,jdbcType=INTEGER},
+            unit = #{unit,jdbcType=VARCHAR},
+            inquire_price = #{inquirePrice,jdbcType=VARCHAR},
+            price_company = #{priceCompany,jdbcType=VARCHAR},
+            is_standard = #{isStandard,jdbcType=VARCHAR},
+            after_service = #{afterService,jdbcType=VARCHAR},
+            status3 = #{status3,jdbcType=VARCHAR},
+            init_bid_id = #{initBidId,jdbcType=VARCHAR},
+            bid_id = #{bidId,jdbcType=VARCHAR},
+            is_cheapest = #{isCheapest,jdbcType=VARCHAR},
+            init_time = #{initTime,jdbcType=VARCHAR},
+            init_user_id = #{initUserId,jdbcType=VARCHAR},
+            init_username = #{initUsername,jdbcType=VARCHAR},
+            user_init_reason = #{userInitReason,jdbcType=VARCHAR},
+            close_reason = #{closeReason,jdbcType=VARCHAR},
+            company_id = #{companyId,jdbcType=VARCHAR},
+            company_name = #{companyName,jdbcType=VARCHAR},
+            bid_price = #{bidPrice,jdbcType=VARCHAR},
+            bid_amount = #{bidAmount,jdbcType=VARCHAR},
+            bid_amount_renminbi = #{bidAmountRenminbi,jdbcType=VARCHAR},
+            deliver_time = #{deliverTime,jdbcType=TIMESTAMP},
+            deliver_userid = #{deliverUserid,jdbcType=VARCHAR},
+            deliver_username = #{deliverUsername,jdbcType=VARCHAR},
+            deliver_remark = #{deliverRemark,jdbcType=VARCHAR},
+            receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+            receive_userid = #{receiveUserid,jdbcType=VARCHAR},
+            receive_remark = #{receiveRemark,jdbcType=VARCHAR},
+            receive_username = #{receiveUsername,jdbcType=VARCHAR},
+            acception_time = #{acceptionTime,jdbcType=TIMESTAMP},
+            acception_userid = #{acceptionUserid,jdbcType=VARCHAR},
+            acception_username = #{acceptionUsername,jdbcType=VARCHAR},
+            acception_remark = #{acceptionRemark,jdbcType=VARCHAR},
+            register_time = #{registerTime,jdbcType=TIMESTAMP},
+            register_userid = #{registerUserid,jdbcType=VARCHAR},
+            register_username = #{registerUsername,jdbcType=VARCHAR},
+            register_remark = #{registerRemark,jdbcType=VARCHAR},
+            buyer_is_assessed = #{buyerIsAssessed,jdbcType=VARCHAR},
+            seller_is_assessed = #{sellerIsAssessed,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=VARCHAR},
+            create_username = #{createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR},
+            is_reaudit = #{isReaudit,jdbcType=VARCHAR},
+            re_audit_time = #{reAuditTime,jdbcType=TIMESTAMP},
+            re_audit_userid = #{reAuditUserid,jdbcType=VARCHAR},
+            re_audit_username = #{reAuditUsername,jdbcType=VARCHAR},
+            re_audit_reason = #{reAuditReason,jdbcType=VARCHAR},
+            diffrences_desc = #{diffrencesDesc,jdbcType=VARCHAR},
+            is_auto_submit = #{isAutoSubmit,jdbcType=VARCHAR}
+        where dmain_id = #{dmainId,jdbcType=CHAR}
+    </update>
+</mapper>

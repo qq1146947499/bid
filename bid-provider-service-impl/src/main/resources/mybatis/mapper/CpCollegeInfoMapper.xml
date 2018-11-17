@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CpCollegeInfoMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CpCollegeInfo" >
+        <id column="college_id" property="collegeId" jdbcType="INTEGER" />
+        <result column="college_code" property="collegeCode" jdbcType="VARCHAR" />
+        <result column="college_name" property="collegeName" jdbcType="VARCHAR" />
+        <result column="logo_path" property="logoPath" jdbcType="VARCHAR" />
+        <result column="in_province" property="inProvince" jdbcType="VARCHAR" />
+        <result column="in_city" property="inCity" jdbcType="VARCHAR" />
+        <result column="audit_company" property="auditCompany" jdbcType="VARCHAR" />
+        <result column="is_redution" property="isRedution" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+        <result column="sort_num8" property="sortNum8" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        college_id, college_code, college_name, logo_path, in_province, in_city, audit_company, 
+        is_redution, remark, create_time, create_userid, create_username, is_dx_center, is_dx_college, 
+        sort_num8
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CpCollegeInfoExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from cp_college_info
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from cp_college_info
+        where college_id = #{collegeId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from cp_college_info
+        where college_id = #{collegeId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CpCollegeInfoExample" >
+        delete from cp_college_info
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CpCollegeInfo" >
+        insert into cp_college_info (college_id, college_code, college_name, 
+            logo_path, in_province, in_city, 
+            audit_company, is_redution, remark, 
+            create_time, create_userid, create_username, 
+            is_dx_center, is_dx_college, sort_num8
+            )
+        values (#{collegeId,jdbcType=INTEGER}, #{collegeCode,jdbcType=VARCHAR}, #{collegeName,jdbcType=VARCHAR}, 
+            #{logoPath,jdbcType=VARCHAR}, #{inProvince,jdbcType=VARCHAR}, #{inCity,jdbcType=VARCHAR}, 
+            #{auditCompany,jdbcType=VARCHAR}, #{isRedution,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, 
+            #{isDxCenter,jdbcType=VARCHAR}, #{isDxCollege,jdbcType=VARCHAR}, #{sortNum8,jdbcType=INTEGER}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CpCollegeInfo" >
+        insert into cp_college_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="collegeCode != null" >
+                college_code,
+            </if>
+            <if test="collegeName != null" >
+                college_name,
+            </if>
+            <if test="logoPath != null" >
+                logo_path,
+            </if>
+            <if test="inProvince != null" >
+                in_province,
+            </if>
+            <if test="inCity != null" >
+                in_city,
+            </if>
+            <if test="auditCompany != null" >
+                audit_company,
+            </if>
+            <if test="isRedution != null" >
+                is_redution,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+            <if test="sortNum8 != null" >
+                sort_num8,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=INTEGER},
+            </if>
+            <if test="collegeCode != null" >
+                #{collegeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null" >
+                #{collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="logoPath != null" >
+                #{logoPath,jdbcType=VARCHAR},
+            </if>
+            <if test="inProvince != null" >
+                #{inProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="inCity != null" >
+                #{inCity,jdbcType=VARCHAR},
+            </if>
+            <if test="auditCompany != null" >
+                #{auditCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="isRedution != null" >
+                #{isRedution,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="sortNum8 != null" >
+                #{sortNum8,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CpCollegeInfoExample" resultType="java.lang.Integer" >
+        select count(*) from cp_college_info
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update cp_college_info
+        <set >
+            <if test="record.collegeId != null" >
+                college_id = #{record.collegeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.collegeCode != null" >
+                college_code = #{record.collegeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.collegeName != null" >
+                college_name = #{record.collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.logoPath != null" >
+                logo_path = #{record.logoPath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.inProvince != null" >
+                in_province = #{record.inProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="record.inCity != null" >
+                in_city = #{record.inCity,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditCompany != null" >
+                audit_company = #{record.auditCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isRedution != null" >
+                is_redution = #{record.isRedution,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserid != null" >
+                create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createUsername != null" >
+                create_username = #{record.createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter != null" >
+                is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege != null" >
+                is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sortNum8 != null" >
+                sort_num8 = #{record.sortNum8,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update cp_college_info
+        set college_id = #{record.collegeId,jdbcType=INTEGER},
+            college_code = #{record.collegeCode,jdbcType=VARCHAR},
+            college_name = #{record.collegeName,jdbcType=VARCHAR},
+            logo_path = #{record.logoPath,jdbcType=VARCHAR},
+            in_province = #{record.inProvince,jdbcType=VARCHAR},
+            in_city = #{record.inCity,jdbcType=VARCHAR},
+            audit_company = #{record.auditCompany,jdbcType=VARCHAR},
+            is_redution = #{record.isRedution,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            create_username = #{record.createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            sort_num8 = #{record.sortNum8,jdbcType=INTEGER}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CpCollegeInfo" >
+        update cp_college_info
+        <set >
+            <if test="collegeCode != null" >
+                college_code = #{collegeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null" >
+                college_name = #{collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="logoPath != null" >
+                logo_path = #{logoPath,jdbcType=VARCHAR},
+            </if>
+            <if test="inProvince != null" >
+                in_province = #{inProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="inCity != null" >
+                in_city = #{inCity,jdbcType=VARCHAR},
+            </if>
+            <if test="auditCompany != null" >
+                audit_company = #{auditCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="isRedution != null" >
+                is_redution = #{isRedution,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="sortNum8 != null" >
+                sort_num8 = #{sortNum8,jdbcType=INTEGER},
+            </if>
+        </set>
+        where college_id = #{collegeId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CpCollegeInfo" >
+        update cp_college_info
+        set college_code = #{collegeCode,jdbcType=VARCHAR},
+            college_name = #{collegeName,jdbcType=VARCHAR},
+            logo_path = #{logoPath,jdbcType=VARCHAR},
+            in_province = #{inProvince,jdbcType=VARCHAR},
+            in_city = #{inCity,jdbcType=VARCHAR},
+            audit_company = #{auditCompany,jdbcType=VARCHAR},
+            is_redution = #{isRedution,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=VARCHAR},
+            create_username = #{createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            sort_num8 = #{sortNum8,jdbcType=INTEGER}
+        where college_id = #{collegeId,jdbcType=INTEGER}
+    </update>
+</mapper>

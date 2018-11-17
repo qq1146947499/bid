@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CpBidOrderMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CpBidOrder" >
+        <id column="bid_info_id" property="bidInfoId" jdbcType="INTEGER" />
+        <result column="detail_id" property="detailId" jdbcType="VARCHAR" />
+        <result column="order_main_id" property="orderMainId" jdbcType="VARCHAR" />
+        <result column="order_bid_type" property="orderBidType" jdbcType="VARCHAR" />
+        <result column="source_college_id" property="sourceCollegeId" jdbcType="VARCHAR" />
+        <result column="source_company_id" property="sourceCompanyId" jdbcType="VARCHAR" />
+        <result column="device_id" property="deviceId" jdbcType="INTEGER" />
+        <result column="bid_price" property="bidPrice" jdbcType="VARCHAR" />
+        <result column="total_amount" property="totalAmount" jdbcType="VARCHAR" />
+        <result column="total_amount_renminbi" property="totalAmountRenminbi" jdbcType="LONGVARCHAR" />
+        <result column="after_service" property="afterService" jdbcType="VARCHAR" />
+        <result column="is_fulfil" property="isFulfil" jdbcType="VARCHAR" />
+        <result column="diffrences_desc" property="diffrencesDesc" jdbcType="VARCHAR" />
+        <result column="bid_person" property="bidPerson" jdbcType="VARCHAR" />
+        <result column="bid_user_id" property="bidUserId" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="bid_time" property="bidTime" jdbcType="VARCHAR" />
+        <result column="bid_status" property="bidStatus" jdbcType="VARCHAR" />
+        <result column="bid_reason" property="bidReason" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+        <result column="is_inquire" property="isInquire" jdbcType="VARCHAR" />
+        <result column="cel_num" property="celNum" jdbcType="VARCHAR" />
+        <result column="ecc_num" property="eccNum" jdbcType="VARCHAR" />
+        <result column="node_reason" property="nodeReason" jdbcType="VARCHAR" />
+        <result column="warranty_period" property="warrantyPeriod" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        bid_info_id, detail_id, order_main_id, order_bid_type, source_college_id, source_company_id, 
+        device_id, bid_price, total_amount, total_amount_renminbi, after_service, is_fulfil, 
+        diffrences_desc, bid_person, bid_user_id, company_id, company_name, bid_time, bid_status, 
+        bid_reason, create_time, create_userid, create_username, is_dx_center, is_dx_college, 
+        is_inquire, cel_num, ecc_num, node_reason, warranty_period
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CpBidOrderExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from cp_bid_order
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from cp_bid_order
+        where bid_info_id = #{bidInfoId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from cp_bid_order
+        where bid_info_id = #{bidInfoId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CpBidOrderExample" >
+        delete from cp_bid_order
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CpBidOrder" >
+        insert into cp_bid_order (bid_info_id, detail_id, order_main_id, 
+            order_bid_type, source_college_id, source_company_id, 
+            device_id, bid_price, total_amount, 
+            total_amount_renminbi, after_service, 
+            is_fulfil, diffrences_desc, bid_person, 
+            bid_user_id, company_id, company_name, 
+            bid_time, bid_status, bid_reason, 
+            create_time, create_userid, create_username, 
+            is_dx_center, is_dx_college, is_inquire, 
+            cel_num, ecc_num, node_reason, 
+            warranty_period)
+        values (#{bidInfoId,jdbcType=INTEGER}, #{detailId,jdbcType=VARCHAR}, #{orderMainId,jdbcType=VARCHAR}, 
+            #{orderBidType,jdbcType=VARCHAR}, #{sourceCollegeId,jdbcType=VARCHAR}, #{sourceCompanyId,jdbcType=VARCHAR}, 
+            #{deviceId,jdbcType=INTEGER}, #{bidPrice,jdbcType=VARCHAR}, #{totalAmount,jdbcType=VARCHAR}, 
+            #{totalAmountRenminbi,jdbcType=LONGVARCHAR}, #{afterService,jdbcType=VARCHAR}, 
+            #{isFulfil,jdbcType=VARCHAR}, #{diffrencesDesc,jdbcType=VARCHAR}, #{bidPerson,jdbcType=VARCHAR}, 
+            #{bidUserId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+            #{bidTime,jdbcType=VARCHAR}, #{bidStatus,jdbcType=VARCHAR}, #{bidReason,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, 
+            #{isDxCenter,jdbcType=VARCHAR}, #{isDxCollege,jdbcType=VARCHAR}, #{isInquire,jdbcType=VARCHAR}, 
+            #{celNum,jdbcType=VARCHAR}, #{eccNum,jdbcType=VARCHAR}, #{nodeReason,jdbcType=VARCHAR}, 
+            #{warrantyPeriod,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CpBidOrder" >
+        insert into cp_bid_order
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="bidInfoId != null" >
+                bid_info_id,
+            </if>
+            <if test="detailId != null" >
+                detail_id,
+            </if>
+            <if test="orderMainId != null" >
+                order_main_id,
+            </if>
+            <if test="orderBidType != null" >
+                order_bid_type,
+            </if>
+            <if test="sourceCollegeId != null" >
+                source_college_id,
+            </if>
+            <if test="sourceCompanyId != null" >
+                source_company_id,
+            </if>
+            <if test="deviceId != null" >
+                device_id,
+            </if>
+            <if test="bidPrice != null" >
+                bid_price,
+            </if>
+            <if test="totalAmount != null" >
+                total_amount,
+            </if>
+            <if test="totalAmountRenminbi != null" >
+                total_amount_renminbi,
+            </if>
+            <if test="afterService != null" >
+                after_service,
+            </if>
+            <if test="isFulfil != null" >
+                is_fulfil,
+            </if>
+            <if test="diffrencesDesc != null" >
+                diffrences_desc,
+            </if>
+            <if test="bidPerson != null" >
+                bid_person,
+            </if>
+            <if test="bidUserId != null" >
+                bid_user_id,
+            </if>
+            <if test="companyId != null" >
+                company_id,
+            </if>
+            <if test="companyName != null" >
+                company_name,
+            </if>
+            <if test="bidTime != null" >
+                bid_time,
+            </if>
+            <if test="bidStatus != null" >
+                bid_status,
+            </if>
+            <if test="bidReason != null" >
+                bid_reason,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+            <if test="isInquire != null" >
+                is_inquire,
+            </if>
+            <if test="celNum != null" >
+                cel_num,
+            </if>
+            <if test="eccNum != null" >
+                ecc_num,
+            </if>
+            <if test="nodeReason != null" >
+                node_reason,
+            </if>
+            <if test="warrantyPeriod != null" >
+                warranty_period,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="bidInfoId != null" >
+                #{bidInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="detailId != null" >
+                #{detailId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderMainId != null" >
+                #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderBidType != null" >
+                #{orderBidType,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceCollegeId != null" >
+                #{sourceCollegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceCompanyId != null" >
+                #{sourceCompanyId,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceId != null" >
+                #{deviceId,jdbcType=INTEGER},
+            </if>
+            <if test="bidPrice != null" >
+                #{bidPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null" >
+                #{totalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmountRenminbi != null" >
+                #{totalAmountRenminbi,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="afterService != null" >
+                #{afterService,jdbcType=VARCHAR},
+            </if>
+            <if test="isFulfil != null" >
+                #{isFulfil,jdbcType=VARCHAR},
+            </if>
+            <if test="diffrencesDesc != null" >
+                #{diffrencesDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="bidPerson != null" >
+                #{bidPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="bidUserId != null" >
+                #{bidUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null" >
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="bidTime != null" >
+                #{bidTime,jdbcType=VARCHAR},
+            </if>
+            <if test="bidStatus != null" >
+                #{bidStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="bidReason != null" >
+                #{bidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="isInquire != null" >
+                #{isInquire,jdbcType=VARCHAR},
+            </if>
+            <if test="celNum != null" >
+                #{celNum,jdbcType=VARCHAR},
+            </if>
+            <if test="eccNum != null" >
+                #{eccNum,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeReason != null" >
+                #{nodeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="warrantyPeriod != null" >
+                #{warrantyPeriod,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CpBidOrderExample" resultType="java.lang.Integer" >
+        select count(*) from cp_bid_order
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update cp_bid_order
+        <set >
+            <if test="record.bidInfoId != null" >
+                bid_info_id = #{record.bidInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="record.detailId != null" >
+                detail_id = #{record.detailId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderMainId != null" >
+                order_main_id = #{record.orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderBidType != null" >
+                order_bid_type = #{record.orderBidType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sourceCollegeId != null" >
+                source_college_id = #{record.sourceCollegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sourceCompanyId != null" >
+                source_company_id = #{record.sourceCompanyId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceId != null" >
+                device_id = #{record.deviceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.bidPrice != null" >
+                bid_price = #{record.bidPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="record.totalAmount != null" >
+                total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.totalAmountRenminbi != null" >
+                total_amount_renminbi = #{record.totalAmountRenminbi,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.afterService != null" >
+                after_service = #{record.afterService,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isFulfil != null" >
+                is_fulfil = #{record.isFulfil,jdbcType=VARCHAR},
+            </if>
+            <if test="record.diffrencesDesc != null" >
+                diffrences_desc = #{record.diffrencesDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidPerson != null" >
+                bid_person = #{record.bidPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidUserId != null" >
+                bid_user_id = #{record.bidUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.companyId != null" >
+                company_id = #{record.companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.companyName != null" >
+                company_name = #{record.companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidTime != null" >
+                bid_time = #{record.bidTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidStatus != null" >
+                bid_status = #{record.bidStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidReason != null" >
+                bid_reason = #{record.bidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserid != null" >
+                create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createUsername != null" >
+                create_username = #{record.createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter != null" >
+                is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege != null" >
+                is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isInquire != null" >
+                is_inquire = #{record.isInquire,jdbcType=VARCHAR},
+            </if>
+            <if test="record.celNum != null" >
+                cel_num = #{record.celNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eccNum != null" >
+                ecc_num = #{record.eccNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeReason != null" >
+                node_reason = #{record.nodeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.warrantyPeriod != null" >
+                warranty_period = #{record.warrantyPeriod,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update cp_bid_order
+        set bid_info_id = #{record.bidInfoId,jdbcType=INTEGER},
+            detail_id = #{record.detailId,jdbcType=VARCHAR},
+            order_main_id = #{record.orderMainId,jdbcType=VARCHAR},
+            order_bid_type = #{record.orderBidType,jdbcType=VARCHAR},
+            source_college_id = #{record.sourceCollegeId,jdbcType=VARCHAR},
+            source_company_id = #{record.sourceCompanyId,jdbcType=VARCHAR},
+            device_id = #{record.deviceId,jdbcType=INTEGER},
+            bid_price = #{record.bidPrice,jdbcType=VARCHAR},
+            total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+            total_amount_renminbi = #{record.totalAmountRenminbi,jdbcType=LONGVARCHAR},
+            after_service = #{record.afterService,jdbcType=VARCHAR},
+            is_fulfil = #{record.isFulfil,jdbcType=VARCHAR},
+            diffrences_desc = #{record.diffrencesDesc,jdbcType=VARCHAR},
+            bid_person = #{record.bidPerson,jdbcType=VARCHAR},
+            bid_user_id = #{record.bidUserId,jdbcType=VARCHAR},
+            company_id = #{record.companyId,jdbcType=VARCHAR},
+            company_name = #{record.companyName,jdbcType=VARCHAR},
+            bid_time = #{record.bidTime,jdbcType=VARCHAR},
+            bid_status = #{record.bidStatus,jdbcType=VARCHAR},
+            bid_reason = #{record.bidReason,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            create_username = #{record.createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            is_inquire = #{record.isInquire,jdbcType=VARCHAR},
+            cel_num = #{record.celNum,jdbcType=VARCHAR},
+            ecc_num = #{record.eccNum,jdbcType=VARCHAR},
+            node_reason = #{record.nodeReason,jdbcType=VARCHAR},
+            warranty_period = #{record.warrantyPeriod,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CpBidOrder" >
+        update cp_bid_order
+        <set >
+            <if test="detailId != null" >
+                detail_id = #{detailId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderMainId != null" >
+                order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderBidType != null" >
+                order_bid_type = #{orderBidType,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceCollegeId != null" >
+                source_college_id = #{sourceCollegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceCompanyId != null" >
+                source_company_id = #{sourceCompanyId,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceId != null" >
+                device_id = #{deviceId,jdbcType=INTEGER},
+            </if>
+            <if test="bidPrice != null" >
+                bid_price = #{bidPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null" >
+                total_amount = #{totalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmountRenminbi != null" >
+                total_amount_renminbi = #{totalAmountRenminbi,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="afterService != null" >
+                after_service = #{afterService,jdbcType=VARCHAR},
+            </if>
+            <if test="isFulfil != null" >
+                is_fulfil = #{isFulfil,jdbcType=VARCHAR},
+            </if>
+            <if test="diffrencesDesc != null" >
+                diffrences_desc = #{diffrencesDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="bidPerson != null" >
+                bid_person = #{bidPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="bidUserId != null" >
+                bid_user_id = #{bidUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null" >
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="bidTime != null" >
+                bid_time = #{bidTime,jdbcType=VARCHAR},
+            </if>
+            <if test="bidStatus != null" >
+                bid_status = #{bidStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="bidReason != null" >
+                bid_reason = #{bidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="isInquire != null" >
+                is_inquire = #{isInquire,jdbcType=VARCHAR},
+            </if>
+            <if test="celNum != null" >
+                cel_num = #{celNum,jdbcType=VARCHAR},
+            </if>
+            <if test="eccNum != null" >
+                ecc_num = #{eccNum,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeReason != null" >
+                node_reason = #{nodeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="warrantyPeriod != null" >
+                warranty_period = #{warrantyPeriod,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where bid_info_id = #{bidInfoId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CpBidOrder" >
+        update cp_bid_order
+        set detail_id = #{detailId,jdbcType=VARCHAR},
+            order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            order_bid_type = #{orderBidType,jdbcType=VARCHAR},
+            source_college_id = #{sourceCollegeId,jdbcType=VARCHAR},
+            source_company_id = #{sourceCompanyId,jdbcType=VARCHAR},
+            device_id = #{deviceId,jdbcType=INTEGER},
+            bid_price = #{bidPrice,jdbcType=VARCHAR},
+            total_amount = #{totalAmount,jdbcType=VARCHAR},
+            total_amount_renminbi = #{totalAmountRenminbi,jdbcType=LONGVARCHAR},
+            after_service = #{afterService,jdbcType=VARCHAR},
+            is_fulfil = #{isFulfil,jdbcType=VARCHAR},
+            diffrences_desc = #{diffrencesDesc,jdbcType=VARCHAR},
+            bid_person = #{bidPerson,jdbcType=VARCHAR},
+            bid_user_id = #{bidUserId,jdbcType=VARCHAR},
+            company_id = #{companyId,jdbcType=VARCHAR},
+            company_name = #{companyName,jdbcType=VARCHAR},
+            bid_time = #{bidTime,jdbcType=VARCHAR},
+            bid_status = #{bidStatus,jdbcType=VARCHAR},
+            bid_reason = #{bidReason,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=VARCHAR},
+            create_username = #{createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            is_inquire = #{isInquire,jdbcType=VARCHAR},
+            cel_num = #{celNum,jdbcType=VARCHAR},
+            ecc_num = #{eccNum,jdbcType=VARCHAR},
+            node_reason = #{nodeReason,jdbcType=VARCHAR},
+            warranty_period = #{warrantyPeriod,jdbcType=VARCHAR}
+        where bid_info_id = #{bidInfoId,jdbcType=INTEGER}
+    </update>
+</mapper>

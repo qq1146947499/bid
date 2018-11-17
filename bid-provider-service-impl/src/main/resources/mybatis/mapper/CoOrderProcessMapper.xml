@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CoOrderProcessMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CoOrderProcess" >
+        <id column="process_id" property="processId" jdbcType="VARCHAR" />
+        <result column="order_main_id" property="orderMainId" jdbcType="VARCHAR" />
+        <result column="order_bid_type" property="orderBidType" jdbcType="VARCHAR" />
+        <result column="source_college_id" property="sourceCollegeId" jdbcType="LONGVARCHAR" />
+        <result column="process_name" property="processName" jdbcType="VARCHAR" />
+        <result column="process_time" property="processTime" jdbcType="TIMESTAMP" />
+        <result column="audit_result" property="auditResult" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        process_id, order_main_id, order_bid_type, source_college_id, process_name, process_time, 
+        audit_result, remark
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoOrderProcessExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from co_order_process
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_order_process
+        where process_id = #{processId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from co_order_process
+        where process_id = #{processId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CoOrderProcessExample" >
+        delete from co_order_process
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CoOrderProcess" >
+        insert into co_order_process (process_id, order_main_id, order_bid_type, 
+            source_college_id, process_name, process_time, 
+            audit_result, remark)
+        values (#{processId,jdbcType=VARCHAR}, #{orderMainId,jdbcType=VARCHAR}, #{orderBidType,jdbcType=VARCHAR}, 
+            #{sourceCollegeId,jdbcType=LONGVARCHAR}, #{processName,jdbcType=VARCHAR}, #{processTime,jdbcType=TIMESTAMP}, 
+            #{auditResult,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CoOrderProcess" >
+        insert into co_order_process
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="processId != null" >
+                process_id,
+            </if>
+            <if test="orderMainId != null" >
+                order_main_id,
+            </if>
+            <if test="orderBidType != null" >
+                order_bid_type,
+            </if>
+            <if test="sourceCollegeId != null" >
+                source_college_id,
+            </if>
+            <if test="processName != null" >
+                process_name,
+            </if>
+            <if test="processTime != null" >
+                process_time,
+            </if>
+            <if test="auditResult != null" >
+                audit_result,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="processId != null" >
+                #{processId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderMainId != null" >
+                #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderBidType != null" >
+                #{orderBidType,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceCollegeId != null" >
+                #{sourceCollegeId,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="processName != null" >
+                #{processName,jdbcType=VARCHAR},
+            </if>
+            <if test="processTime != null" >
+                #{processTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditResult != null" >
+                #{auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CoOrderProcessExample" resultType="java.lang.Integer" >
+        select count(*) from co_order_process
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update co_order_process
+        <set >
+            <if test="record.processId != null" >
+                process_id = #{record.processId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderMainId != null" >
+                order_main_id = #{record.orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderBidType != null" >
+                order_bid_type = #{record.orderBidType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sourceCollegeId != null" >
+                source_college_id = #{record.sourceCollegeId,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.processName != null" >
+                process_name = #{record.processName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.processTime != null" >
+                process_time = #{record.processTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.auditResult != null" >
+                audit_result = #{record.auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update co_order_process
+        set process_id = #{record.processId,jdbcType=VARCHAR},
+            order_main_id = #{record.orderMainId,jdbcType=VARCHAR},
+            order_bid_type = #{record.orderBidType,jdbcType=VARCHAR},
+            source_college_id = #{record.sourceCollegeId,jdbcType=LONGVARCHAR},
+            process_name = #{record.processName,jdbcType=VARCHAR},
+            process_time = #{record.processTime,jdbcType=TIMESTAMP},
+            audit_result = #{record.auditResult,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CoOrderProcess" >
+        update co_order_process
+        <set >
+            <if test="orderMainId != null" >
+                order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderBidType != null" >
+                order_bid_type = #{orderBidType,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceCollegeId != null" >
+                source_college_id = #{sourceCollegeId,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="processName != null" >
+                process_name = #{processName,jdbcType=VARCHAR},
+            </if>
+            <if test="processTime != null" >
+                process_time = #{processTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditResult != null" >
+                audit_result = #{auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where process_id = #{processId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CoOrderProcess" >
+        update co_order_process
+        set order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            order_bid_type = #{orderBidType,jdbcType=VARCHAR},
+            source_college_id = #{sourceCollegeId,jdbcType=LONGVARCHAR},
+            process_name = #{processName,jdbcType=VARCHAR},
+            process_time = #{processTime,jdbcType=TIMESTAMP},
+            audit_result = #{auditResult,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR}
+        where process_id = #{processId,jdbcType=VARCHAR}
+    </update>
+</mapper>

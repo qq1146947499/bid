@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CoUserMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CoUser" >
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+        <result column="user_pass" property="userPass" jdbcType="VARCHAR" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="user_type" property="userType" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="office_phone" property="officePhone" jdbcType="VARCHAR" />
+        <result column="person_phone" property="personPhone" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="last_logintime" property="lastLogintime" jdbcType="TIMESTAMP" />
+        <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+        <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+        <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+        <result column="auditor" property="auditor" jdbcType="VARCHAR" />
+        <result column="auditor_time" property="auditorTime" jdbcType="TIMESTAMP" />
+        <result column="apply_priv" property="applyPriv" jdbcType="VARCHAR" />
+        <result column="apply_oneself" property="applyOneself" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="VARCHAR" />
+        <result column="last_update_userid" property="lastUpdateUserid" jdbcType="VARCHAR" />
+        <result column="last_update_username" property="lastUpdateUsername" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        user_id, user_account, user_pass, real_name, user_type, status, office_phone, person_phone, 
+        email, last_logintime, college_id, department_id, reg_time, auditor, auditor_time, 
+        apply_priv, apply_oneself, remark, create_time, create_userid, create_username, is_dx_center, 
+        is_dx_college, last_update_time, last_update_userid, last_update_username
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoUserExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from co_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from co_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CoUserExample" >
+        delete from co_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CoUser" >
+        insert into co_user (user_id, user_account, user_pass, 
+            real_name, user_type, status, 
+            office_phone, person_phone, email, 
+            last_logintime, college_id, department_id, 
+            reg_time, auditor, auditor_time, 
+            apply_priv, apply_oneself, remark, 
+            create_time, create_userid, create_username, 
+            is_dx_center, is_dx_college, last_update_time, 
+            last_update_userid, last_update_username)
+        values (#{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, 
+            #{realName,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+            #{officePhone,jdbcType=VARCHAR}, #{personPhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+            #{lastLogintime,jdbcType=TIMESTAMP}, #{collegeId,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, 
+            #{regTime,jdbcType=TIMESTAMP}, #{auditor,jdbcType=VARCHAR}, #{auditorTime,jdbcType=TIMESTAMP}, 
+            #{applyPriv,jdbcType=VARCHAR}, #{applyOneself,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, 
+            #{isDxCenter,jdbcType=VARCHAR}, #{isDxCollege,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=VARCHAR}, 
+            #{lastUpdateUserid,jdbcType=VARCHAR}, #{lastUpdateUsername,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CoUser" >
+        insert into co_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="userAccount != null" >
+                user_account,
+            </if>
+            <if test="userPass != null" >
+                user_pass,
+            </if>
+            <if test="realName != null" >
+                real_name,
+            </if>
+            <if test="userType != null" >
+                user_type,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="officePhone != null" >
+                office_phone,
+            </if>
+            <if test="personPhone != null" >
+                person_phone,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="lastLogintime != null" >
+                last_logintime,
+            </if>
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="departmentId != null" >
+                department_id,
+            </if>
+            <if test="regTime != null" >
+                reg_time,
+            </if>
+            <if test="auditor != null" >
+                auditor,
+            </if>
+            <if test="auditorTime != null" >
+                auditor_time,
+            </if>
+            <if test="applyPriv != null" >
+                apply_priv,
+            </if>
+            <if test="applyOneself != null" >
+                apply_oneself,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time,
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid,
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="userAccount != null" >
+                #{userAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="userPass != null" >
+                #{userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null" >
+                #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="officePhone != null" >
+                #{officePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="personPhone != null" >
+                #{personPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLogintime != null" >
+                #{lastLogintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="regTime != null" >
+                #{regTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditor != null" >
+                #{auditor,jdbcType=VARCHAR},
+            </if>
+            <if test="auditorTime != null" >
+                #{auditorTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="applyPriv != null" >
+                #{applyPriv,jdbcType=VARCHAR},
+            </if>
+            <if test="applyOneself != null" >
+                #{applyOneself,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                #{lastUpdateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CoUserExample" resultType="java.lang.Integer" >
+        select count(*) from co_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update co_user
+        <set >
+            <if test="record.userId != null" >
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userAccount != null" >
+                user_account = #{record.userAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userPass != null" >
+                user_pass = #{record.userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realName != null" >
+                real_name = #{record.realName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userType != null" >
+                user_type = #{record.userType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null" >
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.officePhone != null" >
+                office_phone = #{record.officePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.personPhone != null" >
+                person_phone = #{record.personPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null" >
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastLogintime != null" >
+                last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.collegeId != null" >
+                college_id = #{record.collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.departmentId != null" >
+                department_id = #{record.departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.regTime != null" >
+                reg_time = #{record.regTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.auditor != null" >
+                auditor = #{record.auditor,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditorTime != null" >
+                auditor_time = #{record.auditorTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.applyPriv != null" >
+                apply_priv = #{record.applyPriv,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applyOneself != null" >
+                apply_oneself = #{record.applyOneself,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserid != null" >
+                create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createUsername != null" >
+                create_username = #{record.createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter != null" >
+                is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege != null" >
+                is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateTime != null" >
+                last_update_time = #{record.lastUpdateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateUserid != null" >
+                last_update_userid = #{record.lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateUsername != null" >
+                last_update_username = #{record.lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update co_user
+        set user_id = #{record.userId,jdbcType=INTEGER},
+            user_account = #{record.userAccount,jdbcType=VARCHAR},
+            user_pass = #{record.userPass,jdbcType=VARCHAR},
+            real_name = #{record.realName,jdbcType=VARCHAR},
+            user_type = #{record.userType,jdbcType=VARCHAR},
+            status = #{record.status,jdbcType=VARCHAR},
+            office_phone = #{record.officePhone,jdbcType=VARCHAR},
+            person_phone = #{record.personPhone,jdbcType=VARCHAR},
+            email = #{record.email,jdbcType=VARCHAR},
+            last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
+            college_id = #{record.collegeId,jdbcType=VARCHAR},
+            department_id = #{record.departmentId,jdbcType=VARCHAR},
+            reg_time = #{record.regTime,jdbcType=TIMESTAMP},
+            auditor = #{record.auditor,jdbcType=VARCHAR},
+            auditor_time = #{record.auditorTime,jdbcType=TIMESTAMP},
+            apply_priv = #{record.applyPriv,jdbcType=VARCHAR},
+            apply_oneself = #{record.applyOneself,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            create_username = #{record.createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            last_update_time = #{record.lastUpdateTime,jdbcType=VARCHAR},
+            last_update_userid = #{record.lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{record.lastUpdateUsername,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CoUser" >
+        update co_user
+        <set >
+            <if test="userAccount != null" >
+                user_account = #{userAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="userPass != null" >
+                user_pass = #{userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null" >
+                user_type = #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="officePhone != null" >
+                office_phone = #{officePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="personPhone != null" >
+                person_phone = #{personPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLogintime != null" >
+                last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="collegeId != null" >
+                college_id = #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                department_id = #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="regTime != null" >
+                reg_time = #{regTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditor != null" >
+                auditor = #{auditor,jdbcType=VARCHAR},
+            </if>
+            <if test="auditorTime != null" >
+                auditor_time = #{auditorTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="applyPriv != null" >
+                apply_priv = #{applyPriv,jdbcType=VARCHAR},
+            </if>
+            <if test="applyOneself != null" >
+                apply_oneself = #{applyOneself,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CoUser" >
+        update co_user
+        set user_account = #{userAccount,jdbcType=VARCHAR},
+            user_pass = #{userPass,jdbcType=VARCHAR},
+            real_name = #{realName,jdbcType=VARCHAR},
+            user_type = #{userType,jdbcType=VARCHAR},
+            status = #{status,jdbcType=VARCHAR},
+            office_phone = #{officePhone,jdbcType=VARCHAR},
+            person_phone = #{personPhone,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+            college_id = #{collegeId,jdbcType=VARCHAR},
+            department_id = #{departmentId,jdbcType=VARCHAR},
+            reg_time = #{regTime,jdbcType=TIMESTAMP},
+            auditor = #{auditor,jdbcType=VARCHAR},
+            auditor_time = #{auditorTime,jdbcType=TIMESTAMP},
+            apply_priv = #{applyPriv,jdbcType=VARCHAR},
+            apply_oneself = #{applyOneself,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=VARCHAR},
+            create_username = #{createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+            last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.DeviceMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.Device" >
+        <id column="device_id" property="deviceId" jdbcType="INTEGER" />
+        <result column="media_id" property="mediaId" jdbcType="VARCHAR" />
+        <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+        <result column="bid_info_id" property="bidInfoId" jdbcType="INTEGER" />
+        <result column="name_id" property="nameId" jdbcType="VARCHAR" />
+        <result column="dmain_id" property="dmainId" jdbcType="CHAR" />
+        <result column="device_type_id" property="deviceTypeId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        device_id, media_id, brand_id, bid_info_id, name_id, dmain_id, device_type_id
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.DeviceExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from device
+        where device_id = #{deviceId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from device
+        where device_id = #{deviceId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.DeviceExample" >
+        delete from device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.Device" >
+        insert into device (device_id, media_id, brand_id, 
+            bid_info_id, name_id, dmain_id, 
+            device_type_id)
+        values (#{deviceId,jdbcType=INTEGER}, #{mediaId,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}, 
+            #{bidInfoId,jdbcType=INTEGER}, #{nameId,jdbcType=VARCHAR}, #{dmainId,jdbcType=CHAR}, 
+            #{deviceTypeId,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.Device" >
+        insert into device
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="deviceId != null" >
+                device_id,
+            </if>
+            <if test="mediaId != null" >
+                media_id,
+            </if>
+            <if test="brandId != null" >
+                brand_id,
+            </if>
+            <if test="bidInfoId != null" >
+                bid_info_id,
+            </if>
+            <if test="nameId != null" >
+                name_id,
+            </if>
+            <if test="dmainId != null" >
+                dmain_id,
+            </if>
+            <if test="deviceTypeId != null" >
+                device_type_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="deviceId != null" >
+                #{deviceId,jdbcType=INTEGER},
+            </if>
+            <if test="mediaId != null" >
+                #{mediaId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null" >
+                #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="bidInfoId != null" >
+                #{bidInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="nameId != null" >
+                #{nameId,jdbcType=VARCHAR},
+            </if>
+            <if test="dmainId != null" >
+                #{dmainId,jdbcType=CHAR},
+            </if>
+            <if test="deviceTypeId != null" >
+                #{deviceTypeId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.DeviceExample" resultType="java.lang.Integer" >
+        select count(*) from device
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update device
+        <set >
+            <if test="record.deviceId != null" >
+                device_id = #{record.deviceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.mediaId != null" >
+                media_id = #{record.mediaId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.brandId != null" >
+                brand_id = #{record.brandId,jdbcType=INTEGER},
+            </if>
+            <if test="record.bidInfoId != null" >
+                bid_info_id = #{record.bidInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="record.nameId != null" >
+                name_id = #{record.nameId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dmainId != null" >
+                dmain_id = #{record.dmainId,jdbcType=CHAR},
+            </if>
+            <if test="record.deviceTypeId != null" >
+                device_type_id = #{record.deviceTypeId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update device
+        set device_id = #{record.deviceId,jdbcType=INTEGER},
+            media_id = #{record.mediaId,jdbcType=VARCHAR},
+            brand_id = #{record.brandId,jdbcType=INTEGER},
+            bid_info_id = #{record.bidInfoId,jdbcType=INTEGER},
+            name_id = #{record.nameId,jdbcType=VARCHAR},
+            dmain_id = #{record.dmainId,jdbcType=CHAR},
+            device_type_id = #{record.deviceTypeId,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.Device" >
+        update device
+        <set >
+            <if test="mediaId != null" >
+                media_id = #{mediaId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null" >
+                brand_id = #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="bidInfoId != null" >
+                bid_info_id = #{bidInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="nameId != null" >
+                name_id = #{nameId,jdbcType=VARCHAR},
+            </if>
+            <if test="dmainId != null" >
+                dmain_id = #{dmainId,jdbcType=CHAR},
+            </if>
+            <if test="deviceTypeId != null" >
+                device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where device_id = #{deviceId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.Device" >
+        update device
+        set media_id = #{mediaId,jdbcType=VARCHAR},
+            brand_id = #{brandId,jdbcType=INTEGER},
+            bid_info_id = #{bidInfoId,jdbcType=INTEGER},
+            name_id = #{nameId,jdbcType=VARCHAR},
+            dmain_id = #{dmainId,jdbcType=CHAR},
+            device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+        where device_id = #{deviceId,jdbcType=INTEGER}
+    </update>
+</mapper>

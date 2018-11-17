@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CoDeviceNameMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CoDeviceName" >
+        <id column="name_id" property="nameId" jdbcType="VARCHAR" />
+        <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+        <result column="devicetype_id" property="devicetypeId" jdbcType="VARCHAR" />
+        <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        name_id, device_name, devicetype_id, college_id, remark
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoDeviceNameExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from co_device_name
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_device_name
+        where name_id = #{nameId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from co_device_name
+        where name_id = #{nameId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CoDeviceNameExample" >
+        delete from co_device_name
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CoDeviceName" >
+        insert into co_device_name (name_id, device_name, devicetype_id, 
+            college_id, remark)
+        values (#{nameId,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, #{devicetypeId,jdbcType=VARCHAR}, 
+            #{collegeId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CoDeviceName" >
+        insert into co_device_name
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="nameId != null" >
+                name_id,
+            </if>
+            <if test="deviceName != null" >
+                device_name,
+            </if>
+            <if test="devicetypeId != null" >
+                devicetype_id,
+            </if>
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="nameId != null" >
+                #{nameId,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceName != null" >
+                #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="devicetypeId != null" >
+                #{devicetypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CoDeviceNameExample" resultType="java.lang.Integer" >
+        select count(*) from co_device_name
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update co_device_name
+        <set >
+            <if test="record.nameId != null" >
+                name_id = #{record.nameId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceName != null" >
+                device_name = #{record.deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.devicetypeId != null" >
+                devicetype_id = #{record.devicetypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.collegeId != null" >
+                college_id = #{record.collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update co_device_name
+        set name_id = #{record.nameId,jdbcType=VARCHAR},
+            device_name = #{record.deviceName,jdbcType=VARCHAR},
+            devicetype_id = #{record.devicetypeId,jdbcType=VARCHAR},
+            college_id = #{record.collegeId,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CoDeviceName" >
+        update co_device_name
+        <set >
+            <if test="deviceName != null" >
+                device_name = #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="devicetypeId != null" >
+                devicetype_id = #{devicetypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                college_id = #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where name_id = #{nameId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CoDeviceName" >
+        update co_device_name
+        set device_name = #{deviceName,jdbcType=VARCHAR},
+            devicetype_id = #{devicetypeId,jdbcType=VARCHAR},
+            college_id = #{collegeId,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR}
+        where name_id = #{nameId,jdbcType=VARCHAR}
+    </update>
+</mapper>

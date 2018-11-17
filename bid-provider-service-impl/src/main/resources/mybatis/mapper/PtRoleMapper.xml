@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.PtRoleMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.PtRole" >
+        <id column="role_id" property="roleId" jdbcType="INTEGER" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+        <result column="is_college_defsult" property="isCollegeDefsult" jdbcType="VARCHAR" />
+        <result column="is_first_audit" property="isFirstAudit" jdbcType="VARCHAR" />
+        <result column="is_second_audit" property="isSecondAudit" jdbcType="VARCHAR" />
+        <result column="is_company" property="isCompany" jdbcType="VARCHAR" />
+        <result column="pt_type" property="ptType" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="INTEGER" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        role_id, role_name, is_college_defsult, is_first_audit, is_second_audit, is_company, 
+        pt_type, create_time, create_userid, create_username, is_dx_center, is_dx_college
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.PtRoleExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from pt_role
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from pt_role
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from pt_role
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.PtRoleExample" >
+        delete from pt_role
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.PtRole" >
+        insert into pt_role (role_id, role_name, is_college_defsult, 
+            is_first_audit, is_second_audit, is_company, 
+            pt_type, create_time, create_userid, 
+            create_username, is_dx_center, is_dx_college
+            )
+        values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{isCollegeDefsult,jdbcType=VARCHAR}, 
+            #{isFirstAudit,jdbcType=VARCHAR}, #{isSecondAudit,jdbcType=VARCHAR}, #{isCompany,jdbcType=VARCHAR}, 
+            #{ptType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=INTEGER}, 
+            #{createUsername,jdbcType=VARCHAR}, #{isDxCenter,jdbcType=VARCHAR}, #{isDxCollege,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.PtRole" >
+        insert into pt_role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="roleId != null" >
+                role_id,
+            </if>
+            <if test="roleName != null" >
+                role_name,
+            </if>
+            <if test="isCollegeDefsult != null" >
+                is_college_defsult,
+            </if>
+            <if test="isFirstAudit != null" >
+                is_first_audit,
+            </if>
+            <if test="isSecondAudit != null" >
+                is_second_audit,
+            </if>
+            <if test="isCompany != null" >
+                is_company,
+            </if>
+            <if test="ptType != null" >
+                pt_type,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="roleId != null" >
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="roleName != null" >
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="isCollegeDefsult != null" >
+                #{isCollegeDefsult,jdbcType=VARCHAR},
+            </if>
+            <if test="isFirstAudit != null" >
+                #{isFirstAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="isSecondAudit != null" >
+                #{isSecondAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="isCompany != null" >
+                #{isCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="ptType != null" >
+                #{ptType,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=INTEGER},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.PtRoleExample" resultType="java.lang.Integer" >
+        select count(*) from pt_role
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update pt_role
+        <set >
+            <if test="record.roleId != null" >
+                role_id = #{record.roleId,jdbcType=INTEGER},
+            </if>
+            <if test="record.roleName != null" >
+                role_name = #{record.roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isCollegeDefsult != null" >
+                is_college_defsult = #{record.isCollegeDefsult,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isFirstAudit != null" >
+                is_first_audit = #{record.isFirstAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isSecondAudit != null" >
+                is_second_audit = #{record.isSecondAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isCompany != null" >
+                is_company = #{record.isCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ptType != null" >
+                pt_type = #{record.ptType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserid != null" >
+                create_userid = #{record.createUserid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createUsername != null" >
+                create_username = #{record.createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter != null" >
+                is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege != null" >
+                is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update pt_role
+        set role_id = #{record.roleId,jdbcType=INTEGER},
+            role_name = #{record.roleName,jdbcType=VARCHAR},
+            is_college_defsult = #{record.isCollegeDefsult,jdbcType=VARCHAR},
+            is_first_audit = #{record.isFirstAudit,jdbcType=VARCHAR},
+            is_second_audit = #{record.isSecondAudit,jdbcType=VARCHAR},
+            is_company = #{record.isCompany,jdbcType=VARCHAR},
+            pt_type = #{record.ptType,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            create_userid = #{record.createUserid,jdbcType=INTEGER},
+            create_username = #{record.createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.PtRole" >
+        update pt_role
+        <set >
+            <if test="roleName != null" >
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="isCollegeDefsult != null" >
+                is_college_defsult = #{isCollegeDefsult,jdbcType=VARCHAR},
+            </if>
+            <if test="isFirstAudit != null" >
+                is_first_audit = #{isFirstAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="isSecondAudit != null" >
+                is_second_audit = #{isSecondAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="isCompany != null" >
+                is_company = #{isCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="ptType != null" >
+                pt_type = #{ptType,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=INTEGER},
+            </if>
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.PtRole" >
+        update pt_role
+        set role_name = #{roleName,jdbcType=VARCHAR},
+            is_college_defsult = #{isCollegeDefsult,jdbcType=VARCHAR},
+            is_first_audit = #{isFirstAudit,jdbcType=VARCHAR},
+            is_second_audit = #{isSecondAudit,jdbcType=VARCHAR},
+            is_company = #{isCompany,jdbcType=VARCHAR},
+            pt_type = #{ptType,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=INTEGER},
+            create_username = #{createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR}
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </update>
+</mapper>

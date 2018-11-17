@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.PtUserMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.PtUser" >
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="user_pass" property="userPass" jdbcType="VARCHAR" />
+        <result column="user_type" property="userType" jdbcType="LONGVARCHAR" />
+        <result column="is_super" property="isSuper" jdbcType="VARCHAR" />
+        <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
+        <result column="person_phone" property="personPhone" jdbcType="LONGVARCHAR" />
+        <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+        <result column="college_name" property="collegeName" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="co_department_id" property="coDepartmentId" jdbcType="VARCHAR" />
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+        <result column="compus_id" property="compusId" jdbcType="INTEGER" />
+        <result column="compus_name" property="compusName" jdbcType="VARCHAR" />
+        <result column="institue_id" property="institueId" jdbcType="INTEGER" />
+        <result column="institue_name" property="institueName" jdbcType="VARCHAR" />
+        <result column="apply_priv" property="applyPriv" jdbcType="VARCHAR" />
+        <result column="apply_oneself" property="applyOneself" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="audit_userid" property="auditUserid" jdbcType="INTEGER" />
+        <result column="audit_username" property="auditUsername" jdbcType="VARCHAR" />
+        <result column="auditor_time" property="auditorTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        user_id, user_name, real_name, user_pass, user_type, is_super, user_status, person_phone, 
+        college_id, college_name, company_id, company_name, co_department_id, department_name, 
+        compus_id, compus_name, institue_id, institue_name, apply_priv, apply_oneself, email, 
+        audit_userid, audit_username, auditor_time
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.PtUserExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from pt_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from pt_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from pt_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.PtUserExample" >
+        delete from pt_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.PtUser" >
+        insert into pt_user (user_id, user_name, real_name, 
+            user_pass, user_type, is_super, 
+            user_status, person_phone, college_id, 
+            college_name, company_id, company_name, 
+            co_department_id, department_name, compus_id, 
+            compus_name, institue_id, institue_name, 
+            apply_priv, apply_oneself, email, 
+            audit_userid, audit_username, auditor_time
+            )
+        values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+            #{userPass,jdbcType=VARCHAR}, #{userType,jdbcType=LONGVARCHAR}, #{isSuper,jdbcType=VARCHAR}, 
+            #{userStatus,jdbcType=VARCHAR}, #{personPhone,jdbcType=LONGVARCHAR}, #{collegeId,jdbcType=INTEGER}, 
+            #{collegeName,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+            #{coDepartmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{compusId,jdbcType=INTEGER}, 
+            #{compusName,jdbcType=VARCHAR}, #{institueId,jdbcType=INTEGER}, #{institueName,jdbcType=VARCHAR}, 
+            #{applyPriv,jdbcType=VARCHAR}, #{applyOneself,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+            #{auditUserid,jdbcType=INTEGER}, #{auditUsername,jdbcType=VARCHAR}, #{auditorTime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.PtUser" >
+        insert into pt_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="realName != null" >
+                real_name,
+            </if>
+            <if test="userPass != null" >
+                user_pass,
+            </if>
+            <if test="userType != null" >
+                user_type,
+            </if>
+            <if test="isSuper != null" >
+                is_super,
+            </if>
+            <if test="userStatus != null" >
+                user_status,
+            </if>
+            <if test="personPhone != null" >
+                person_phone,
+            </if>
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="collegeName != null" >
+                college_name,
+            </if>
+            <if test="companyId != null" >
+                company_id,
+            </if>
+            <if test="companyName != null" >
+                company_name,
+            </if>
+            <if test="coDepartmentId != null" >
+                co_department_id,
+            </if>
+            <if test="departmentName != null" >
+                department_name,
+            </if>
+            <if test="compusId != null" >
+                compus_id,
+            </if>
+            <if test="compusName != null" >
+                compus_name,
+            </if>
+            <if test="institueId != null" >
+                institue_id,
+            </if>
+            <if test="institueName != null" >
+                institue_name,
+            </if>
+            <if test="applyPriv != null" >
+                apply_priv,
+            </if>
+            <if test="applyOneself != null" >
+                apply_oneself,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="auditUserid != null" >
+                audit_userid,
+            </if>
+            <if test="auditUsername != null" >
+                audit_username,
+            </if>
+            <if test="auditorTime != null" >
+                auditor_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPass != null" >
+                #{userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null" >
+                #{userType,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isSuper != null" >
+                #{isSuper,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null" >
+                #{userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="personPhone != null" >
+                #{personPhone,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=INTEGER},
+            </if>
+            <if test="collegeName != null" >
+                #{collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null" >
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="coDepartmentId != null" >
+                #{coDepartmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentName != null" >
+                #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="compusId != null" >
+                #{compusId,jdbcType=INTEGER},
+            </if>
+            <if test="compusName != null" >
+                #{compusName,jdbcType=VARCHAR},
+            </if>
+            <if test="institueId != null" >
+                #{institueId,jdbcType=INTEGER},
+            </if>
+            <if test="institueName != null" >
+                #{institueName,jdbcType=VARCHAR},
+            </if>
+            <if test="applyPriv != null" >
+                #{applyPriv,jdbcType=VARCHAR},
+            </if>
+            <if test="applyOneself != null" >
+                #{applyOneself,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUserid != null" >
+                #{auditUserid,jdbcType=INTEGER},
+            </if>
+            <if test="auditUsername != null" >
+                #{auditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="auditorTime != null" >
+                #{auditorTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.PtUserExample" resultType="java.lang.Integer" >
+        select count(*) from pt_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update pt_user
+        <set >
+            <if test="record.userId != null" >
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userName != null" >
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realName != null" >
+                real_name = #{record.realName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userPass != null" >
+                user_pass = #{record.userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userType != null" >
+                user_type = #{record.userType,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.isSuper != null" >
+                is_super = #{record.isSuper,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userStatus != null" >
+                user_status = #{record.userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.personPhone != null" >
+                person_phone = #{record.personPhone,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.collegeId != null" >
+                college_id = #{record.collegeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.collegeName != null" >
+                college_name = #{record.collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.companyId != null" >
+                company_id = #{record.companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.companyName != null" >
+                company_name = #{record.companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.coDepartmentId != null" >
+                co_department_id = #{record.coDepartmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.departmentName != null" >
+                department_name = #{record.departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.compusId != null" >
+                compus_id = #{record.compusId,jdbcType=INTEGER},
+            </if>
+            <if test="record.compusName != null" >
+                compus_name = #{record.compusName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.institueId != null" >
+                institue_id = #{record.institueId,jdbcType=INTEGER},
+            </if>
+            <if test="record.institueName != null" >
+                institue_name = #{record.institueName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applyPriv != null" >
+                apply_priv = #{record.applyPriv,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applyOneself != null" >
+                apply_oneself = #{record.applyOneself,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null" >
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditUserid != null" >
+                audit_userid = #{record.auditUserid,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditUsername != null" >
+                audit_username = #{record.auditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditorTime != null" >
+                auditor_time = #{record.auditorTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update pt_user
+        set user_id = #{record.userId,jdbcType=INTEGER},
+            user_name = #{record.userName,jdbcType=VARCHAR},
+            real_name = #{record.realName,jdbcType=VARCHAR},
+            user_pass = #{record.userPass,jdbcType=VARCHAR},
+            user_type = #{record.userType,jdbcType=LONGVARCHAR},
+            is_super = #{record.isSuper,jdbcType=VARCHAR},
+            user_status = #{record.userStatus,jdbcType=VARCHAR},
+            person_phone = #{record.personPhone,jdbcType=LONGVARCHAR},
+            college_id = #{record.collegeId,jdbcType=INTEGER},
+            college_name = #{record.collegeName,jdbcType=VARCHAR},
+            company_id = #{record.companyId,jdbcType=VARCHAR},
+            company_name = #{record.companyName,jdbcType=VARCHAR},
+            co_department_id = #{record.coDepartmentId,jdbcType=VARCHAR},
+            department_name = #{record.departmentName,jdbcType=VARCHAR},
+            compus_id = #{record.compusId,jdbcType=INTEGER},
+            compus_name = #{record.compusName,jdbcType=VARCHAR},
+            institue_id = #{record.institueId,jdbcType=INTEGER},
+            institue_name = #{record.institueName,jdbcType=VARCHAR},
+            apply_priv = #{record.applyPriv,jdbcType=VARCHAR},
+            apply_oneself = #{record.applyOneself,jdbcType=VARCHAR},
+            email = #{record.email,jdbcType=VARCHAR},
+            audit_userid = #{record.auditUserid,jdbcType=INTEGER},
+            audit_username = #{record.auditUsername,jdbcType=VARCHAR},
+            auditor_time = #{record.auditorTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.PtUser" >
+        update pt_user
+        <set >
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPass != null" >
+                user_pass = #{userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null" >
+                user_type = #{userType,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isSuper != null" >
+                is_super = #{isSuper,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null" >
+                user_status = #{userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="personPhone != null" >
+                person_phone = #{personPhone,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                college_id = #{collegeId,jdbcType=INTEGER},
+            </if>
+            <if test="collegeName != null" >
+                college_name = #{collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null" >
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="coDepartmentId != null" >
+                co_department_id = #{coDepartmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentName != null" >
+                department_name = #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="compusId != null" >
+                compus_id = #{compusId,jdbcType=INTEGER},
+            </if>
+            <if test="compusName != null" >
+                compus_name = #{compusName,jdbcType=VARCHAR},
+            </if>
+            <if test="institueId != null" >
+                institue_id = #{institueId,jdbcType=INTEGER},
+            </if>
+            <if test="institueName != null" >
+                institue_name = #{institueName,jdbcType=VARCHAR},
+            </if>
+            <if test="applyPriv != null" >
+                apply_priv = #{applyPriv,jdbcType=VARCHAR},
+            </if>
+            <if test="applyOneself != null" >
+                apply_oneself = #{applyOneself,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUserid != null" >
+                audit_userid = #{auditUserid,jdbcType=INTEGER},
+            </if>
+            <if test="auditUsername != null" >
+                audit_username = #{auditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="auditorTime != null" >
+                auditor_time = #{auditorTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.PtUser" >
+        update pt_user
+        set user_name = #{userName,jdbcType=VARCHAR},
+            real_name = #{realName,jdbcType=VARCHAR},
+            user_pass = #{userPass,jdbcType=VARCHAR},
+            user_type = #{userType,jdbcType=LONGVARCHAR},
+            is_super = #{isSuper,jdbcType=VARCHAR},
+            user_status = #{userStatus,jdbcType=VARCHAR},
+            person_phone = #{personPhone,jdbcType=LONGVARCHAR},
+            college_id = #{collegeId,jdbcType=INTEGER},
+            college_name = #{collegeName,jdbcType=VARCHAR},
+            company_id = #{companyId,jdbcType=VARCHAR},
+            company_name = #{companyName,jdbcType=VARCHAR},
+            co_department_id = #{coDepartmentId,jdbcType=VARCHAR},
+            department_name = #{departmentName,jdbcType=VARCHAR},
+            compus_id = #{compusId,jdbcType=INTEGER},
+            compus_name = #{compusName,jdbcType=VARCHAR},
+            institue_id = #{institueId,jdbcType=INTEGER},
+            institue_name = #{institueName,jdbcType=VARCHAR},
+            apply_priv = #{applyPriv,jdbcType=VARCHAR},
+            apply_oneself = #{applyOneself,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            audit_userid = #{auditUserid,jdbcType=INTEGER},
+            audit_username = #{auditUsername,jdbcType=VARCHAR},
+            auditor_time = #{auditorTime,jdbcType=TIMESTAMP}
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+</mapper>

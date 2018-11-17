@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.co_advance_endbidMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.co_advance_endbid" >
+        <id column="advance_endbid_id" property="advanceEndbidId" jdbcType="VARCHAR" />
+        <result column="advance_endbid_time" property="advanceEndbidTime" jdbcType="TIMESTAMP" />
+        <result column="apply_reason" property="applyReason" jdbcType="VARCHAR" />
+        <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+        <result column="college_name" property="collegeName" jdbcType="VARCHAR" />
+        <result column="order_main_id" property="orderMainId" jdbcType="VARCHAR" />
+        <result column="audit_userid" property="auditUserid" jdbcType="VARCHAR" />
+        <result column="audit_username" property="auditUsername" jdbcType="VARCHAR" />
+        <result column="audit_reason" property="auditReason" jdbcType="VARCHAR" />
+        <result column="audit_status" property="auditStatus" jdbcType="VARCHAR" />
+        <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="last_update_userid" property="lastUpdateUserid" jdbcType="VARCHAR" />
+        <result column="last_update_username" property="lastUpdateUsername" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        advance_endbid_id, advance_endbid_time, apply_reason, college_id, college_name, order_main_id, 
+        audit_userid, audit_username, audit_reason, audit_status, audit_time, create_time, 
+        create_userid, create_username, is_dx_center, is_dx_college, last_update_time, last_update_userid, 
+        last_update_username
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_advance_endbid
+        where advance_endbid_id = #{advanceEndbidId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from co_advance_endbid
+        where advance_endbid_id = #{advanceEndbidId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.co_advance_endbid" >
+        insert into co_advance_endbid (advance_endbid_id, advance_endbid_time, 
+            apply_reason, college_id, college_name, 
+            order_main_id, audit_userid, audit_username, 
+            audit_reason, audit_status, audit_time, 
+            create_time, create_userid, create_username, 
+            is_dx_center, is_dx_college, last_update_time, 
+            last_update_userid, last_update_username)
+        values (#{advanceEndbidId,jdbcType=VARCHAR}, #{advanceEndbidTime,jdbcType=TIMESTAMP}, 
+            #{applyReason,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, #{collegeName,jdbcType=VARCHAR}, 
+            #{orderMainId,jdbcType=VARCHAR}, #{auditUserid,jdbcType=VARCHAR}, #{auditUsername,jdbcType=VARCHAR}, 
+            #{auditReason,jdbcType=VARCHAR}, #{auditStatus,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, 
+            #{isDxCenter,jdbcType=VARCHAR}, #{isDxCollege,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+            #{lastUpdateUserid,jdbcType=VARCHAR}, #{lastUpdateUsername,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.co_advance_endbid" >
+        insert into co_advance_endbid
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="advanceEndbidId != null" >
+                advance_endbid_id,
+            </if>
+            <if test="advanceEndbidTime != null" >
+                advance_endbid_time,
+            </if>
+            <if test="applyReason != null" >
+                apply_reason,
+            </if>
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="collegeName != null" >
+                college_name,
+            </if>
+            <if test="orderMainId != null" >
+                order_main_id,
+            </if>
+            <if test="auditUserid != null" >
+                audit_userid,
+            </if>
+            <if test="auditUsername != null" >
+                audit_username,
+            </if>
+            <if test="auditReason != null" >
+                audit_reason,
+            </if>
+            <if test="auditStatus != null" >
+                audit_status,
+            </if>
+            <if test="auditTime != null" >
+                audit_time,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time,
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid,
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="advanceEndbidId != null" >
+                #{advanceEndbidId,jdbcType=VARCHAR},
+            </if>
+            <if test="advanceEndbidTime != null" >
+                #{advanceEndbidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="applyReason != null" >
+                #{applyReason,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null" >
+                #{collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderMainId != null" >
+                #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUserid != null" >
+                #{auditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUsername != null" >
+                #{auditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="auditReason != null" >
+                #{auditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStatus != null" >
+                #{auditStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.co_advance_endbid" >
+        update co_advance_endbid
+        <set >
+            <if test="advanceEndbidTime != null" >
+                advance_endbid_time = #{advanceEndbidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="applyReason != null" >
+                apply_reason = #{applyReason,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                college_id = #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null" >
+                college_name = #{collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderMainId != null" >
+                order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUserid != null" >
+                audit_userid = #{auditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUsername != null" >
+                audit_username = #{auditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="auditReason != null" >
+                audit_reason = #{auditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStatus != null" >
+                audit_status = #{auditStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where advance_endbid_id = #{advanceEndbidId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.co_advance_endbid" >
+        update co_advance_endbid
+        set advance_endbid_time = #{advanceEndbidTime,jdbcType=TIMESTAMP},
+            apply_reason = #{applyReason,jdbcType=VARCHAR},
+            college_id = #{collegeId,jdbcType=VARCHAR},
+            college_name = #{collegeName,jdbcType=VARCHAR},
+            order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            audit_userid = #{auditUserid,jdbcType=VARCHAR},
+            audit_username = #{auditUsername,jdbcType=VARCHAR},
+            audit_reason = #{auditReason,jdbcType=VARCHAR},
+            audit_status = #{auditStatus,jdbcType=VARCHAR},
+            audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=VARCHAR},
+            create_username = #{createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR}
+        where advance_endbid_id = #{advanceEndbidId,jdbcType=VARCHAR}
+    </update>
+</mapper>

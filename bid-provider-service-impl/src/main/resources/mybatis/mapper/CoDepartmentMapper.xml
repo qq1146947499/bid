@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CoDepartmentMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CoDepartment" >
+        <id column="department_name" property="departmentName" jdbcType="VARCHAR" />
+        <id column="department_id" property="departmentId" jdbcType="VARCHAR" />
+        <result column="cp__college_id" property="cpCollegeId" jdbcType="INTEGER" />
+        <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+        <result column="is_dx_center3" property="isDxCenter3" jdbcType="VARCHAR" />
+        <result column="is_dx_college3" property="isDxCollege3" jdbcType="VARCHAR" />
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="last_update_userid" property="lastUpdateUserid" jdbcType="VARCHAR" />
+        <result column="last_update_username" property="lastUpdateUsername" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        department_name, department_id, cp__college_id, college_id, remark, create_time, 
+        create_userid, create_username, is_dx_center3, is_dx_college3, last_update_time, 
+        last_update_userid, last_update_username
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoDepartmentExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from co_department
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoDepartmentKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_department
+        where department_name = #{departmentName,jdbcType=VARCHAR}
+          and department_id = #{departmentId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bid.springcloud.entities.CoDepartmentKey" >
+        delete from co_department
+        where department_name = #{departmentName,jdbcType=VARCHAR}
+          and department_id = #{departmentId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CoDepartmentExample" >
+        delete from co_department
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CoDepartment" >
+        insert into co_department (department_name, department_id, cp__college_id, 
+            college_id, remark, create_time, 
+            create_userid, create_username, is_dx_center3, 
+            is_dx_college3, last_update_time, last_update_userid, 
+            last_update_username)
+        values (#{departmentName,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{cpCollegeId,jdbcType=INTEGER}, 
+            #{collegeId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, #{isDxCenter3,jdbcType=VARCHAR}, 
+            #{isDxCollege3,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{lastUpdateUserid,jdbcType=VARCHAR}, 
+            #{lastUpdateUsername,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CoDepartment" >
+        insert into co_department
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="departmentName != null" >
+                department_name,
+            </if>
+            <if test="departmentId != null" >
+                department_id,
+            </if>
+            <if test="cpCollegeId != null" >
+                cp__college_id,
+            </if>
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="isDxCenter3 != null" >
+                is_dx_center3,
+            </if>
+            <if test="isDxCollege3 != null" >
+                is_dx_college3,
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time,
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid,
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="departmentName != null" >
+                #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="cpCollegeId != null" >
+                #{cpCollegeId,jdbcType=INTEGER},
+            </if>
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter3 != null" >
+                #{isDxCenter3,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege3 != null" >
+                #{isDxCollege3,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CoDepartmentExample" resultType="java.lang.Integer" >
+        select count(*) from co_department
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update co_department
+        <set >
+            <if test="record.departmentName != null" >
+                department_name = #{record.departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.departmentId != null" >
+                department_id = #{record.departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cpCollegeId != null" >
+                cp__college_id = #{record.cpCollegeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.collegeId != null" >
+                college_id = #{record.collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserid != null" >
+                create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createUsername != null" >
+                create_username = #{record.createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter3 != null" >
+                is_dx_center3 = #{record.isDxCenter3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege3 != null" >
+                is_dx_college3 = #{record.isDxCollege3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateTime != null" >
+                last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastUpdateUserid != null" >
+                last_update_userid = #{record.lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateUsername != null" >
+                last_update_username = #{record.lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update co_department
+        set department_name = #{record.departmentName,jdbcType=VARCHAR},
+            department_id = #{record.departmentId,jdbcType=VARCHAR},
+            cp__college_id = #{record.cpCollegeId,jdbcType=INTEGER},
+            college_id = #{record.collegeId,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            create_username = #{record.createUsername,jdbcType=VARCHAR},
+            is_dx_center3 = #{record.isDxCenter3,jdbcType=VARCHAR},
+            is_dx_college3 = #{record.isDxCollege3,jdbcType=VARCHAR},
+            last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+            last_update_userid = #{record.lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{record.lastUpdateUsername,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CoDepartment" >
+        update co_department
+        <set >
+            <if test="cpCollegeId != null" >
+                cp__college_id = #{cpCollegeId,jdbcType=INTEGER},
+            </if>
+            <if test="collegeId != null" >
+                college_id = #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter3 != null" >
+                is_dx_center3 = #{isDxCenter3,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege3 != null" >
+                is_dx_college3 = #{isDxCollege3,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where department_name = #{departmentName,jdbcType=VARCHAR}
+          and department_id = #{departmentId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CoDepartment" >
+        update co_department
+        set cp__college_id = #{cpCollegeId,jdbcType=INTEGER},
+            college_id = #{collegeId,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=VARCHAR},
+            create_username = #{createUsername,jdbcType=VARCHAR},
+            is_dx_center3 = #{isDxCenter3,jdbcType=VARCHAR},
+            is_dx_college3 = #{isDxCollege3,jdbcType=VARCHAR},
+            last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR}
+        where department_name = #{departmentName,jdbcType=VARCHAR}
+          and department_id = #{departmentId,jdbcType=VARCHAR}
+    </update>
+</mapper>

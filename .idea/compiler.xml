@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bid-colleage" />
+        <module name="bid-common-api" />
+        <module name="bid-enterprise" />
+        <module name="bid-eureka" />
+        <module name="bid-platform" />
+        <module name="bid-protal" />
+        <module name="bid-provider-service-impl" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bid" target="1.8" />
+      <module name="bid-colleage" target="1.8" />
+      <module name="bid-common-api" target="1.8" />
+      <module name="bid-enterprise" target="1.8" />
+      <module name="bid-eureka" target="1.8" />
+      <module name="bid-platform" target="1.8" />
+      <module name="bid-protal" target="1.8" />
+      <module name="bid-provider-service-impl" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

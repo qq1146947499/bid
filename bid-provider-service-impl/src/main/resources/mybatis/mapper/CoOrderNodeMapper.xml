@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CoOrderNodeMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CoOrderNode" >
+        <id column="order_node_id" property="orderNodeId" jdbcType="VARCHAR" />
+        <result column="order_main_id" property="orderMainId" jdbcType="VARCHAR" />
+        <result column="operation_title" property="operationTitle" jdbcType="VARCHAR" />
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+        <result column="order_detail_id" property="orderDetailId" jdbcType="VARCHAR" />
+        <result column="node_type" property="nodeType" jdbcType="VARCHAR" />
+        <result column="node_user_name" property="nodeUserName" jdbcType="VARCHAR" />
+        <result column="node_user_id" property="nodeUserId" jdbcType="VARCHAR" />
+        <result column="node_time" property="nodeTime" jdbcType="TIMESTAMP" />
+        <result column="node_reason" property="nodeReason" jdbcType="VARCHAR" />
+        <result column="node_resoult" property="nodeResoult" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        order_node_id, order_main_id, operation_title, order_code, order_detail_id, node_type, 
+        node_user_name, node_user_id, node_time, node_reason, node_resoult, remark, is_dx_center, 
+        is_dx_college
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoOrderNodeExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from co_order_node
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_order_node
+        where order_node_id = #{orderNodeId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from co_order_node
+        where order_node_id = #{orderNodeId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CoOrderNodeExample" >
+        delete from co_order_node
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CoOrderNode" >
+        insert into co_order_node (order_node_id, order_main_id, operation_title, 
+            order_code, order_detail_id, node_type, 
+            node_user_name, node_user_id, node_time, 
+            node_reason, node_resoult, remark, 
+            is_dx_center, is_dx_college)
+        values (#{orderNodeId,jdbcType=VARCHAR}, #{orderMainId,jdbcType=VARCHAR}, #{operationTitle,jdbcType=VARCHAR}, 
+            #{orderCode,jdbcType=VARCHAR}, #{orderDetailId,jdbcType=VARCHAR}, #{nodeType,jdbcType=VARCHAR}, 
+            #{nodeUserName,jdbcType=VARCHAR}, #{nodeUserId,jdbcType=VARCHAR}, #{nodeTime,jdbcType=TIMESTAMP}, 
+            #{nodeReason,jdbcType=VARCHAR}, #{nodeResoult,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+            #{isDxCenter,jdbcType=VARCHAR}, #{isDxCollege,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CoOrderNode" >
+        insert into co_order_node
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orderNodeId != null" >
+                order_node_id,
+            </if>
+            <if test="orderMainId != null" >
+                order_main_id,
+            </if>
+            <if test="operationTitle != null" >
+                operation_title,
+            </if>
+            <if test="orderCode != null" >
+                order_code,
+            </if>
+            <if test="orderDetailId != null" >
+                order_detail_id,
+            </if>
+            <if test="nodeType != null" >
+                node_type,
+            </if>
+            <if test="nodeUserName != null" >
+                node_user_name,
+            </if>
+            <if test="nodeUserId != null" >
+                node_user_id,
+            </if>
+            <if test="nodeTime != null" >
+                node_time,
+            </if>
+            <if test="nodeReason != null" >
+                node_reason,
+            </if>
+            <if test="nodeResoult != null" >
+                node_resoult,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orderNodeId != null" >
+                #{orderNodeId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderMainId != null" >
+                #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="operationTitle != null" >
+                #{operationTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCode != null" >
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDetailId != null" >
+                #{orderDetailId,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeType != null" >
+                #{nodeType,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeUserName != null" >
+                #{nodeUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeUserId != null" >
+                #{nodeUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeTime != null" >
+                #{nodeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nodeReason != null" >
+                #{nodeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeResoult != null" >
+                #{nodeResoult,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CoOrderNodeExample" resultType="java.lang.Integer" >
+        select count(*) from co_order_node
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update co_order_node
+        <set >
+            <if test="record.orderNodeId != null" >
+                order_node_id = #{record.orderNodeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderMainId != null" >
+                order_main_id = #{record.orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operationTitle != null" >
+                operation_title = #{record.operationTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderCode != null" >
+                order_code = #{record.orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderDetailId != null" >
+                order_detail_id = #{record.orderDetailId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeType != null" >
+                node_type = #{record.nodeType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeUserName != null" >
+                node_user_name = #{record.nodeUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeUserId != null" >
+                node_user_id = #{record.nodeUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeTime != null" >
+                node_time = #{record.nodeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.nodeReason != null" >
+                node_reason = #{record.nodeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeResoult != null" >
+                node_resoult = #{record.nodeResoult,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter != null" >
+                is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege != null" >
+                is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update co_order_node
+        set order_node_id = #{record.orderNodeId,jdbcType=VARCHAR},
+            order_main_id = #{record.orderMainId,jdbcType=VARCHAR},
+            operation_title = #{record.operationTitle,jdbcType=VARCHAR},
+            order_code = #{record.orderCode,jdbcType=VARCHAR},
+            order_detail_id = #{record.orderDetailId,jdbcType=VARCHAR},
+            node_type = #{record.nodeType,jdbcType=VARCHAR},
+            node_user_name = #{record.nodeUserName,jdbcType=VARCHAR},
+            node_user_id = #{record.nodeUserId,jdbcType=VARCHAR},
+            node_time = #{record.nodeTime,jdbcType=TIMESTAMP},
+            node_reason = #{record.nodeReason,jdbcType=VARCHAR},
+            node_resoult = #{record.nodeResoult,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CoOrderNode" >
+        update co_order_node
+        <set >
+            <if test="orderMainId != null" >
+                order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            </if>
+            <if test="operationTitle != null" >
+                operation_title = #{operationTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCode != null" >
+                order_code = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDetailId != null" >
+                order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeType != null" >
+                node_type = #{nodeType,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeUserName != null" >
+                node_user_name = #{nodeUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeUserId != null" >
+                node_user_id = #{nodeUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeTime != null" >
+                node_time = #{nodeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nodeReason != null" >
+                node_reason = #{nodeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeResoult != null" >
+                node_resoult = #{nodeResoult,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where order_node_id = #{orderNodeId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CoOrderNode" >
+        update co_order_node
+        set order_main_id = #{orderMainId,jdbcType=VARCHAR},
+            operation_title = #{operationTitle,jdbcType=VARCHAR},
+            order_code = #{orderCode,jdbcType=VARCHAR},
+            order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+            node_type = #{nodeType,jdbcType=VARCHAR},
+            node_user_name = #{nodeUserName,jdbcType=VARCHAR},
+            node_user_id = #{nodeUserId,jdbcType=VARCHAR},
+            node_time = #{nodeTime,jdbcType=TIMESTAMP},
+            node_reason = #{nodeReason,jdbcType=VARCHAR},
+            node_resoult = #{nodeResoult,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR}
+        where order_node_id = #{orderNodeId,jdbcType=VARCHAR}
+    </update>
+</mapper>

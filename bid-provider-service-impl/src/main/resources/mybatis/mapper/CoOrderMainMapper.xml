@@ -1,0 +1,1736 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CoOrderMainMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CoOrderMain" >
+        <id column="order_main_id" property="orderMainId" jdbcType="INTEGER" />
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+        <result column="order_title" property="orderTitle" jdbcType="VARCHAR" />
+        <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+        <result column="founds_subject" property="foundsSubject" jdbcType="VARCHAR" />
+        <result column="founds_code" property="foundsCode" jdbcType="VARCHAR" />
+        <result column="using_corrency" property="usingCorrency" jdbcType="VARCHAR" />
+        <result column="is_deliver" property="isDeliver" jdbcType="VARCHAR" />
+        <result column="deliver_time" property="deliverTime" jdbcType="VARCHAR" />
+        <result column="is_tax" property="isTax" jdbcType="VARCHAR" />
+        <result column="is_invoice" property="isInvoice" jdbcType="VARCHAR" />
+        <result column="deliver_place" property="deliverPlace" jdbcType="VARCHAR" />
+        <result column="is_implemented" property="isImplemented" jdbcType="VARCHAR" />
+        <result column="budget" property="budget" jdbcType="VARCHAR" />
+        <result column="advice_expired_time" property="adviceExpiredTime" jdbcType="VARCHAR" />
+        <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+        <result column="current_procee" property="currentProcee" jdbcType="VARCHAR" />
+        <result column="order_status" property="orderStatus" jdbcType="VARCHAR" />
+        <result column="is_advance_endbid" property="isAdvanceEndbid" jdbcType="VARCHAR" />
+        <result column="college_id" property="collegeId" jdbcType="VARCHAR" />
+        <result column="college_name" property="collegeName" jdbcType="VARCHAR" />
+        <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+        <result column="order_unit" property="orderUnit" jdbcType="VARCHAR" />
+        <result column="order_person" property="orderPerson" jdbcType="VARCHAR" />
+        <result column="order_time" property="orderTime" jdbcType="VARCHAR" />
+        <result column="person_phone" property="personPhone" jdbcType="VARCHAR" />
+        <result column="item_num" property="itemNum" jdbcType="VARCHAR" />
+        <result column="order_total_amount" property="orderTotalAmount" jdbcType="VARCHAR" />
+        <result column="read_count" property="readCount" jdbcType="VARCHAR" />
+        <result column="bid_count" property="bidCount" jdbcType="VARCHAR" />
+        <result column="order_process" property="orderProcess" jdbcType="VARCHAR" />
+        <result column="start_bidtime" property="startBidtime" jdbcType="TIMESTAMP" />
+        <result column="end_bidtime" property="endBidtime" jdbcType="TIMESTAMP" />
+        <result column="audit_suggestion" property="auditSuggestion" jdbcType="VARCHAR" />
+        <result column="audit_userid" property="auditUserid" jdbcType="VARCHAR" />
+        <result column="audit_username" property="auditUsername" jdbcType="VARCHAR" />
+        <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+        <result column="last_end_bidtime" property="lastEndBidtime" jdbcType="TIMESTAMP" />
+        <result column="is_extend" property="isExtend" jdbcType="VARCHAR" />
+        <result column="extend_bid_reason" property="extendBidReason" jdbcType="VARCHAR" />
+        <result column="extend_userid" property="extendUserid" jdbcType="VARCHAR" />
+        <result column="extend_username" property="extendUsername" jdbcType="VARCHAR" />
+        <result column="choose_time" property="chooseTime" jdbcType="VARCHAR" />
+        <result column="choose_option" property="chooseOption" jdbcType="VARCHAR" />
+        <result column="choose_reason" property="chooseReason" jdbcType="VARCHAR" />
+        <result column="choose_user_id" property="chooseUserId" jdbcType="VARCHAR" />
+        <result column="choose_user_name" property="chooseUserName" jdbcType="VARCHAR" />
+        <result column="first_time" property="firstTime" jdbcType="TIMESTAMP" />
+        <result column="first_audit" property="firstAudit" jdbcType="VARCHAR" />
+        <result column="first_audit_reason" property="firstAuditReason" jdbcType="VARCHAR" />
+        <result column="first_audit_user_id" property="firstAuditUserId" jdbcType="VARCHAR" />
+        <result column="first_audit_user_name" property="firstAuditUserName" jdbcType="VARCHAR" />
+        <result column="second_audit" property="secondAudit" jdbcType="VARCHAR" />
+        <result column="second_audit_reason" property="secondAuditReason" jdbcType="VARCHAR" />
+        <result column="second_audit_user_id" property="secondAuditUserId" jdbcType="VARCHAR" />
+        <result column="second_audit_user_name" property="secondAuditUserName" jdbcType="VARCHAR" />
+        <result column="second_time" property="secondTime" jdbcType="VARCHAR" />
+        <result column="bid_amount" property="bidAmount" jdbcType="VARCHAR" />
+        <result column="bid_amount_renminbi" property="bidAmountRenminbi" jdbcType="VARCHAR" />
+        <result column="is_publish_bidresult" property="isPublishBidresult" jdbcType="VARCHAR" />
+        <result column="publish_bidresult_time" property="publishBidresultTime" jdbcType="TIMESTAMP" />
+        <result column="publish_bidresult_userid" property="publishBidresultUserid" jdbcType="VARCHAR" />
+        <result column="publish_bidresult_username" property="publishBidresultUsername" jdbcType="VARCHAR" />
+        <result column="bid_finished" property="bidFinished" jdbcType="VARCHAR" />
+        <result column="stop_bid_time" property="stopBidTime" jdbcType="TIMESTAMP" />
+        <result column="stop_bid_reason" property="stopBidReason" jdbcType="VARCHAR" />
+        <result column="stop_bid_userid" property="stopBidUserid" jdbcType="VARCHAR" />
+        <result column="stop_bid_username" property="stopBidUsername" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_userid" property="createUserid" jdbcType="VARCHAR" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="last_update_userid" property="lastUpdateUserid" jdbcType="VARCHAR" />
+        <result column="last_update_username" property="lastUpdateUsername" jdbcType="VARCHAR" />
+        <result column="re_audit_time" property="reAuditTime" jdbcType="TIMESTAMP" />
+        <result column="re_audit_userid" property="reAuditUserid" jdbcType="VARCHAR" />
+        <result column="re_audit_username" property="reAuditUsername" jdbcType="VARCHAR" />
+        <result column="re_audit_reason" property="reAuditReason" jdbcType="VARCHAR" />
+        <result column="is_reaudit" property="isReaudit" jdbcType="VARCHAR" />
+        <result column="conf_num" property="confNum" jdbcType="VARCHAR" />
+        <result column="agent_user_id" property="agentUserId" jdbcType="VARCHAR" />
+        <result column="agent_user_name" property="agentUserName" jdbcType="VARCHAR" />
+        <result column="agent_real_name" property="agentRealName" jdbcType="VARCHAR" />
+        <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+        <result column="invoice_type" property="invoiceType" jdbcType="VARCHAR" />
+        <result column="deliver_type" property="deliverType" jdbcType="VARCHAR" />
+        <result column="transport_type" property="transportType" jdbcType="VARCHAR" />
+        <result column="installationg_site" property="installationgSite" jdbcType="VARCHAR" />
+        <result column="pack_level" property="packLevel" jdbcType="VARCHAR" />
+        <result column="accpetance_level" property="accpetanceLevel" jdbcType="VARCHAR" />
+        <result column="is_finance_audit" property="isFinanceAudit" jdbcType="VARCHAR" />
+        <result column="finance_audit_user_id" property="financeAuditUserId" jdbcType="VARCHAR" />
+        <result column="finance_audit_user_name" property="financeAuditUserName" jdbcType="VARCHAR" />
+        <result column="finance_audit_reason" property="financeAuditReason" jdbcType="VARCHAR" />
+        <result column="is_auto_submit" property="isAutoSubmit" jdbcType="VARCHAR" />
+        <result column="pause_reason" property="pauseReason" jdbcType="VARCHAR" />
+        <result column="winning_principle" property="winningPrinciple" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        order_main_id, order_code, order_title, device_type, founds_subject, founds_code, 
+        using_corrency, is_deliver, deliver_time, is_tax, is_invoice, deliver_place, is_implemented, 
+        budget, advice_expired_time, order_type, current_procee, order_status, is_advance_endbid, 
+        college_id, college_name, department_id, order_unit, order_person, order_time, person_phone, 
+        item_num, order_total_amount, read_count, bid_count, order_process, start_bidtime, 
+        end_bidtime, audit_suggestion, audit_userid, audit_username, audit_time, last_end_bidtime, 
+        is_extend, extend_bid_reason, extend_userid, extend_username, choose_time, choose_option, 
+        choose_reason, choose_user_id, choose_user_name, first_time, first_audit, first_audit_reason, 
+        first_audit_user_id, first_audit_user_name, second_audit, second_audit_reason, second_audit_user_id, 
+        second_audit_user_name, second_time, bid_amount, bid_amount_renminbi, is_publish_bidresult, 
+        publish_bidresult_time, publish_bidresult_userid, publish_bidresult_username, bid_finished, 
+        stop_bid_time, stop_bid_reason, stop_bid_userid, stop_bid_username, remark, create_time, 
+        create_userid, create_username, is_dx_center, is_dx_college, last_update_time, last_update_userid, 
+        last_update_username, re_audit_time, re_audit_userid, re_audit_username, re_audit_reason, 
+        is_reaudit, conf_num, agent_user_id, agent_user_name, agent_real_name, pay_type, 
+        invoice_type, deliver_type, transport_type, installationg_site, pack_level, accpetance_level, 
+        is_finance_audit, finance_audit_user_id, finance_audit_user_name, finance_audit_reason, 
+        is_auto_submit, pause_reason, winning_principle
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoOrderMainExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from co_order_main
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from co_order_main
+        where order_main_id = #{orderMainId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from co_order_main
+        where order_main_id = #{orderMainId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CoOrderMainExample" >
+        delete from co_order_main
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CoOrderMain" >
+        insert into co_order_main (order_main_id, order_code, order_title, 
+            device_type, founds_subject, founds_code, 
+            using_corrency, is_deliver, deliver_time, 
+            is_tax, is_invoice, deliver_place, 
+            is_implemented, budget, advice_expired_time, 
+            order_type, current_procee, order_status, 
+            is_advance_endbid, college_id, college_name, 
+            department_id, order_unit, order_person, 
+            order_time, person_phone, item_num, 
+            order_total_amount, read_count, bid_count, 
+            order_process, start_bidtime, end_bidtime, 
+            audit_suggestion, audit_userid, audit_username, 
+            audit_time, last_end_bidtime, is_extend, 
+            extend_bid_reason, extend_userid, extend_username, 
+            choose_time, choose_option, choose_reason, 
+            choose_user_id, choose_user_name, first_time, 
+            first_audit, first_audit_reason, first_audit_user_id, 
+            first_audit_user_name, second_audit, second_audit_reason, 
+            second_audit_user_id, second_audit_user_name, 
+            second_time, bid_amount, bid_amount_renminbi, 
+            is_publish_bidresult, publish_bidresult_time, 
+            publish_bidresult_userid, publish_bidresult_username, 
+            bid_finished, stop_bid_time, stop_bid_reason, 
+            stop_bid_userid, stop_bid_username, remark, 
+            create_time, create_userid, create_username, 
+            is_dx_center, is_dx_college, last_update_time, 
+            last_update_userid, last_update_username, 
+            re_audit_time, re_audit_userid, re_audit_username, 
+            re_audit_reason, is_reaudit, conf_num, 
+            agent_user_id, agent_user_name, agent_real_name, 
+            pay_type, invoice_type, deliver_type, 
+            transport_type, installationg_site, pack_level, 
+            accpetance_level, is_finance_audit, finance_audit_user_id, 
+            finance_audit_user_name, finance_audit_reason, 
+            is_auto_submit, pause_reason, winning_principle
+            )
+        values (#{orderMainId,jdbcType=INTEGER}, #{orderCode,jdbcType=VARCHAR}, #{orderTitle,jdbcType=VARCHAR}, 
+            #{deviceType,jdbcType=VARCHAR}, #{foundsSubject,jdbcType=VARCHAR}, #{foundsCode,jdbcType=VARCHAR}, 
+            #{usingCorrency,jdbcType=VARCHAR}, #{isDeliver,jdbcType=VARCHAR}, #{deliverTime,jdbcType=VARCHAR}, 
+            #{isTax,jdbcType=VARCHAR}, #{isInvoice,jdbcType=VARCHAR}, #{deliverPlace,jdbcType=VARCHAR}, 
+            #{isImplemented,jdbcType=VARCHAR}, #{budget,jdbcType=VARCHAR}, #{adviceExpiredTime,jdbcType=VARCHAR}, 
+            #{orderType,jdbcType=VARCHAR}, #{currentProcee,jdbcType=VARCHAR}, #{orderStatus,jdbcType=VARCHAR}, 
+            #{isAdvanceEndbid,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, #{collegeName,jdbcType=VARCHAR}, 
+            #{departmentId,jdbcType=VARCHAR}, #{orderUnit,jdbcType=VARCHAR}, #{orderPerson,jdbcType=VARCHAR}, 
+            #{orderTime,jdbcType=VARCHAR}, #{personPhone,jdbcType=VARCHAR}, #{itemNum,jdbcType=VARCHAR}, 
+            #{orderTotalAmount,jdbcType=VARCHAR}, #{readCount,jdbcType=VARCHAR}, #{bidCount,jdbcType=VARCHAR}, 
+            #{orderProcess,jdbcType=VARCHAR}, #{startBidtime,jdbcType=TIMESTAMP}, #{endBidtime,jdbcType=TIMESTAMP}, 
+            #{auditSuggestion,jdbcType=VARCHAR}, #{auditUserid,jdbcType=VARCHAR}, #{auditUsername,jdbcType=VARCHAR}, 
+            #{auditTime,jdbcType=TIMESTAMP}, #{lastEndBidtime,jdbcType=TIMESTAMP}, #{isExtend,jdbcType=VARCHAR}, 
+            #{extendBidReason,jdbcType=VARCHAR}, #{extendUserid,jdbcType=VARCHAR}, #{extendUsername,jdbcType=VARCHAR}, 
+            #{chooseTime,jdbcType=VARCHAR}, #{chooseOption,jdbcType=VARCHAR}, #{chooseReason,jdbcType=VARCHAR}, 
+            #{chooseUserId,jdbcType=VARCHAR}, #{chooseUserName,jdbcType=VARCHAR}, #{firstTime,jdbcType=TIMESTAMP}, 
+            #{firstAudit,jdbcType=VARCHAR}, #{firstAuditReason,jdbcType=VARCHAR}, #{firstAuditUserId,jdbcType=VARCHAR}, 
+            #{firstAuditUserName,jdbcType=VARCHAR}, #{secondAudit,jdbcType=VARCHAR}, #{secondAuditReason,jdbcType=VARCHAR}, 
+            #{secondAuditUserId,jdbcType=VARCHAR}, #{secondAuditUserName,jdbcType=VARCHAR}, 
+            #{secondTime,jdbcType=VARCHAR}, #{bidAmount,jdbcType=VARCHAR}, #{bidAmountRenminbi,jdbcType=VARCHAR}, 
+            #{isPublishBidresult,jdbcType=VARCHAR}, #{publishBidresultTime,jdbcType=TIMESTAMP}, 
+            #{publishBidresultUserid,jdbcType=VARCHAR}, #{publishBidresultUsername,jdbcType=VARCHAR}, 
+            #{bidFinished,jdbcType=VARCHAR}, #{stopBidTime,jdbcType=TIMESTAMP}, #{stopBidReason,jdbcType=VARCHAR}, 
+            #{stopBidUserid,jdbcType=VARCHAR}, #{stopBidUsername,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, 
+            #{isDxCenter,jdbcType=VARCHAR}, #{isDxCollege,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+            #{lastUpdateUserid,jdbcType=VARCHAR}, #{lastUpdateUsername,jdbcType=VARCHAR}, 
+            #{reAuditTime,jdbcType=TIMESTAMP}, #{reAuditUserid,jdbcType=VARCHAR}, #{reAuditUsername,jdbcType=VARCHAR}, 
+            #{reAuditReason,jdbcType=VARCHAR}, #{isReaudit,jdbcType=VARCHAR}, #{confNum,jdbcType=VARCHAR}, 
+            #{agentUserId,jdbcType=VARCHAR}, #{agentUserName,jdbcType=VARCHAR}, #{agentRealName,jdbcType=VARCHAR}, 
+            #{payType,jdbcType=VARCHAR}, #{invoiceType,jdbcType=VARCHAR}, #{deliverType,jdbcType=VARCHAR}, 
+            #{transportType,jdbcType=VARCHAR}, #{installationgSite,jdbcType=VARCHAR}, #{packLevel,jdbcType=VARCHAR}, 
+            #{accpetanceLevel,jdbcType=VARCHAR}, #{isFinanceAudit,jdbcType=VARCHAR}, #{financeAuditUserId,jdbcType=VARCHAR}, 
+            #{financeAuditUserName,jdbcType=VARCHAR}, #{financeAuditReason,jdbcType=VARCHAR}, 
+            #{isAutoSubmit,jdbcType=VARCHAR}, #{pauseReason,jdbcType=VARCHAR}, #{winningPrinciple,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CoOrderMain" >
+        insert into co_order_main
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orderMainId != null" >
+                order_main_id,
+            </if>
+            <if test="orderCode != null" >
+                order_code,
+            </if>
+            <if test="orderTitle != null" >
+                order_title,
+            </if>
+            <if test="deviceType != null" >
+                device_type,
+            </if>
+            <if test="foundsSubject != null" >
+                founds_subject,
+            </if>
+            <if test="foundsCode != null" >
+                founds_code,
+            </if>
+            <if test="usingCorrency != null" >
+                using_corrency,
+            </if>
+            <if test="isDeliver != null" >
+                is_deliver,
+            </if>
+            <if test="deliverTime != null" >
+                deliver_time,
+            </if>
+            <if test="isTax != null" >
+                is_tax,
+            </if>
+            <if test="isInvoice != null" >
+                is_invoice,
+            </if>
+            <if test="deliverPlace != null" >
+                deliver_place,
+            </if>
+            <if test="isImplemented != null" >
+                is_implemented,
+            </if>
+            <if test="budget != null" >
+                budget,
+            </if>
+            <if test="adviceExpiredTime != null" >
+                advice_expired_time,
+            </if>
+            <if test="orderType != null" >
+                order_type,
+            </if>
+            <if test="currentProcee != null" >
+                current_procee,
+            </if>
+            <if test="orderStatus != null" >
+                order_status,
+            </if>
+            <if test="isAdvanceEndbid != null" >
+                is_advance_endbid,
+            </if>
+            <if test="collegeId != null" >
+                college_id,
+            </if>
+            <if test="collegeName != null" >
+                college_name,
+            </if>
+            <if test="departmentId != null" >
+                department_id,
+            </if>
+            <if test="orderUnit != null" >
+                order_unit,
+            </if>
+            <if test="orderPerson != null" >
+                order_person,
+            </if>
+            <if test="orderTime != null" >
+                order_time,
+            </if>
+            <if test="personPhone != null" >
+                person_phone,
+            </if>
+            <if test="itemNum != null" >
+                item_num,
+            </if>
+            <if test="orderTotalAmount != null" >
+                order_total_amount,
+            </if>
+            <if test="readCount != null" >
+                read_count,
+            </if>
+            <if test="bidCount != null" >
+                bid_count,
+            </if>
+            <if test="orderProcess != null" >
+                order_process,
+            </if>
+            <if test="startBidtime != null" >
+                start_bidtime,
+            </if>
+            <if test="endBidtime != null" >
+                end_bidtime,
+            </if>
+            <if test="auditSuggestion != null" >
+                audit_suggestion,
+            </if>
+            <if test="auditUserid != null" >
+                audit_userid,
+            </if>
+            <if test="auditUsername != null" >
+                audit_username,
+            </if>
+            <if test="auditTime != null" >
+                audit_time,
+            </if>
+            <if test="lastEndBidtime != null" >
+                last_end_bidtime,
+            </if>
+            <if test="isExtend != null" >
+                is_extend,
+            </if>
+            <if test="extendBidReason != null" >
+                extend_bid_reason,
+            </if>
+            <if test="extendUserid != null" >
+                extend_userid,
+            </if>
+            <if test="extendUsername != null" >
+                extend_username,
+            </if>
+            <if test="chooseTime != null" >
+                choose_time,
+            </if>
+            <if test="chooseOption != null" >
+                choose_option,
+            </if>
+            <if test="chooseReason != null" >
+                choose_reason,
+            </if>
+            <if test="chooseUserId != null" >
+                choose_user_id,
+            </if>
+            <if test="chooseUserName != null" >
+                choose_user_name,
+            </if>
+            <if test="firstTime != null" >
+                first_time,
+            </if>
+            <if test="firstAudit != null" >
+                first_audit,
+            </if>
+            <if test="firstAuditReason != null" >
+                first_audit_reason,
+            </if>
+            <if test="firstAuditUserId != null" >
+                first_audit_user_id,
+            </if>
+            <if test="firstAuditUserName != null" >
+                first_audit_user_name,
+            </if>
+            <if test="secondAudit != null" >
+                second_audit,
+            </if>
+            <if test="secondAuditReason != null" >
+                second_audit_reason,
+            </if>
+            <if test="secondAuditUserId != null" >
+                second_audit_user_id,
+            </if>
+            <if test="secondAuditUserName != null" >
+                second_audit_user_name,
+            </if>
+            <if test="secondTime != null" >
+                second_time,
+            </if>
+            <if test="bidAmount != null" >
+                bid_amount,
+            </if>
+            <if test="bidAmountRenminbi != null" >
+                bid_amount_renminbi,
+            </if>
+            <if test="isPublishBidresult != null" >
+                is_publish_bidresult,
+            </if>
+            <if test="publishBidresultTime != null" >
+                publish_bidresult_time,
+            </if>
+            <if test="publishBidresultUserid != null" >
+                publish_bidresult_userid,
+            </if>
+            <if test="publishBidresultUsername != null" >
+                publish_bidresult_username,
+            </if>
+            <if test="bidFinished != null" >
+                bid_finished,
+            </if>
+            <if test="stopBidTime != null" >
+                stop_bid_time,
+            </if>
+            <if test="stopBidReason != null" >
+                stop_bid_reason,
+            </if>
+            <if test="stopBidUserid != null" >
+                stop_bid_userid,
+            </if>
+            <if test="stopBidUsername != null" >
+                stop_bid_username,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createUserid != null" >
+                create_userid,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time,
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid,
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username,
+            </if>
+            <if test="reAuditTime != null" >
+                re_audit_time,
+            </if>
+            <if test="reAuditUserid != null" >
+                re_audit_userid,
+            </if>
+            <if test="reAuditUsername != null" >
+                re_audit_username,
+            </if>
+            <if test="reAuditReason != null" >
+                re_audit_reason,
+            </if>
+            <if test="isReaudit != null" >
+                is_reaudit,
+            </if>
+            <if test="confNum != null" >
+                conf_num,
+            </if>
+            <if test="agentUserId != null" >
+                agent_user_id,
+            </if>
+            <if test="agentUserName != null" >
+                agent_user_name,
+            </if>
+            <if test="agentRealName != null" >
+                agent_real_name,
+            </if>
+            <if test="payType != null" >
+                pay_type,
+            </if>
+            <if test="invoiceType != null" >
+                invoice_type,
+            </if>
+            <if test="deliverType != null" >
+                deliver_type,
+            </if>
+            <if test="transportType != null" >
+                transport_type,
+            </if>
+            <if test="installationgSite != null" >
+                installationg_site,
+            </if>
+            <if test="packLevel != null" >
+                pack_level,
+            </if>
+            <if test="accpetanceLevel != null" >
+                accpetance_level,
+            </if>
+            <if test="isFinanceAudit != null" >
+                is_finance_audit,
+            </if>
+            <if test="financeAuditUserId != null" >
+                finance_audit_user_id,
+            </if>
+            <if test="financeAuditUserName != null" >
+                finance_audit_user_name,
+            </if>
+            <if test="financeAuditReason != null" >
+                finance_audit_reason,
+            </if>
+            <if test="isAutoSubmit != null" >
+                is_auto_submit,
+            </if>
+            <if test="pauseReason != null" >
+                pause_reason,
+            </if>
+            <if test="winningPrinciple != null" >
+                winning_principle,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orderMainId != null" >
+                #{orderMainId,jdbcType=INTEGER},
+            </if>
+            <if test="orderCode != null" >
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderTitle != null" >
+                #{orderTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceType != null" >
+                #{deviceType,jdbcType=VARCHAR},
+            </if>
+            <if test="foundsSubject != null" >
+                #{foundsSubject,jdbcType=VARCHAR},
+            </if>
+            <if test="foundsCode != null" >
+                #{foundsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="usingCorrency != null" >
+                #{usingCorrency,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeliver != null" >
+                #{isDeliver,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverTime != null" >
+                #{deliverTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isTax != null" >
+                #{isTax,jdbcType=VARCHAR},
+            </if>
+            <if test="isInvoice != null" >
+                #{isInvoice,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverPlace != null" >
+                #{deliverPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="isImplemented != null" >
+                #{isImplemented,jdbcType=VARCHAR},
+            </if>
+            <if test="budget != null" >
+                #{budget,jdbcType=VARCHAR},
+            </if>
+            <if test="adviceExpiredTime != null" >
+                #{adviceExpiredTime,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null" >
+                #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="currentProcee != null" >
+                #{currentProcee,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null" >
+                #{orderStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="isAdvanceEndbid != null" >
+                #{isAdvanceEndbid,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null" >
+                #{collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderUnit != null" >
+                #{orderUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPerson != null" >
+                #{orderPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="orderTime != null" >
+                #{orderTime,jdbcType=VARCHAR},
+            </if>
+            <if test="personPhone != null" >
+                #{personPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="itemNum != null" >
+                #{itemNum,jdbcType=VARCHAR},
+            </if>
+            <if test="orderTotalAmount != null" >
+                #{orderTotalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="readCount != null" >
+                #{readCount,jdbcType=VARCHAR},
+            </if>
+            <if test="bidCount != null" >
+                #{bidCount,jdbcType=VARCHAR},
+            </if>
+            <if test="orderProcess != null" >
+                #{orderProcess,jdbcType=VARCHAR},
+            </if>
+            <if test="startBidtime != null" >
+                #{startBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endBidtime != null" >
+                #{endBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditSuggestion != null" >
+                #{auditSuggestion,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUserid != null" >
+                #{auditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUsername != null" >
+                #{auditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastEndBidtime != null" >
+                #{lastEndBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isExtend != null" >
+                #{isExtend,jdbcType=VARCHAR},
+            </if>
+            <if test="extendBidReason != null" >
+                #{extendBidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="extendUserid != null" >
+                #{extendUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="extendUsername != null" >
+                #{extendUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseTime != null" >
+                #{chooseTime,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseOption != null" >
+                #{chooseOption,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseReason != null" >
+                #{chooseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseUserId != null" >
+                #{chooseUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseUserName != null" >
+                #{chooseUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="firstTime != null" >
+                #{firstTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="firstAudit != null" >
+                #{firstAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="firstAuditReason != null" >
+                #{firstAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="firstAuditUserId != null" >
+                #{firstAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="firstAuditUserName != null" >
+                #{firstAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="secondAudit != null" >
+                #{secondAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="secondAuditReason != null" >
+                #{secondAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="secondAuditUserId != null" >
+                #{secondAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="secondAuditUserName != null" >
+                #{secondAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="secondTime != null" >
+                #{secondTime,jdbcType=VARCHAR},
+            </if>
+            <if test="bidAmount != null" >
+                #{bidAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="bidAmountRenminbi != null" >
+                #{bidAmountRenminbi,jdbcType=VARCHAR},
+            </if>
+            <if test="isPublishBidresult != null" >
+                #{isPublishBidresult,jdbcType=VARCHAR},
+            </if>
+            <if test="publishBidresultTime != null" >
+                #{publishBidresultTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="publishBidresultUserid != null" >
+                #{publishBidresultUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="publishBidresultUsername != null" >
+                #{publishBidresultUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="bidFinished != null" >
+                #{bidFinished,jdbcType=VARCHAR},
+            </if>
+            <if test="stopBidTime != null" >
+                #{stopBidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="stopBidReason != null" >
+                #{stopBidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="stopBidUserid != null" >
+                #{stopBidUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="stopBidUsername != null" >
+                #{stopBidUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditTime != null" >
+                #{reAuditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reAuditUserid != null" >
+                #{reAuditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditUsername != null" >
+                #{reAuditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditReason != null" >
+                #{reAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isReaudit != null" >
+                #{isReaudit,jdbcType=VARCHAR},
+            </if>
+            <if test="confNum != null" >
+                #{confNum,jdbcType=VARCHAR},
+            </if>
+            <if test="agentUserId != null" >
+                #{agentUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentUserName != null" >
+                #{agentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="agentRealName != null" >
+                #{agentRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceType != null" >
+                #{invoiceType,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverType != null" >
+                #{deliverType,jdbcType=VARCHAR},
+            </if>
+            <if test="transportType != null" >
+                #{transportType,jdbcType=VARCHAR},
+            </if>
+            <if test="installationgSite != null" >
+                #{installationgSite,jdbcType=VARCHAR},
+            </if>
+            <if test="packLevel != null" >
+                #{packLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="accpetanceLevel != null" >
+                #{accpetanceLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="isFinanceAudit != null" >
+                #{isFinanceAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="financeAuditUserId != null" >
+                #{financeAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="financeAuditUserName != null" >
+                #{financeAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="financeAuditReason != null" >
+                #{financeAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isAutoSubmit != null" >
+                #{isAutoSubmit,jdbcType=VARCHAR},
+            </if>
+            <if test="pauseReason != null" >
+                #{pauseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="winningPrinciple != null" >
+                #{winningPrinciple,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CoOrderMainExample" resultType="java.lang.Integer" >
+        select count(*) from co_order_main
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update co_order_main
+        <set >
+            <if test="record.orderMainId != null" >
+                order_main_id = #{record.orderMainId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderCode != null" >
+                order_code = #{record.orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderTitle != null" >
+                order_title = #{record.orderTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deviceType != null" >
+                device_type = #{record.deviceType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.foundsSubject != null" >
+                founds_subject = #{record.foundsSubject,jdbcType=VARCHAR},
+            </if>
+            <if test="record.foundsCode != null" >
+                founds_code = #{record.foundsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.usingCorrency != null" >
+                using_corrency = #{record.usingCorrency,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDeliver != null" >
+                is_deliver = #{record.isDeliver,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deliverTime != null" >
+                deliver_time = #{record.deliverTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isTax != null" >
+                is_tax = #{record.isTax,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isInvoice != null" >
+                is_invoice = #{record.isInvoice,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deliverPlace != null" >
+                deliver_place = #{record.deliverPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isImplemented != null" >
+                is_implemented = #{record.isImplemented,jdbcType=VARCHAR},
+            </if>
+            <if test="record.budget != null" >
+                budget = #{record.budget,jdbcType=VARCHAR},
+            </if>
+            <if test="record.adviceExpiredTime != null" >
+                advice_expired_time = #{record.adviceExpiredTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderType != null" >
+                order_type = #{record.orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.currentProcee != null" >
+                current_procee = #{record.currentProcee,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderStatus != null" >
+                order_status = #{record.orderStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isAdvanceEndbid != null" >
+                is_advance_endbid = #{record.isAdvanceEndbid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.collegeId != null" >
+                college_id = #{record.collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.collegeName != null" >
+                college_name = #{record.collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.departmentId != null" >
+                department_id = #{record.departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderUnit != null" >
+                order_unit = #{record.orderUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderPerson != null" >
+                order_person = #{record.orderPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderTime != null" >
+                order_time = #{record.orderTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.personPhone != null" >
+                person_phone = #{record.personPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.itemNum != null" >
+                item_num = #{record.itemNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderTotalAmount != null" >
+                order_total_amount = #{record.orderTotalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.readCount != null" >
+                read_count = #{record.readCount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidCount != null" >
+                bid_count = #{record.bidCount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderProcess != null" >
+                order_process = #{record.orderProcess,jdbcType=VARCHAR},
+            </if>
+            <if test="record.startBidtime != null" >
+                start_bidtime = #{record.startBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.endBidtime != null" >
+                end_bidtime = #{record.endBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.auditSuggestion != null" >
+                audit_suggestion = #{record.auditSuggestion,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditUserid != null" >
+                audit_userid = #{record.auditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditUsername != null" >
+                audit_username = #{record.auditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditTime != null" >
+                audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastEndBidtime != null" >
+                last_end_bidtime = #{record.lastEndBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isExtend != null" >
+                is_extend = #{record.isExtend,jdbcType=VARCHAR},
+            </if>
+            <if test="record.extendBidReason != null" >
+                extend_bid_reason = #{record.extendBidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.extendUserid != null" >
+                extend_userid = #{record.extendUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.extendUsername != null" >
+                extend_username = #{record.extendUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chooseTime != null" >
+                choose_time = #{record.chooseTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chooseOption != null" >
+                choose_option = #{record.chooseOption,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chooseReason != null" >
+                choose_reason = #{record.chooseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chooseUserId != null" >
+                choose_user_id = #{record.chooseUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chooseUserName != null" >
+                choose_user_name = #{record.chooseUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.firstTime != null" >
+                first_time = #{record.firstTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.firstAudit != null" >
+                first_audit = #{record.firstAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.firstAuditReason != null" >
+                first_audit_reason = #{record.firstAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.firstAuditUserId != null" >
+                first_audit_user_id = #{record.firstAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.firstAuditUserName != null" >
+                first_audit_user_name = #{record.firstAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.secondAudit != null" >
+                second_audit = #{record.secondAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.secondAuditReason != null" >
+                second_audit_reason = #{record.secondAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.secondAuditUserId != null" >
+                second_audit_user_id = #{record.secondAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.secondAuditUserName != null" >
+                second_audit_user_name = #{record.secondAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.secondTime != null" >
+                second_time = #{record.secondTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidAmount != null" >
+                bid_amount = #{record.bidAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidAmountRenminbi != null" >
+                bid_amount_renminbi = #{record.bidAmountRenminbi,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isPublishBidresult != null" >
+                is_publish_bidresult = #{record.isPublishBidresult,jdbcType=VARCHAR},
+            </if>
+            <if test="record.publishBidresultTime != null" >
+                publish_bidresult_time = #{record.publishBidresultTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.publishBidresultUserid != null" >
+                publish_bidresult_userid = #{record.publishBidresultUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.publishBidresultUsername != null" >
+                publish_bidresult_username = #{record.publishBidresultUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bidFinished != null" >
+                bid_finished = #{record.bidFinished,jdbcType=VARCHAR},
+            </if>
+            <if test="record.stopBidTime != null" >
+                stop_bid_time = #{record.stopBidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.stopBidReason != null" >
+                stop_bid_reason = #{record.stopBidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.stopBidUserid != null" >
+                stop_bid_userid = #{record.stopBidUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.stopBidUsername != null" >
+                stop_bid_username = #{record.stopBidUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUserid != null" >
+                create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createUsername != null" >
+                create_username = #{record.createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter != null" >
+                is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege != null" >
+                is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateTime != null" >
+                last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastUpdateUserid != null" >
+                last_update_userid = #{record.lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastUpdateUsername != null" >
+                last_update_username = #{record.lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reAuditTime != null" >
+                re_audit_time = #{record.reAuditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.reAuditUserid != null" >
+                re_audit_userid = #{record.reAuditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reAuditUsername != null" >
+                re_audit_username = #{record.reAuditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reAuditReason != null" >
+                re_audit_reason = #{record.reAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isReaudit != null" >
+                is_reaudit = #{record.isReaudit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.confNum != null" >
+                conf_num = #{record.confNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.agentUserId != null" >
+                agent_user_id = #{record.agentUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.agentUserName != null" >
+                agent_user_name = #{record.agentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.agentRealName != null" >
+                agent_real_name = #{record.agentRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.payType != null" >
+                pay_type = #{record.payType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.invoiceType != null" >
+                invoice_type = #{record.invoiceType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deliverType != null" >
+                deliver_type = #{record.deliverType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.transportType != null" >
+                transport_type = #{record.transportType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.installationgSite != null" >
+                installationg_site = #{record.installationgSite,jdbcType=VARCHAR},
+            </if>
+            <if test="record.packLevel != null" >
+                pack_level = #{record.packLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accpetanceLevel != null" >
+                accpetance_level = #{record.accpetanceLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isFinanceAudit != null" >
+                is_finance_audit = #{record.isFinanceAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.financeAuditUserId != null" >
+                finance_audit_user_id = #{record.financeAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.financeAuditUserName != null" >
+                finance_audit_user_name = #{record.financeAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.financeAuditReason != null" >
+                finance_audit_reason = #{record.financeAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isAutoSubmit != null" >
+                is_auto_submit = #{record.isAutoSubmit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pauseReason != null" >
+                pause_reason = #{record.pauseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.winningPrinciple != null" >
+                winning_principle = #{record.winningPrinciple,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update co_order_main
+        set order_main_id = #{record.orderMainId,jdbcType=INTEGER},
+            order_code = #{record.orderCode,jdbcType=VARCHAR},
+            order_title = #{record.orderTitle,jdbcType=VARCHAR},
+            device_type = #{record.deviceType,jdbcType=VARCHAR},
+            founds_subject = #{record.foundsSubject,jdbcType=VARCHAR},
+            founds_code = #{record.foundsCode,jdbcType=VARCHAR},
+            using_corrency = #{record.usingCorrency,jdbcType=VARCHAR},
+            is_deliver = #{record.isDeliver,jdbcType=VARCHAR},
+            deliver_time = #{record.deliverTime,jdbcType=VARCHAR},
+            is_tax = #{record.isTax,jdbcType=VARCHAR},
+            is_invoice = #{record.isInvoice,jdbcType=VARCHAR},
+            deliver_place = #{record.deliverPlace,jdbcType=VARCHAR},
+            is_implemented = #{record.isImplemented,jdbcType=VARCHAR},
+            budget = #{record.budget,jdbcType=VARCHAR},
+            advice_expired_time = #{record.adviceExpiredTime,jdbcType=VARCHAR},
+            order_type = #{record.orderType,jdbcType=VARCHAR},
+            current_procee = #{record.currentProcee,jdbcType=VARCHAR},
+            order_status = #{record.orderStatus,jdbcType=VARCHAR},
+            is_advance_endbid = #{record.isAdvanceEndbid,jdbcType=VARCHAR},
+            college_id = #{record.collegeId,jdbcType=VARCHAR},
+            college_name = #{record.collegeName,jdbcType=VARCHAR},
+            department_id = #{record.departmentId,jdbcType=VARCHAR},
+            order_unit = #{record.orderUnit,jdbcType=VARCHAR},
+            order_person = #{record.orderPerson,jdbcType=VARCHAR},
+            order_time = #{record.orderTime,jdbcType=VARCHAR},
+            person_phone = #{record.personPhone,jdbcType=VARCHAR},
+            item_num = #{record.itemNum,jdbcType=VARCHAR},
+            order_total_amount = #{record.orderTotalAmount,jdbcType=VARCHAR},
+            read_count = #{record.readCount,jdbcType=VARCHAR},
+            bid_count = #{record.bidCount,jdbcType=VARCHAR},
+            order_process = #{record.orderProcess,jdbcType=VARCHAR},
+            start_bidtime = #{record.startBidtime,jdbcType=TIMESTAMP},
+            end_bidtime = #{record.endBidtime,jdbcType=TIMESTAMP},
+            audit_suggestion = #{record.auditSuggestion,jdbcType=VARCHAR},
+            audit_userid = #{record.auditUserid,jdbcType=VARCHAR},
+            audit_username = #{record.auditUsername,jdbcType=VARCHAR},
+            audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+            last_end_bidtime = #{record.lastEndBidtime,jdbcType=TIMESTAMP},
+            is_extend = #{record.isExtend,jdbcType=VARCHAR},
+            extend_bid_reason = #{record.extendBidReason,jdbcType=VARCHAR},
+            extend_userid = #{record.extendUserid,jdbcType=VARCHAR},
+            extend_username = #{record.extendUsername,jdbcType=VARCHAR},
+            choose_time = #{record.chooseTime,jdbcType=VARCHAR},
+            choose_option = #{record.chooseOption,jdbcType=VARCHAR},
+            choose_reason = #{record.chooseReason,jdbcType=VARCHAR},
+            choose_user_id = #{record.chooseUserId,jdbcType=VARCHAR},
+            choose_user_name = #{record.chooseUserName,jdbcType=VARCHAR},
+            first_time = #{record.firstTime,jdbcType=TIMESTAMP},
+            first_audit = #{record.firstAudit,jdbcType=VARCHAR},
+            first_audit_reason = #{record.firstAuditReason,jdbcType=VARCHAR},
+            first_audit_user_id = #{record.firstAuditUserId,jdbcType=VARCHAR},
+            first_audit_user_name = #{record.firstAuditUserName,jdbcType=VARCHAR},
+            second_audit = #{record.secondAudit,jdbcType=VARCHAR},
+            second_audit_reason = #{record.secondAuditReason,jdbcType=VARCHAR},
+            second_audit_user_id = #{record.secondAuditUserId,jdbcType=VARCHAR},
+            second_audit_user_name = #{record.secondAuditUserName,jdbcType=VARCHAR},
+            second_time = #{record.secondTime,jdbcType=VARCHAR},
+            bid_amount = #{record.bidAmount,jdbcType=VARCHAR},
+            bid_amount_renminbi = #{record.bidAmountRenminbi,jdbcType=VARCHAR},
+            is_publish_bidresult = #{record.isPublishBidresult,jdbcType=VARCHAR},
+            publish_bidresult_time = #{record.publishBidresultTime,jdbcType=TIMESTAMP},
+            publish_bidresult_userid = #{record.publishBidresultUserid,jdbcType=VARCHAR},
+            publish_bidresult_username = #{record.publishBidresultUsername,jdbcType=VARCHAR},
+            bid_finished = #{record.bidFinished,jdbcType=VARCHAR},
+            stop_bid_time = #{record.stopBidTime,jdbcType=TIMESTAMP},
+            stop_bid_reason = #{record.stopBidReason,jdbcType=VARCHAR},
+            stop_bid_userid = #{record.stopBidUserid,jdbcType=VARCHAR},
+            stop_bid_username = #{record.stopBidUsername,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            create_userid = #{record.createUserid,jdbcType=VARCHAR},
+            create_username = #{record.createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+            last_update_userid = #{record.lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{record.lastUpdateUsername,jdbcType=VARCHAR},
+            re_audit_time = #{record.reAuditTime,jdbcType=TIMESTAMP},
+            re_audit_userid = #{record.reAuditUserid,jdbcType=VARCHAR},
+            re_audit_username = #{record.reAuditUsername,jdbcType=VARCHAR},
+            re_audit_reason = #{record.reAuditReason,jdbcType=VARCHAR},
+            is_reaudit = #{record.isReaudit,jdbcType=VARCHAR},
+            conf_num = #{record.confNum,jdbcType=VARCHAR},
+            agent_user_id = #{record.agentUserId,jdbcType=VARCHAR},
+            agent_user_name = #{record.agentUserName,jdbcType=VARCHAR},
+            agent_real_name = #{record.agentRealName,jdbcType=VARCHAR},
+            pay_type = #{record.payType,jdbcType=VARCHAR},
+            invoice_type = #{record.invoiceType,jdbcType=VARCHAR},
+            deliver_type = #{record.deliverType,jdbcType=VARCHAR},
+            transport_type = #{record.transportType,jdbcType=VARCHAR},
+            installationg_site = #{record.installationgSite,jdbcType=VARCHAR},
+            pack_level = #{record.packLevel,jdbcType=VARCHAR},
+            accpetance_level = #{record.accpetanceLevel,jdbcType=VARCHAR},
+            is_finance_audit = #{record.isFinanceAudit,jdbcType=VARCHAR},
+            finance_audit_user_id = #{record.financeAuditUserId,jdbcType=VARCHAR},
+            finance_audit_user_name = #{record.financeAuditUserName,jdbcType=VARCHAR},
+            finance_audit_reason = #{record.financeAuditReason,jdbcType=VARCHAR},
+            is_auto_submit = #{record.isAutoSubmit,jdbcType=VARCHAR},
+            pause_reason = #{record.pauseReason,jdbcType=VARCHAR},
+            winning_principle = #{record.winningPrinciple,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CoOrderMain" >
+        update co_order_main
+        <set >
+            <if test="orderCode != null" >
+                order_code = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderTitle != null" >
+                order_title = #{orderTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceType != null" >
+                device_type = #{deviceType,jdbcType=VARCHAR},
+            </if>
+            <if test="foundsSubject != null" >
+                founds_subject = #{foundsSubject,jdbcType=VARCHAR},
+            </if>
+            <if test="foundsCode != null" >
+                founds_code = #{foundsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="usingCorrency != null" >
+                using_corrency = #{usingCorrency,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeliver != null" >
+                is_deliver = #{isDeliver,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverTime != null" >
+                deliver_time = #{deliverTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isTax != null" >
+                is_tax = #{isTax,jdbcType=VARCHAR},
+            </if>
+            <if test="isInvoice != null" >
+                is_invoice = #{isInvoice,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverPlace != null" >
+                deliver_place = #{deliverPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="isImplemented != null" >
+                is_implemented = #{isImplemented,jdbcType=VARCHAR},
+            </if>
+            <if test="budget != null" >
+                budget = #{budget,jdbcType=VARCHAR},
+            </if>
+            <if test="adviceExpiredTime != null" >
+                advice_expired_time = #{adviceExpiredTime,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null" >
+                order_type = #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="currentProcee != null" >
+                current_procee = #{currentProcee,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null" >
+                order_status = #{orderStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="isAdvanceEndbid != null" >
+                is_advance_endbid = #{isAdvanceEndbid,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeId != null" >
+                college_id = #{collegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null" >
+                college_name = #{collegeName,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                department_id = #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderUnit != null" >
+                order_unit = #{orderUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPerson != null" >
+                order_person = #{orderPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="orderTime != null" >
+                order_time = #{orderTime,jdbcType=VARCHAR},
+            </if>
+            <if test="personPhone != null" >
+                person_phone = #{personPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="itemNum != null" >
+                item_num = #{itemNum,jdbcType=VARCHAR},
+            </if>
+            <if test="orderTotalAmount != null" >
+                order_total_amount = #{orderTotalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="readCount != null" >
+                read_count = #{readCount,jdbcType=VARCHAR},
+            </if>
+            <if test="bidCount != null" >
+                bid_count = #{bidCount,jdbcType=VARCHAR},
+            </if>
+            <if test="orderProcess != null" >
+                order_process = #{orderProcess,jdbcType=VARCHAR},
+            </if>
+            <if test="startBidtime != null" >
+                start_bidtime = #{startBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endBidtime != null" >
+                end_bidtime = #{endBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditSuggestion != null" >
+                audit_suggestion = #{auditSuggestion,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUserid != null" >
+                audit_userid = #{auditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUsername != null" >
+                audit_username = #{auditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastEndBidtime != null" >
+                last_end_bidtime = #{lastEndBidtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isExtend != null" >
+                is_extend = #{isExtend,jdbcType=VARCHAR},
+            </if>
+            <if test="extendBidReason != null" >
+                extend_bid_reason = #{extendBidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="extendUserid != null" >
+                extend_userid = #{extendUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="extendUsername != null" >
+                extend_username = #{extendUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseTime != null" >
+                choose_time = #{chooseTime,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseOption != null" >
+                choose_option = #{chooseOption,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseReason != null" >
+                choose_reason = #{chooseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseUserId != null" >
+                choose_user_id = #{chooseUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseUserName != null" >
+                choose_user_name = #{chooseUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="firstTime != null" >
+                first_time = #{firstTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="firstAudit != null" >
+                first_audit = #{firstAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="firstAuditReason != null" >
+                first_audit_reason = #{firstAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="firstAuditUserId != null" >
+                first_audit_user_id = #{firstAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="firstAuditUserName != null" >
+                first_audit_user_name = #{firstAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="secondAudit != null" >
+                second_audit = #{secondAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="secondAuditReason != null" >
+                second_audit_reason = #{secondAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="secondAuditUserId != null" >
+                second_audit_user_id = #{secondAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="secondAuditUserName != null" >
+                second_audit_user_name = #{secondAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="secondTime != null" >
+                second_time = #{secondTime,jdbcType=VARCHAR},
+            </if>
+            <if test="bidAmount != null" >
+                bid_amount = #{bidAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="bidAmountRenminbi != null" >
+                bid_amount_renminbi = #{bidAmountRenminbi,jdbcType=VARCHAR},
+            </if>
+            <if test="isPublishBidresult != null" >
+                is_publish_bidresult = #{isPublishBidresult,jdbcType=VARCHAR},
+            </if>
+            <if test="publishBidresultTime != null" >
+                publish_bidresult_time = #{publishBidresultTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="publishBidresultUserid != null" >
+                publish_bidresult_userid = #{publishBidresultUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="publishBidresultUsername != null" >
+                publish_bidresult_username = #{publishBidresultUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="bidFinished != null" >
+                bid_finished = #{bidFinished,jdbcType=VARCHAR},
+            </if>
+            <if test="stopBidTime != null" >
+                stop_bid_time = #{stopBidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="stopBidReason != null" >
+                stop_bid_reason = #{stopBidReason,jdbcType=VARCHAR},
+            </if>
+            <if test="stopBidUserid != null" >
+                stop_bid_userid = #{stopBidUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="stopBidUsername != null" >
+                stop_bid_username = #{stopBidUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserid != null" >
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserid != null" >
+                last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUpdateUsername != null" >
+                last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditTime != null" >
+                re_audit_time = #{reAuditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reAuditUserid != null" >
+                re_audit_userid = #{reAuditUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditUsername != null" >
+                re_audit_username = #{reAuditUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="reAuditReason != null" >
+                re_audit_reason = #{reAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isReaudit != null" >
+                is_reaudit = #{isReaudit,jdbcType=VARCHAR},
+            </if>
+            <if test="confNum != null" >
+                conf_num = #{confNum,jdbcType=VARCHAR},
+            </if>
+            <if test="agentUserId != null" >
+                agent_user_id = #{agentUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentUserName != null" >
+                agent_user_name = #{agentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="agentRealName != null" >
+                agent_real_name = #{agentRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                pay_type = #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceType != null" >
+                invoice_type = #{invoiceType,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverType != null" >
+                deliver_type = #{deliverType,jdbcType=VARCHAR},
+            </if>
+            <if test="transportType != null" >
+                transport_type = #{transportType,jdbcType=VARCHAR},
+            </if>
+            <if test="installationgSite != null" >
+                installationg_site = #{installationgSite,jdbcType=VARCHAR},
+            </if>
+            <if test="packLevel != null" >
+                pack_level = #{packLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="accpetanceLevel != null" >
+                accpetance_level = #{accpetanceLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="isFinanceAudit != null" >
+                is_finance_audit = #{isFinanceAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="financeAuditUserId != null" >
+                finance_audit_user_id = #{financeAuditUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="financeAuditUserName != null" >
+                finance_audit_user_name = #{financeAuditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="financeAuditReason != null" >
+                finance_audit_reason = #{financeAuditReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isAutoSubmit != null" >
+                is_auto_submit = #{isAutoSubmit,jdbcType=VARCHAR},
+            </if>
+            <if test="pauseReason != null" >
+                pause_reason = #{pauseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="winningPrinciple != null" >
+                winning_principle = #{winningPrinciple,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where order_main_id = #{orderMainId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CoOrderMain" >
+        update co_order_main
+        set order_code = #{orderCode,jdbcType=VARCHAR},
+            order_title = #{orderTitle,jdbcType=VARCHAR},
+            device_type = #{deviceType,jdbcType=VARCHAR},
+            founds_subject = #{foundsSubject,jdbcType=VARCHAR},
+            founds_code = #{foundsCode,jdbcType=VARCHAR},
+            using_corrency = #{usingCorrency,jdbcType=VARCHAR},
+            is_deliver = #{isDeliver,jdbcType=VARCHAR},
+            deliver_time = #{deliverTime,jdbcType=VARCHAR},
+            is_tax = #{isTax,jdbcType=VARCHAR},
+            is_invoice = #{isInvoice,jdbcType=VARCHAR},
+            deliver_place = #{deliverPlace,jdbcType=VARCHAR},
+            is_implemented = #{isImplemented,jdbcType=VARCHAR},
+            budget = #{budget,jdbcType=VARCHAR},
+            advice_expired_time = #{adviceExpiredTime,jdbcType=VARCHAR},
+            order_type = #{orderType,jdbcType=VARCHAR},
+            current_procee = #{currentProcee,jdbcType=VARCHAR},
+            order_status = #{orderStatus,jdbcType=VARCHAR},
+            is_advance_endbid = #{isAdvanceEndbid,jdbcType=VARCHAR},
+            college_id = #{collegeId,jdbcType=VARCHAR},
+            college_name = #{collegeName,jdbcType=VARCHAR},
+            department_id = #{departmentId,jdbcType=VARCHAR},
+            order_unit = #{orderUnit,jdbcType=VARCHAR},
+            order_person = #{orderPerson,jdbcType=VARCHAR},
+            order_time = #{orderTime,jdbcType=VARCHAR},
+            person_phone = #{personPhone,jdbcType=VARCHAR},
+            item_num = #{itemNum,jdbcType=VARCHAR},
+            order_total_amount = #{orderTotalAmount,jdbcType=VARCHAR},
+            read_count = #{readCount,jdbcType=VARCHAR},
+            bid_count = #{bidCount,jdbcType=VARCHAR},
+            order_process = #{orderProcess,jdbcType=VARCHAR},
+            start_bidtime = #{startBidtime,jdbcType=TIMESTAMP},
+            end_bidtime = #{endBidtime,jdbcType=TIMESTAMP},
+            audit_suggestion = #{auditSuggestion,jdbcType=VARCHAR},
+            audit_userid = #{auditUserid,jdbcType=VARCHAR},
+            audit_username = #{auditUsername,jdbcType=VARCHAR},
+            audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            last_end_bidtime = #{lastEndBidtime,jdbcType=TIMESTAMP},
+            is_extend = #{isExtend,jdbcType=VARCHAR},
+            extend_bid_reason = #{extendBidReason,jdbcType=VARCHAR},
+            extend_userid = #{extendUserid,jdbcType=VARCHAR},
+            extend_username = #{extendUsername,jdbcType=VARCHAR},
+            choose_time = #{chooseTime,jdbcType=VARCHAR},
+            choose_option = #{chooseOption,jdbcType=VARCHAR},
+            choose_reason = #{chooseReason,jdbcType=VARCHAR},
+            choose_user_id = #{chooseUserId,jdbcType=VARCHAR},
+            choose_user_name = #{chooseUserName,jdbcType=VARCHAR},
+            first_time = #{firstTime,jdbcType=TIMESTAMP},
+            first_audit = #{firstAudit,jdbcType=VARCHAR},
+            first_audit_reason = #{firstAuditReason,jdbcType=VARCHAR},
+            first_audit_user_id = #{firstAuditUserId,jdbcType=VARCHAR},
+            first_audit_user_name = #{firstAuditUserName,jdbcType=VARCHAR},
+            second_audit = #{secondAudit,jdbcType=VARCHAR},
+            second_audit_reason = #{secondAuditReason,jdbcType=VARCHAR},
+            second_audit_user_id = #{secondAuditUserId,jdbcType=VARCHAR},
+            second_audit_user_name = #{secondAuditUserName,jdbcType=VARCHAR},
+            second_time = #{secondTime,jdbcType=VARCHAR},
+            bid_amount = #{bidAmount,jdbcType=VARCHAR},
+            bid_amount_renminbi = #{bidAmountRenminbi,jdbcType=VARCHAR},
+            is_publish_bidresult = #{isPublishBidresult,jdbcType=VARCHAR},
+            publish_bidresult_time = #{publishBidresultTime,jdbcType=TIMESTAMP},
+            publish_bidresult_userid = #{publishBidresultUserid,jdbcType=VARCHAR},
+            publish_bidresult_username = #{publishBidresultUsername,jdbcType=VARCHAR},
+            bid_finished = #{bidFinished,jdbcType=VARCHAR},
+            stop_bid_time = #{stopBidTime,jdbcType=TIMESTAMP},
+            stop_bid_reason = #{stopBidReason,jdbcType=VARCHAR},
+            stop_bid_userid = #{stopBidUserid,jdbcType=VARCHAR},
+            stop_bid_username = #{stopBidUsername,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_userid = #{createUserid,jdbcType=VARCHAR},
+            create_username = #{createUsername,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+            last_update_userid = #{lastUpdateUserid,jdbcType=VARCHAR},
+            last_update_username = #{lastUpdateUsername,jdbcType=VARCHAR},
+            re_audit_time = #{reAuditTime,jdbcType=TIMESTAMP},
+            re_audit_userid = #{reAuditUserid,jdbcType=VARCHAR},
+            re_audit_username = #{reAuditUsername,jdbcType=VARCHAR},
+            re_audit_reason = #{reAuditReason,jdbcType=VARCHAR},
+            is_reaudit = #{isReaudit,jdbcType=VARCHAR},
+            conf_num = #{confNum,jdbcType=VARCHAR},
+            agent_user_id = #{agentUserId,jdbcType=VARCHAR},
+            agent_user_name = #{agentUserName,jdbcType=VARCHAR},
+            agent_real_name = #{agentRealName,jdbcType=VARCHAR},
+            pay_type = #{payType,jdbcType=VARCHAR},
+            invoice_type = #{invoiceType,jdbcType=VARCHAR},
+            deliver_type = #{deliverType,jdbcType=VARCHAR},
+            transport_type = #{transportType,jdbcType=VARCHAR},
+            installationg_site = #{installationgSite,jdbcType=VARCHAR},
+            pack_level = #{packLevel,jdbcType=VARCHAR},
+            accpetance_level = #{accpetanceLevel,jdbcType=VARCHAR},
+            is_finance_audit = #{isFinanceAudit,jdbcType=VARCHAR},
+            finance_audit_user_id = #{financeAuditUserId,jdbcType=VARCHAR},
+            finance_audit_user_name = #{financeAuditUserName,jdbcType=VARCHAR},
+            finance_audit_reason = #{financeAuditReason,jdbcType=VARCHAR},
+            is_auto_submit = #{isAutoSubmit,jdbcType=VARCHAR},
+            pause_reason = #{pauseReason,jdbcType=VARCHAR},
+            winning_principle = #{winningPrinciple,jdbcType=VARCHAR}
+        where order_main_id = #{orderMainId,jdbcType=INTEGER}
+    </update>
+</mapper>

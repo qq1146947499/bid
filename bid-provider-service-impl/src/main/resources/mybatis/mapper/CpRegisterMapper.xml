@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.CpRegisterMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.CpRegister" >
+        <id column="reg_resource_id" property="regResourceId" jdbcType="VARCHAR" />
+        <result column="audit_college_id" property="auditCollegeId" jdbcType="VARCHAR" />
+        <result column="invite_code" property="inviteCode" jdbcType="VARCHAR" />
+        <result column="Ainfo_type" property="ainfoType" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+        <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        reg_resource_id, audit_college_id, invite_code, Ainfo_type, remark, is_dx_center, 
+        is_dx_college
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CpRegisterExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from cp_register
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from cp_register
+        where reg_resource_id = #{regResourceId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from cp_register
+        where reg_resource_id = #{regResourceId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.CpRegisterExample" >
+        delete from cp_register
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.CpRegister" >
+        insert into cp_register (reg_resource_id, audit_college_id, invite_code, 
+            Ainfo_type, remark, is_dx_center, 
+            is_dx_college)
+        values (#{regResourceId,jdbcType=VARCHAR}, #{auditCollegeId,jdbcType=VARCHAR}, #{inviteCode,jdbcType=VARCHAR}, 
+            #{ainfoType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{isDxCenter,jdbcType=VARCHAR}, 
+            #{isDxCollege,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CpRegister" >
+        insert into cp_register
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="regResourceId != null" >
+                reg_resource_id,
+            </if>
+            <if test="auditCollegeId != null" >
+                audit_college_id,
+            </if>
+            <if test="inviteCode != null" >
+                invite_code,
+            </if>
+            <if test="ainfoType != null" >
+                Ainfo_type,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="regResourceId != null" >
+                #{regResourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="auditCollegeId != null" >
+                #{auditCollegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="inviteCode != null" >
+                #{inviteCode,jdbcType=VARCHAR},
+            </if>
+            <if test="ainfoType != null" >
+                #{ainfoType,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.CpRegisterExample" resultType="java.lang.Integer" >
+        select count(*) from cp_register
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update cp_register
+        <set >
+            <if test="record.regResourceId != null" >
+                reg_resource_id = #{record.regResourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditCollegeId != null" >
+                audit_college_id = #{record.auditCollegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.inviteCode != null" >
+                invite_code = #{record.inviteCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ainfoType != null" >
+                Ainfo_type = #{record.ainfoType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCenter != null" >
+                is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDxCollege != null" >
+                is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update cp_register
+        set reg_resource_id = #{record.regResourceId,jdbcType=VARCHAR},
+            audit_college_id = #{record.auditCollegeId,jdbcType=VARCHAR},
+            invite_code = #{record.inviteCode,jdbcType=VARCHAR},
+            Ainfo_type = #{record.ainfoType,jdbcType=VARCHAR},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            is_dx_center = #{record.isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{record.isDxCollege,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CpRegister" >
+        update cp_register
+        <set >
+            <if test="auditCollegeId != null" >
+                audit_college_id = #{auditCollegeId,jdbcType=VARCHAR},
+            </if>
+            <if test="inviteCode != null" >
+                invite_code = #{inviteCode,jdbcType=VARCHAR},
+            </if>
+            <if test="ainfoType != null" >
+                Ainfo_type = #{ainfoType,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college = #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where reg_resource_id = #{regResourceId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.CpRegister" >
+        update cp_register
+        set audit_college_id = #{auditCollegeId,jdbcType=VARCHAR},
+            invite_code = #{inviteCode,jdbcType=VARCHAR},
+            Ainfo_type = #{ainfoType,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            is_dx_center = #{isDxCenter,jdbcType=VARCHAR},
+            is_dx_college = #{isDxCollege,jdbcType=VARCHAR}
+        where reg_resource_id = #{regResourceId,jdbcType=VARCHAR}
+    </update>
+</mapper>
