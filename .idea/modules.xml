@@ -4,12 +4,15 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bid.iml" filepath="$PROJECT_DIR$/bid.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-colleage/bid-colleage.iml" filepath="$PROJECT_DIR$/bid-colleage/bid-colleage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bid-common-api/bid-common-api.iml" filepath="$PROJECT_DIR$/bid-common-api/bid-common-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-colleage-api/bid-colleage-api.iml" filepath="$PROJECT_DIR$/bid-colleage-api/bid-colleage-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-common-mapper/bid-common-mapper.iml" filepath="$PROJECT_DIR$/bid-common-mapper/bid-common-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-common-pojo/bid-common-pojo.iml" filepath="$PROJECT_DIR$/bid-common-pojo/bid-common-pojo.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-enterprise/bid-enterprise.iml" filepath="$PROJECT_DIR$/bid-enterprise/bid-enterprise.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-enterprise-api/bid-enterprise-api.iml" filepath="$PROJECT_DIR$/bid-enterprise-api/bid-enterprise-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-eureka/bid-eureka.iml" filepath="$PROJECT_DIR$/bid-eureka/bid-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-platform/bid-platform.iml" filepath="$PROJECT_DIR$/bid-platform/bid-platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-platform-api/bid-platform-api.iml" filepath="$PROJECT_DIR$/bid-platform-api/bid-platform-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-protal/bid-protal.iml" filepath="$PROJECT_DIR$/bid-protal/bid-protal.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bid-provider-service-impl/bid-provider-service-impl.iml" filepath="$PROJECT_DIR$/bid-provider-service-impl/bid-provider-service-impl.iml" />
     </modules>
   </component>
 </project>

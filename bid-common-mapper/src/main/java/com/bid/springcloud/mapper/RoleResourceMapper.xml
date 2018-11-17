@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bid.springcloud.mapper.RoleResourceMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.RoleResource" >
+        <id column="resource_id" property="resourceId" jdbcType="INTEGER" />
+        <id column="role_id" property="roleId" jdbcType="INTEGER" />
+        <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        resource_id, role_id, resource_type
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.RoleResourceExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from role_resource
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.RoleResourceKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from role_resource
+        where resource_id = #{resourceId,jdbcType=INTEGER}
+          and role_id = #{roleId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bid.springcloud.entities.RoleResourceKey" >
+        delete from role_resource
+        where resource_id = #{resourceId,jdbcType=INTEGER}
+          and role_id = #{roleId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bid.springcloud.entities.RoleResourceExample" >
+        delete from role_resource
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bid.springcloud.entities.RoleResource" >
+        insert into role_resource (resource_id, role_id, resource_type
+            )
+        values (#{resourceId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{resourceType,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bid.springcloud.entities.RoleResource" >
+        insert into role_resource
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="resourceId != null" >
+                resource_id,
+            </if>
+            <if test="roleId != null" >
+                role_id,
+            </if>
+            <if test="resourceType != null" >
+                resource_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="resourceId != null" >
+                #{resourceId,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null" >
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="resourceType != null" >
+                #{resourceType,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bid.springcloud.entities.RoleResourceExample" resultType="java.lang.Integer" >
+        select count(*) from role_resource
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update role_resource
+        <set >
+            <if test="record.resourceId != null" >
+                resource_id = #{record.resourceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.roleId != null" >
+                role_id = #{record.roleId,jdbcType=INTEGER},
+            </if>
+            <if test="record.resourceType != null" >
+                resource_type = #{record.resourceType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update role_resource
+        set resource_id = #{record.resourceId,jdbcType=INTEGER},
+            role_id = #{record.roleId,jdbcType=INTEGER},
+            resource_type = #{record.resourceType,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.RoleResource" >
+        update role_resource
+        <set >
+            <if test="resourceType != null" >
+                resource_type = #{resourceType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where resource_id = #{resourceId,jdbcType=INTEGER}
+          and role_id = #{roleId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bid.springcloud.entities.RoleResource" >
+        update role_resource
+        set resource_type = #{resourceType,jdbcType=VARCHAR}
+        where resource_id = #{resourceId,jdbcType=INTEGER}
+          and role_id = #{roleId,jdbcType=INTEGER}
+    </update>
+</mapper>

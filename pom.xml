@@ -10,13 +10,17 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>bid-eureka</module>
-        <module>com-common</module>
         <module>bid-provider-service-impl</module>
         <module>bid-protal</module>
         <module>bid-colleage</module>
         <module>bid-platform</module>
         <module>bid-enterprise</module>
         <module>bid-common-api</module>
+        <module>bid-colleage-api</module>
+        <module>bid-platform-api</module>
+        <module>bid-enterprise-api</module>
+        <module>bid-common-mapper</module>
+        <module>bid-common-pojo</module>
     </modules>
 
     <properties>
@@ -100,4 +104,23 @@
         </dependencies>
     </dependencyManagement>
 
+     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <!--<resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>-->
+        </resources>
+    </build>
 </project>

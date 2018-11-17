@@ -3,10 +3,15 @@
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bid-colleage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bid-colleage-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bid-common-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bid-common-mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bid-common-pojo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bid-enterprise" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bid-enterprise-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bid-eureka" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bid-platform" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bid-platform-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bid-protal" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bid-provider-service-impl" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
