@@ -3,10 +3,16 @@ package com.bid.springcloud.mapper;
 import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.entities.PtUserExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface PtUserMapper {
+
+
+    @Select("SELECT * from pt_user  ")
+    List<PtUser> querAll();
+
     int countByExample(PtUserExample example);
 
     int deleteByExample(PtUserExample example);

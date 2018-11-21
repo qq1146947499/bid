@@ -1,12 +1,14 @@
 package com.bid.springcloud.mapper;
 
-import com.bid.springcloud.entities.CoUser;
-import com.bid.springcloud.entities.CoUserExample;
+import com.bid.springcloud.entities.*;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface CoUserMapper {
+
+
     int countByExample(CoUserExample example);
 
     int deleteByExample(CoUserExample example);
@@ -28,4 +30,5 @@ public interface CoUserMapper {
     int updateByPrimaryKeySelective(CoUser record);
 
     int updateByPrimaryKey(CoUser record);
+
 }

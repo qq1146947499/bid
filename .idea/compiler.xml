@@ -10,12 +10,15 @@
         <module name="bid-colleage-api" />
         <module name="bid-common-mapper" />
         <module name="bid-common-pojo" />
+        <module name="bid-demo" />
         <module name="bid-enterprise" />
         <module name="bid-enterprise-api" />
         <module name="bid-eureka" />
         <module name="bid-platform" />
         <module name="bid-platform-api" />
         <module name="bid-protal" />
+        <module name="p-web" />
+        <module name="platform-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -25,13 +28,21 @@
       <module name="bid-common-api" target="1.8" />
       <module name="bid-common-mapper" target="1.8" />
       <module name="bid-common-pojo" target="1.8" />
+      <module name="bid-demo" target="1.8" />
       <module name="bid-enterprise" target="1.8" />
       <module name="bid-enterprise-api" target="1.8" />
       <module name="bid-eureka" target="1.8" />
+      <module name="bid-plataforma-web" target="1.8" />
       <module name="bid-platform" target="1.8" />
       <module name="bid-platform-api" target="1.8" />
+      <module name="bid-platform-web" target="1.8" />
       <module name="bid-protal" target="1.8" />
       <module name="bid-provider-service-impl" target="1.8" />
+      <module name="demo" target="1.8" />
+      <module name="dew" target="1.8" />
+      <module name="p-web" target="1.8" />
+      <module name="platform-web" target="1.8" />
+      <module name="w" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

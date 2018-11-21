@@ -10,6 +10,38 @@ import java.util.Date;
  * @date 2018-11-15
  */
 public class PtUser {
+
+
+    @Override
+    public String toString() {
+        return "PtUser{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", realName='" + realName + '\'' +
+                ", userPass='" + userPass + '\'' +
+                ", userType='" + userType + '\'' +
+                ", isSuper='" + isSuper + '\'' +
+                ", userStatus='" + userStatus + '\'' +
+                ", personPhone='" + personPhone + '\'' +
+                ", collegeId=" + collegeId +
+                ", collegeName='" + collegeName + '\'' +
+                ", companyId='" + companyId + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", coDepartmentId='" + coDepartmentId + '\'' +
+                ", departmentName='" + departmentName + '\'' +
+                ", compusId=" + compusId +
+                ", compusName='" + compusName + '\'' +
+                ", institueId=" + institueId +
+                ", institueName='" + institueName + '\'' +
+                ", applyPriv='" + applyPriv + '\'' +
+                ", applyOneself='" + applyOneself + '\'' +
+                ", email='" + email + '\'' +
+                ", auditUserid=" + auditUserid +
+                ", auditUsername='" + auditUsername + '\'' +
+                ", auditorTime=" + auditorTime +
+                '}';
+    }
+
     private Integer userId;
 
     private String userName;

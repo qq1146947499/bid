@@ -10,6 +10,40 @@ import java.util.Date;
  * @date 2018-11-15
  */
 public class CoUser {
+
+
+    @Override
+    public String toString() {
+        return "CoUser{" +
+                "userId=" + userId +
+                ", userAccount='" + userAccount + '\'' +
+                ", userPass='" + userPass + '\'' +
+                ", realName='" + realName + '\'' +
+                ", userType='" + userType + '\'' +
+                ", status='" + status + '\'' +
+                ", officePhone='" + officePhone + '\'' +
+                ", personPhone='" + personPhone + '\'' +
+                ", email='" + email + '\'' +
+                ", lastLogintime=" + lastLogintime +
+                ", collegeId='" + collegeId + '\'' +
+                ", departmentId='" + departmentId + '\'' +
+                ", regTime=" + regTime +
+                ", auditor='" + auditor + '\'' +
+                ", auditorTime=" + auditorTime +
+                ", applyPriv='" + applyPriv + '\'' +
+                ", applyOneself='" + applyOneself + '\'' +
+                ", remark='" + remark + '\'' +
+                ", createTime=" + createTime +
+                ", createUserid='" + createUserid + '\'' +
+                ", createUsername='" + createUsername + '\'' +
+                ", isDxCenter='" + isDxCenter + '\'' +
+                ", isDxCollege='" + isDxCollege + '\'' +
+                ", lastUpdateTime='" + lastUpdateTime + '\'' +
+                ", lastUpdateUserid='" + lastUpdateUserid + '\'' +
+                ", lastUpdateUsername='" + lastUpdateUsername + '\'' +
+                '}';
+    }
+
     private Integer userId;
 
     private String userAccount;

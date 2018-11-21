@@ -10,17 +10,17 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>bid-eureka</module>
-        <module>bid-provider-service-impl</module>
         <module>bid-protal</module>
         <module>bid-colleage</module>
         <module>bid-platform</module>
         <module>bid-enterprise</module>
-        <module>bid-common-api</module>
         <module>bid-colleage-api</module>
         <module>bid-platform-api</module>
         <module>bid-enterprise-api</module>
         <module>bid-common-mapper</module>
         <module>bid-common-pojo</module>
+        <module>p-web</module>
+        <module>bid-demo</module>
     </modules>
 
     <properties>
@@ -30,6 +30,12 @@
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <lombok.version>1.16.18</lombok.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+        <!-- 布局功能的支持程序  thymeleaf3主程序  layout2以上版本 -->
+        <!-- thymeleaf2   layout1-->
+        <thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
     </properties>
 
     <dependencyManagement>
@@ -105,6 +111,12 @@
     </dependencyManagement>
 
      <build>
+             <plugins>
+                 <plugin>
+                     <groupId>org.springframework.boot</groupId>
+                     <artifactId>spring-boot-maven-plugin</artifactId>
+                 </plugin>
+             </plugins>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
@@ -119,7 +131,7 @@
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                 </includes>
-                <filtering>false</filtering>
+                <filtering>true</filtering>
             </resource>-->
         </resources>
     </build>

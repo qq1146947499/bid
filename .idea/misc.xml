@@ -12,7 +12,10 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/bid-common-api/pom.xml" />
+        <option value="$PROJECT_DIR$/bid-platform-web/pom.xml" />
         <option value="$PROJECT_DIR$/bid-provider-service-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/dew/pom.xml" />
+        <option value="$PROJECT_DIR$/w/pom.xml" />
       </set>
     </option>
   </component>
