@@ -12,6 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/bid-eureka/bid-eureka.iml" filepath="$PROJECT_DIR$/bid-eureka/bid-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-platform/bid-platform.iml" filepath="$PROJECT_DIR$/bid-platform/bid-platform.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-platform-api/bid-platform-api.iml" filepath="$PROJECT_DIR$/bid-platform-api/bid-platform-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-platform-web/bid-platform-web.iml" filepath="$PROJECT_DIR$/bid-platform-web/bid-platform-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-protal/bid-protal.iml" filepath="$PROJECT_DIR$/bid-protal/bid-protal.iml" />
     </modules>
   </component>

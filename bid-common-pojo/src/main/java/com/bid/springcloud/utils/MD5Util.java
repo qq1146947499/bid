@@ -2,8 +2,9 @@ package com.bid.springcloud.utils;
 
 import java.security.MessageDigest;
 
-public class MD5Util {  
-	  
+public class MD5Util {
+
+
     public final static String MD5(String s) {  
         char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};         
         try {  
@@ -30,7 +31,7 @@ public class MD5Util {
         }  
     }  
     public static void main(String[] args) {  
-        System.out.println(MD5Util.MD5("20121221"));  
-        System.out.println(MD5Util.MD5("加密"));  
+        System.out.println(MD5Util.MD5("3333"));
+        System.out.println(MD5Util.MD5(MD5Util.MD5("2BE9BD7A3434F7038CA27D1918DE58BD")));
     }  
 }  

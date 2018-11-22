@@ -21,6 +21,7 @@
         <module>bid-enterprise-api</module>
         <module>bid-common-mapper</module>
         <module>bid-common-pojo</module>
+        <module>bid-platform-web</module>
     </modules>
 
     <properties>

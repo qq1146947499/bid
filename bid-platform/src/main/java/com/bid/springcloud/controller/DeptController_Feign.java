@@ -19,6 +19,8 @@ public class DeptController_Feign
     @Resource
     private CoUserService coUserService;
 
+
+
     @RequestMapping("/hello")
     public String hello(){
         return  "Hello";

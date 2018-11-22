@@ -12,6 +12,16 @@
     <artifactId>bid-protal</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.bid</groupId>
+            <artifactId>bid-common-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bid</groupId>
+            <artifactId>bid-platform-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
          <dependency>
            <groupId>org.springframework.cloud</groupId>
            <artifactId>spring-cloud-starter-feign</artifactId>
