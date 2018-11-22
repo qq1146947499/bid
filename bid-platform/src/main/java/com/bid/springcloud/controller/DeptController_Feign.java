@@ -1,3 +1,4 @@
+/*
 package com.bid.springcloud.controller;
 
 import java.util.List;
@@ -24,11 +25,14 @@ public class DeptController_Feign
     public String hello(){
         return  "Hello";
     }
-   /* @RequestMapping(value = "/consumer/dept/get/{id}")
+   */
+/* @RequestMapping(value = "/consumer/dept/get/{id}")
     public CoUser get(@PathVariable Integer id){
         System.out.println("get resolver");
        return  coUserService.get(id);
-    }*/
+    }*//*
+
 
 }
 
+*/

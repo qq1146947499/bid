@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+/*
 @RestController
 public class DeptController_Feign
 {
@@ -21,4 +22,5 @@ public class DeptController_Feign
     }
 
 }
+*/
 

@@ -40,7 +40,12 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
         return coUser;
     }
 
-    public EasyUIDataGrid queryAll(int page, int rows) {
+    @Override
+    public PtUser query1(@PathVariable("id") Integer id) {
+        return ptUserMapper.selectByPrimaryKey(id);
+    }
+
+   /* public EasyUIDataGrid queryAll(int page, int rows) {
         PageHelper.startPage(page,rows);
         List<PtUser> list = ptUserMapper.selectByExample(new PtUserExample());
         PageInfo<PtUser> pageInfo = new PageInfo<>(list);
@@ -106,7 +111,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
             return  setResultSuccess("查询用户角色失败");
         }
         return setResultSuccess(ptUser);
-    }
+    }*/
 
 
 }
