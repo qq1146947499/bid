@@ -10,12 +10,10 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>bid-eureka</module>
-        <module>bid-provider-service-impl</module>
         <module>bid-protal</module>
         <module>bid-colleage</module>
         <module>bid-platform</module>
         <module>bid-enterprise</module>
-        <module>bid-common-api</module>
         <module>bid-colleage-api</module>
         <module>bid-platform-api</module>
         <module>bid-enterprise-api</module>

@@ -8,6 +8,8 @@ import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.utils.EasyUIDataGrid;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @FeignClient(value = "MICROSERVICECLOUD-DEPT")
@@ -18,6 +20,7 @@ public  interface PtUserClientService {
      * @param
      * @return
      */
+    @RequestMapping("/queryAll")
     EasyUIDataGrid queryAll(int page, int rows);
 
     /**
@@ -26,6 +29,7 @@ public  interface PtUserClientService {
      * @return
      */
 
+    @RequestMapping("/query4Login")
     ResponseBase query4Login(PtUser ptUser);
 
     /**
@@ -33,7 +37,7 @@ public  interface PtUserClientService {
      * @param ptUser
      * @return
      */
-
+    @RequestMapping("/insertCoCoUser")
     ResponseBase insertCoCoUser(PtUser ptUser);
 
     /**
@@ -41,6 +45,7 @@ public  interface PtUserClientService {
      * @param ptUser
      * @return
      */
+    @RequestMapping("/updateCoCoUser")
     ResponseBase updateCoCoUser(PtUser ptUser);
 
     /**
@@ -48,7 +53,7 @@ public  interface PtUserClientService {
      * @param id
      * @return
      */
-
+    @RequestMapping("/deleteCoCoUserById")
     ResponseBase deleteCoCoUserById(Integer id);
 
     /**
@@ -57,6 +62,7 @@ public  interface PtUserClientService {
      * @return
      */
 
+    @RequestMapping("/queryRoleidsByCoCoUserid")
     ResponseBase queryRoleidsByCoCoUserid(Integer id);
 }
 

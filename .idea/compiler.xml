@@ -15,6 +15,7 @@
         <module name="bid-eureka" />
         <module name="bid-platform" />
         <module name="bid-platform-api" />
+        <module name="bid-platform-web" />
         <module name="bid-protal" />
       </profile>
     </annotationProcessing>
@@ -30,6 +31,7 @@
       <module name="bid-eureka" target="1.8" />
       <module name="bid-platform" target="1.8" />
       <module name="bid-platform-api" target="1.8" />
+      <module name="bid-platform-web" target="1.8" />
       <module name="bid-protal" target="1.8" />
       <module name="bid-provider-service-impl" target="1.8" />
     </bytecodeTargetLevel>
