@@ -7,12 +7,9 @@ package com.bid.springcloud.service;/*
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.entities.PtUserRole;
-import com.bid.springcloud.utils.EasyUIDataGrid;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 
 
 @FeignClient(value = "MICROSERVICECLOUD-DEPT")
