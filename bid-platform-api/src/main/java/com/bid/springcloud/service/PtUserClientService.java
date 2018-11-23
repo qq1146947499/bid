@@ -6,13 +6,11 @@ package com.bid.springcloud.service;/*
 
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtUser;
+import com.bid.springcloud.entities.PtUserRole;
 import com.bid.springcloud.utils.EasyUIDataGrid;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -24,46 +22,88 @@ public  interface PtUserClientService {
     @GetMapping("/query1/{id}")
     PtUser query1(@PathVariable("id") Integer id);
 
-    /**
-     * 查询所有用户
-     * @param
-     * @return
-     */
-    //@RequestMapping(name ="/queryAll", method = RequestMethod.GET)
-    //EasyUIDataGrid queryAll(int page, int rows);
+
+
 
     /**
-     * 用户登陆
+     * 分页查询所有
+     * @return
+     */
+    @GetMapping("/queryAll/{page}/{row}")
+    ResponseBase queryAll(@PathVariable Integer page, @PathVariable Integer row);
+
+
+
+    /**
+     * 登陆查询
      * @param ptUser
      * @return
      */
 
-    //@RequestMapping("/query4Login")
-    //ResponseBase query4Login(PtUser ptUser);
+    @PostMapping("/query4Login")
+    ResponseBase query4Login(@ModelAttribute PtUser ptUser);
+
 
     /**
-     * 添加用户
+     * 增加用户
      * @param ptUser
      * @return
      */
-  //  @RequestMapping("/insertCoCoUser")
-    //ResponseBase insertCoCoUser(PtUser ptUser);
+
+    @PostMapping("/insertUser")
+    ResponseBase insertUser(@ModelAttribute  PtUser ptUser);
+
 
     /**
      * 更新用户
      * @param ptUser
      * @return
      */
-    //@RequestMapping("/updateCoCoUser")
-    //ResponseBase updateCoCoUser(PtUser ptUser);
+
+    @PostMapping("/updateUser")
+    ResponseBase updateUser(@ModelAttribute  PtUser ptUser);
+
+
 
     /**
-     * 查询用户
-     * @param id
+     * 用户id查询用户
+     * @param userId
      * @return
      */
-    //@RequestMapping("/deleteCoCoUserById")
-    //ResponseBase deleteCoCoUserById(Integer id);
+    @GetMapping("/queryById/{userId}")
+    ResponseBase queryById(@PathVariable("userId") Integer userId);
+
+
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
+
+    @GetMapping("/deleteUserById/{userId}")
+    ResponseBase deleteUserById(@PathVariable Integer userId);
+
+
+    /**
+     * 增加用户角色
+     * @param
+     * @return
+     */
+
+    @PostMapping("/insertUserRoles")
+    ResponseBase insertUserRoles(@ModelAttribute PtUserRole ptUserRole);
+
+
+    /**
+     * 删除用户角色
+     * @param
+     * @return
+     */
+
+    @DeleteMapping("/deleteUserRoles1")
+    ResponseBase deleteUserRoles(@ModelAttribute PtUserRole ptUserRole);
+
+
 
     /**
      * 查询用户角色
@@ -71,8 +111,10 @@ public  interface PtUserClientService {
      * @return
      */
 
-    //@RequestMapping("/queryRoleidsByCoCoUserid")
-    //ResponseBase queryRoleidsByCoCoUserid(Integer id);
+    @GetMapping("/queryRoleidsByUserid/{id}")
+    ResponseBase queryRoleidsByUserid(@PathVariable Integer id);
+
+
 }
 
 

@@ -2,15 +2,14 @@ package com.bid.springcloud.service.impl;
 
 import com.bid.springcloud.base.BaseApiService;
 import com.bid.springcloud.base.ResponseBase;
-import com.bid.springcloud.entities.CoUser;
-import com.bid.springcloud.entities.PtUser;
-import com.bid.springcloud.entities.PtUserExample;
+import com.bid.springcloud.entities.*;
 import com.bid.springcloud.mapper.CoUserMapper;
 import com.bid.springcloud.mapper.PtUserMapper;
+import com.bid.springcloud.mapper.PtUserRoleMapper;
 import com.bid.springcloud.service.PtUserClientService;
 import com.bid.springcloud.utils.EasyUIDataGrid;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -25,6 +24,9 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
 
     @Resource
     private PtUserMapper ptUserMapper;
+
+    @Resource
+    private PtUserRoleMapper ptUserRoleMapper;
 
     public CoUser get(@PathVariable Integer id) {
         System.out.println("coUserService");
@@ -45,75 +47,112 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
         return ptUserMapper.selectByPrimaryKey(id);
     }
 
-   /* public EasyUIDataGrid queryAll(int page, int rows) {
-        PageHelper.startPage(page,rows);
+
+
+    @Override
+    public ResponseBase queryAll(@PathVariable Integer page, @PathVariable Integer row) {
+        PageHelper.startPage(page,row);
         List<PtUser> list = ptUserMapper.selectByExample(new PtUserExample());
         PageInfo<PtUser> pageInfo = new PageInfo<>(list);
         EasyUIDataGrid easyUIDataGrid = new EasyUIDataGrid();
         easyUIDataGrid.setRows(pageInfo.getList());
         easyUIDataGrid.setTotal(pageInfo.getTotal());
+        if(easyUIDataGrid!=null){
+            return  setResultSuccess(easyUIDataGrid);
+        }
 
-        return easyUIDataGrid;
+        return setResultError("查询失败");
     }
 
+
     @Override
-    public ResponseBase query4Login(PtUser ptUser) {
-        PtUserExample example = new PtUserExample();
-        example.createCriteria().andUserIdEqualTo(ptUser.getUserId());
-        example.createCriteria().andUserNameEqualTo(ptUser.getUserName());
-        List<PtUser> ptUsers = ptUserMapper.selectByExample(example);
-        if(ptUsers.size()>0){
-            PtUser coUser1 = ptUsers.get(0);
-            return setResultSuccess(coUser1);
+    public ResponseBase query4Login(@ModelAttribute PtUser ptUser) {
+        System.out.println(ptUser);
+        PtUserExample ptUserExample = new PtUserExample();
+        ptUserExample.createCriteria().andUserIdEqualTo(ptUser.getUserId()).andUserNameEqualTo(ptUser.getUserName())
+                .andUserPassEqualTo(ptUser.getUserPass());
+        List<PtUser> ptUsers = ptUserMapper.selectByExample(ptUserExample);
+        if(isNotNull(ptUsers)){
+            return setResultSuccess(ptUsers.get(0));
         }
         return setResultError("查询失败");
 
+
+
+
     }
 
     @Override
-    public ResponseBase insertCoCoUser(PtUser ptUser) {
-           int i = ptUserMapper.insertSelective(ptUser);
+    public ResponseBase insertUser(@ModelAttribute PtUser ptUser) {
+
+        int i = ptUserMapper.insertSelective(ptUser);
         if(i>0){
             return setResultSuccess("添加用户成功");
         }
         return setResultError("添加用户失败");
-
     }
 
     @Override
-    public ResponseBase updateCoCoUser(PtUser ptUser) {
+    public ResponseBase queryById(@PathVariable("userId") Integer userId) {
 
-        int i = ptUserMapper.updateByPrimaryKey(ptUser);
+        PtUser ptUser = ptUserMapper.selectByPrimaryKey(userId);
+        if(isNotNull(ptUser)){
+            return  setResultSuccess(ptUser);
+        }
+        return setResultError("没找到用户");
+    }
+
+    @Override
+    public ResponseBase deleteUserById(@PathVariable Integer userId) {
+        int i = ptUserMapper.deleteByPrimaryKey(userId);
         if(i>0){
-            return  setResultSuccess("更新成功");
+            return  setResultSuccess("删除用户成功");
         }
-        return  setResultError("更新失败");
-
+        return setResultError("删除用户失败");
     }
 
     @Override
-    public ResponseBase deleteCoCoUserById(Integer id) {
-        int i = ptUserMapper.deleteByPrimaryKey(id);
-        if(isNotNull(i)){
-            return setResultSuccess("删除成功");
-        }
-        return  setResultError("删除失败");
+    public ResponseBase insertUserRoles(@ModelAttribute PtUserRole ptUserRole) {
 
+        int i = ptUserRoleMapper.insertSelective(ptUserRole);
+        if(i>0){
+            return  setResultSuccess("增加角色成功");
+        }
+        return setResultError("增加角色失败");
+    }
+
+    @Override
+    public ResponseBase deleteUserRoles(@ModelAttribute PtUserRole ptUserRole) {
+        PtUserRoleExample ptUserRoleExample = new PtUserRoleExample();
+        ptUserRoleExample.createCriteria().andUserIdEqualTo(ptUserRole.getUserId())
+                .andRoleIdEqualTo(ptUserRole.getRoleId());
+        int i = ptUserRoleMapper.deleteByExample(ptUserRoleExample);
+        if(i>0){
+            return  setResultSuccess("删除角色成功");
+        }
+        return setResultError("删除角色失败");
+    }
+
+    @Override
+    public ResponseBase queryRoleidsByUserid(@PathVariable Integer id) {
+
+        PtUserRoleExample ptUserRoleExample = new PtUserRoleExample();
+        ptUserRoleExample.createCriteria().andUserIdEqualTo(id);
+        List<PtUserRole> ptUserRoles = ptUserRoleMapper.selectByExample(ptUserRoleExample);
+        if (isNotNull(ptUserRoles)){
+            return setResultSuccess(ptUserRoles);
+        }
+        return setResultError("没找到用户角色");
     }
 
 
-    @Override
-    public ResponseBase queryRoleidsByCoCoUserid(Integer id) {
-        PtUser ptUser = ptUserMapper.selectByPrimaryKey(2);
-        boolean aNull = isNull(ptUser);
-        if(isNull(ptUser)){
-            System.out.println(ptUser);
-            return  setResultSuccess("查询用户角色失败");
+    public ResponseBase updateUser(@ModelAttribute PtUser ptUser) {
+        int i = ptUserMapper.updateByPrimaryKeySelective(ptUser);
+        if(i>0){
+            return  setResultSuccess("更新用户成功");
         }
-        return setResultSuccess(ptUser);
-    }*/
-
-
+        return setResultError("更新用户失败");
+    }
 }
 
 
