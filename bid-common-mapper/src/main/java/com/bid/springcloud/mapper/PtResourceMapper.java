@@ -2,7 +2,9 @@ package com.bid.springcloud.mapper;
 
 import com.bid.springcloud.entities.PtResource;
 import com.bid.springcloud.entities.PtResourceExample;
+import com.bid.springcloud.entities.PtUser;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -28,4 +30,13 @@ public interface PtResourceMapper {
     int updateByPrimaryKeySelective(PtResource record);
 
     int updateByPrimaryKey(PtResource record);
+
+    @Select("SELECT * FROM pt_resource WHERE p_resource_id = #{pResourceId}")
+    List<PtResource> queryChildPermissions(Integer pid);
+
+    @Select("SELECT resource_id FROM role_resource WHERE role_id = #{roleid}")
+    List<Integer> queryPtResourcesByRoleid(Integer roleid);
+
+
+    PtResource queryPtResourcesByUser(PtUser ptUser);
 }

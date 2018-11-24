@@ -32,7 +32,7 @@ public class PtRoleServiceImpl extends BaseApiService implements PtRoleClientSer
     private RoleResourceMapper roleResourceMapper;
 
     @Override
-    public ResponseBase addRoleResource(RoleResource roleResource) {
+    public ResponseBase addRoleResource(@ModelAttribute RoleResource roleResource) {
         int i = roleResourceMapper.insertSelective(roleResource);
         if (i>0){
             return  setResultSuccess("增加用户权限成功");
@@ -66,7 +66,7 @@ public class PtRoleServiceImpl extends BaseApiService implements PtRoleClientSer
     }
 
     @Override
-    public ResponseBase queryRole(@PathVariable Integer roleId) {
+    public ResponseBase queryRole(@PathVariable(value = "roleId") Integer roleId) {
         PtRole ptRole = ptRoleMapper.selectByPrimaryKey(roleId);
         if (isNotNull(ptRole)) {
             return setResultSuccess(ptRole);
@@ -76,7 +76,7 @@ public class PtRoleServiceImpl extends BaseApiService implements PtRoleClientSer
     }
 
     @Override
-    public ResponseBase deleRole(@PathVariable Integer roleId) {
+    public ResponseBase deleRole(@PathVariable(value = "roleId") Integer roleId) {
         int i = ptRoleMapper.deleteByPrimaryKey(roleId);
         if (i > 0) {
             return setResultSuccess("删除成功");

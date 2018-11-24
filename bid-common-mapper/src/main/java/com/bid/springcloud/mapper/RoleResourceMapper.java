@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface RoleResourceMapper {
+
+
     int countByExample(RoleResourceExample example);
 
     int deleteByExample(RoleResourceExample example);

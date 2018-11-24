@@ -28,14 +28,14 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     @Resource
     private PtUserRoleMapper ptUserRoleMapper;
 
-    public CoUser get(@PathVariable Integer id) {
+    public CoUser get(@PathVariable(value = "id") Integer id) {
         System.out.println("coUserService");
         CoUser coUser = coUserMapper.selectByPrimaryKey(id);
         System.out.println(coUser.toString());
         return coUser;
     }
 
-    public PtUser get1(@PathVariable Integer id) {
+    public PtUser get1(@PathVariable(value = "id") Integer id) {
         System.out.println("coUserService");
         PtUser coUser = ptUserMapper.selectByPrimaryKey(id);
         System.out.println(coUser.toString());
@@ -48,17 +48,16 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
 
-
     @Override
-    public ResponseBase queryAll(@PathVariable Integer page, @PathVariable Integer row) {
-        PageHelper.startPage(page,row);
+    public ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "row") Integer row) {
+        PageHelper.startPage(page, row);
         List<PtUser> list = ptUserMapper.selectByExample(new PtUserExample());
         PageInfo<PtUser> pageInfo = new PageInfo<>(list);
         EasyUIDataGrid easyUIDataGrid = new EasyUIDataGrid();
         easyUIDataGrid.setRows(pageInfo.getList());
         easyUIDataGrid.setTotal(pageInfo.getTotal());
-        if(easyUIDataGrid!=null){
-            return  setResultSuccess(easyUIDataGrid);
+        if (easyUIDataGrid != null) {
+            return setResultSuccess(easyUIDataGrid);
         }
 
         return setResultError("查询失败");
@@ -72,13 +71,10 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
         ptUserExample.createCriteria().andUserIdEqualTo(ptUser.getUserId()).andUserNameEqualTo(ptUser.getUserName())
                 .andUserPassEqualTo(ptUser.getUserPass());
         List<PtUser> ptUsers = ptUserMapper.selectByExample(ptUserExample);
-        if(isNotNull(ptUsers)){
+        if (isNotNull(ptUsers)) {
             return setResultSuccess(ptUsers.get(0));
         }
         return setResultError("查询失败");
-
-
-
 
     }
 
@@ -93,7 +89,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase queryById(@PathVariable("userId") Integer userId) {
+    public ResponseBase queryById(@PathVariable(value = "userId") Integer userId) {
 
         PtUser ptUser = ptUserMapper.selectByPrimaryKey(userId);
         if(isNotNull(ptUser)){
@@ -103,7 +99,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase deleteUserById(@PathVariable Integer userId) {
+    public ResponseBase deleteUserById(@PathVariable(value = "userId") Integer userId) {
         int i = ptUserMapper.deleteByPrimaryKey(userId);
         if(i>0){
             return  setResultSuccess("删除用户成功");
@@ -134,7 +130,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase queryRoleidsByUserid(@PathVariable Integer id) {
+    public ResponseBase queryRoleidsByUserid(@PathVariable(value = "id") Integer id) {
 
         PtUserRoleExample ptUserRoleExample = new PtUserRoleExample();
         ptUserRoleExample.createCriteria().andUserIdEqualTo(id);
@@ -153,6 +149,6 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
         }
         return setResultError("更新用户失败");
     }
-}
 
+}
 

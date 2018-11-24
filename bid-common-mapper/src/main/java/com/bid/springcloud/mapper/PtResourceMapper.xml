@@ -75,6 +75,13 @@
         resource_id, resource_name, resource_path, resource_type, p_resource_id, pt_type
     </sql>
 
+
+
+    <select id="queryPtResourcesByUser" resultMap="BaseResultMap" >
+       SELECT * FROM pt_resource WHERE resource_id IN ( SELECT resource_id FROM role_resource WHERE role_id IN ( SELECT role_id FROM pt_user_role WHERE user_id = '#userId' ) )
+    </select>
+
+
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.PtResourceExample" >
         select
         <if test="distinct" >

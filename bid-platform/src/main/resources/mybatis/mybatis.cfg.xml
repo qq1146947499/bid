@@ -2,12 +2,19 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  
-<configuration>
 
-  <settings>
-   <setting name="cacheEnabled" value="true"/><!-- 二级缓存开启 -->
-  </settings>
+<configuration>
+    <settings>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <setting name="cacheEnabled" value="true"/><!-- 二级缓存开启 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+
 
 </configuration>
+
+
+
 

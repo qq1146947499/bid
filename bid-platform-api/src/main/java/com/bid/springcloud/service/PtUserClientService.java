@@ -8,10 +8,11 @@ import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.entities.PtUserRole;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 
-
+@Component
 @FeignClient(value = "MICROSERVICECLOUD-DEPT")
 public  interface PtUserClientService {
 
@@ -20,14 +21,12 @@ public  interface PtUserClientService {
     PtUser query1(@PathVariable("id") Integer id);
 
 
-
-
     /**
      * 分页查询所有
      * @return
      */
     @GetMapping("/queryAll/{page}/{row}")
-    ResponseBase queryAll(@PathVariable Integer page, @PathVariable Integer row);
+    ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "row") Integer row);
 
 
 
@@ -78,7 +77,7 @@ public  interface PtUserClientService {
      */
 
     @GetMapping("/deleteUserById/{userId}")
-    ResponseBase deleteUserById(@PathVariable Integer userId);
+    ResponseBase deleteUserById(@PathVariable(value = "id") Integer userId);
 
 
     /**
@@ -109,8 +108,7 @@ public  interface PtUserClientService {
      */
 
     @GetMapping("/queryRoleidsByUserid/{id}")
-    ResponseBase queryRoleidsByUserid(@PathVariable Integer id);
-
+    ResponseBase queryRoleidsByUserid(@PathVariable(value = "id") Integer id);
 
 }
 

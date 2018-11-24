@@ -26,7 +26,7 @@ public interface PtRoleClientService {
      * @return
      */
     @PostMapping("/updateRoleResource")
-    ResponseBase updateRoleResource(@RequestParam("roleIdX") Integer roleIdX,@ModelAttribute RoleResource roleResource);
+    ResponseBase updateRoleResource(@RequestParam("roleIdX") Integer roleIdX, @ModelAttribute RoleResource roleResource);
 
     /**
      * 插入角色
@@ -42,7 +42,7 @@ public interface PtRoleClientService {
      * @return
      */
     @GetMapping("/queryRole/{roleId}")
-    ResponseBase queryRole(@PathVariable Integer roleId);
+    ResponseBase queryRole(@PathVariable(value = "roleId") Integer roleId);
 
     /**
      * 删除角色
@@ -50,5 +50,5 @@ public interface PtRoleClientService {
      * @return
      */
     @GetMapping("/deleRole/{roleId}")
-    ResponseBase deleRole(@PathVariable Integer roleId);
+    ResponseBase deleRole(@PathVariable(value = "roleId") Integer roleId);
 }
