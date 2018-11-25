@@ -49,15 +49,17 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
 
 
     @Override
-    public ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "row") Integer row) {
-        PageHelper.startPage(page, row);
+    public ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "rows") Integer rows) {
+        PageHelper.startPage(page, rows);
+//        userPage.setDatas(users);
+//        userPage.setTotalno(totalno);
+//        userPage.setTotalsize(totalsize);
+//        userPage.setPageno(pageno);
         List<PtUser> list = ptUserMapper.selectByExample(new PtUserExample());
         PageInfo<PtUser> pageInfo = new PageInfo<>(list);
-        EasyUIDataGrid easyUIDataGrid = new EasyUIDataGrid();
-        easyUIDataGrid.setRows(pageInfo.getList());
-        easyUIDataGrid.setTotal(pageInfo.getTotal());
-        if (easyUIDataGrid != null) {
-            return setResultSuccess(easyUIDataGrid);
+
+        if (pageInfo != null) {
+            return setResultSuccess(pageInfo);
         }
 
         return setResultError("查询失败");
@@ -65,10 +67,10 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
 
 
     @Override
-    public ResponseBase query4Login(@ModelAttribute PtUser ptUser) {
+    public ResponseBase query4Login(@RequestBody PtUser ptUser) {
         System.out.println(ptUser);
         PtUserExample ptUserExample = new PtUserExample();
-        ptUserExample.createCriteria().andUserIdEqualTo(ptUser.getUserId()).andUserNameEqualTo(ptUser.getUserName())
+        ptUserExample.createCriteria().andUserNameEqualTo(ptUser.getUserName())
                 .andUserPassEqualTo(ptUser.getUserPass());
         List<PtUser> ptUsers = ptUserMapper.selectByExample(ptUserExample);
         if (isNotNull(ptUsers)) {

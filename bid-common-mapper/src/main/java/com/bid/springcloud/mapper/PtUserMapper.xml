@@ -112,7 +112,7 @@
     </select>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-        select 
+        select
         <include refid="Base_Column_List" />
         from pt_user
         where user_id = #{userId,jdbcType=INTEGER}
@@ -394,29 +394,29 @@
     <update id="updateByExample" parameterType="map" >
         update pt_user
         set user_id = #{record.userId,jdbcType=INTEGER},
-            user_name = #{record.userName,jdbcType=VARCHAR},
-            real_name = #{record.realName,jdbcType=VARCHAR},
-            user_pass = #{record.userPass,jdbcType=VARCHAR},
-            user_type = #{record.userType,jdbcType=LONGVARCHAR},
-            is_super = #{record.isSuper,jdbcType=VARCHAR},
-            user_status = #{record.userStatus,jdbcType=VARCHAR},
-            person_phone = #{record.personPhone,jdbcType=LONGVARCHAR},
-            college_id = #{record.collegeId,jdbcType=INTEGER},
-            college_name = #{record.collegeName,jdbcType=VARCHAR},
-            company_id = #{record.companyId,jdbcType=VARCHAR},
-            company_name = #{record.companyName,jdbcType=VARCHAR},
-            co_department_id = #{record.coDepartmentId,jdbcType=VARCHAR},
-            department_name = #{record.departmentName,jdbcType=VARCHAR},
-            compus_id = #{record.compusId,jdbcType=INTEGER},
-            compus_name = #{record.compusName,jdbcType=VARCHAR},
-            institue_id = #{record.institueId,jdbcType=INTEGER},
-            institue_name = #{record.institueName,jdbcType=VARCHAR},
-            apply_priv = #{record.applyPriv,jdbcType=VARCHAR},
-            apply_oneself = #{record.applyOneself,jdbcType=VARCHAR},
-            email = #{record.email,jdbcType=VARCHAR},
-            audit_userid = #{record.auditUserid,jdbcType=INTEGER},
-            audit_username = #{record.auditUsername,jdbcType=VARCHAR},
-            auditor_time = #{record.auditorTime,jdbcType=TIMESTAMP}
+        user_name = #{record.userName,jdbcType=VARCHAR},
+        real_name = #{record.realName,jdbcType=VARCHAR},
+        user_pass = #{record.userPass,jdbcType=VARCHAR},
+        user_type = #{record.userType,jdbcType=LONGVARCHAR},
+        is_super = #{record.isSuper,jdbcType=VARCHAR},
+        user_status = #{record.userStatus,jdbcType=VARCHAR},
+        person_phone = #{record.personPhone,jdbcType=LONGVARCHAR},
+        college_id = #{record.collegeId,jdbcType=INTEGER},
+        college_name = #{record.collegeName,jdbcType=VARCHAR},
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+        co_department_id = #{record.coDepartmentId,jdbcType=VARCHAR},
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+        compus_id = #{record.compusId,jdbcType=INTEGER},
+        compus_name = #{record.compusName,jdbcType=VARCHAR},
+        institue_id = #{record.institueId,jdbcType=INTEGER},
+        institue_name = #{record.institueName,jdbcType=VARCHAR},
+        apply_priv = #{record.applyPriv,jdbcType=VARCHAR},
+        apply_oneself = #{record.applyOneself,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        audit_userid = #{record.auditUserid,jdbcType=INTEGER},
+        audit_username = #{record.auditUsername,jdbcType=VARCHAR},
+        auditor_time = #{record.auditorTime,jdbcType=TIMESTAMP}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>

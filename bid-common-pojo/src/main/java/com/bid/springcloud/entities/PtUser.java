@@ -1,5 +1,6 @@
 package com.bid.springcloud.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * 
  * @date 2018-11-15
  */
-public class PtUser {
+public class PtUser implements Serializable {
     private Integer userId;
 
     private String userName;

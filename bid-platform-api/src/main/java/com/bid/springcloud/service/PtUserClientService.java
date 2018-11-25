@@ -7,6 +7,7 @@ package com.bid.springcloud.service;/*
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.entities.PtUserRole;
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public  interface PtUserClientService {
      * 分页查询所有
      * @return
      */
-    @GetMapping("/queryAll/{page}/{row}")
-    ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "row") Integer row);
+    @GetMapping("/queryAll/{page}/{rows}")
+    ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "rows") Integer row);
 
 
 
@@ -36,8 +37,8 @@ public  interface PtUserClientService {
      * @return
      */
 
-    @PostMapping("/query4Login")
-    ResponseBase query4Login(@ModelAttribute PtUser ptUser);
+    @RequestMapping(value = "/dept/add")
+     ResponseBase query4Login(@RequestBody PtUser ptUser);
 
 
     /**

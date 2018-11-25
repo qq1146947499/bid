@@ -4,7 +4,6 @@ import com.bid.springcloud.entities.CoUser;
 import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.service.DeptClientService;
 import com.bid.springcloud.service.PtUserClientService;
-import com.bid.springcloud.utils.EasyUIDataGrid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

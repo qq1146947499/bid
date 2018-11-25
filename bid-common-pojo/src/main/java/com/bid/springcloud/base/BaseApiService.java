@@ -4,12 +4,13 @@ import com.bid.springcloud.constants.Constants;
 import com.google.common.collect.Maps;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 
 @Component
-public class BaseApiService {
+public class BaseApiService implements Serializable {
 
 	/**
 	 *
