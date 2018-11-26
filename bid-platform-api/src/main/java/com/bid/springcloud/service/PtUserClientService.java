@@ -48,7 +48,7 @@ public  interface PtUserClientService {
      */
 
     @PostMapping("/insertUser")
-    ResponseBase insertUser(@ModelAttribute  PtUser ptUser);
+    ResponseBase insertUser(@RequestBody  PtUser ptUser);
 
 
     /**
@@ -58,7 +58,7 @@ public  interface PtUserClientService {
      */
 
     @PostMapping("/updateUser")
-    ResponseBase updateUser(@ModelAttribute  PtUser ptUser);
+    ResponseBase updateUser(@RequestBody  PtUser ptUser);
 
 
 
@@ -77,8 +77,8 @@ public  interface PtUserClientService {
      * @return
      */
 
-    @GetMapping("/deleteUserById/{userId}")
-    ResponseBase deleteUserById(@PathVariable(value = "id") Integer userId);
+    @PostMapping("/deleteUserById/")
+    ResponseBase deleteUserById(@RequestParam(value = "userId") Integer userId);
 
 
     /**
@@ -88,7 +88,7 @@ public  interface PtUserClientService {
      */
 
     @PostMapping("/insertUserRoles")
-    ResponseBase insertUserRoles(@ModelAttribute PtUserRole ptUserRole);
+    ResponseBase insertUserRoles(@RequestBody PtUserRole ptUserRole);
 
 
     /**
@@ -98,7 +98,7 @@ public  interface PtUserClientService {
      */
 
     @DeleteMapping("/deleteUserRoles1")
-    ResponseBase deleteUserRoles(@ModelAttribute PtUserRole ptUserRole);
+    ResponseBase deleteUserRoles(@RequestBody PtUserRole ptUserRole);
 
 
 

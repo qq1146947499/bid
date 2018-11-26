@@ -4,23 +4,16 @@ package com.bid.springcloud.controller;/*
 
 */
 
-import com.alibaba.fastjson.JSON;
 import com.bid.springcloud.VO.ResultVO;
-import com.bid.springcloud.base.BaseApiService;
 import com.bid.springcloud.base.ResponseBase;
-import com.bid.springcloud.constants.Constants;
 import com.bid.springcloud.entities.PtUser;
-import com.bid.springcloud.service.PtResourceClientService;
 import com.bid.springcloud.service.PtUserClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Controller
@@ -31,6 +24,29 @@ public class PtUserController {
     private PtUserClientService ptUserClientService;
 
 
+    @RequestMapping("/pt/user/update")
+    @ResponseBody
+    public ResponseBase userDdit(PtUser ptUser){
+        ResponseBase responseBase = ptUserClientService.updateUser(ptUser);
+        return responseBase;
+    }
+
+    @RequestMapping("/pt/user/edit")
+    public  String toDdit(@RequestParam("id") Integer id,Model model){
+        PtUser ptUser = ptUserClientService.query1(id);
+        if (ptUser !=null){
+            model.addAttribute("user",ptUser);
+        }
+
+        return "user/edit";
+    }
+
+    @ResponseBody
+    @RequestMapping("/pt/user/delete")
+    public ResponseBase delPtuser(@RequestParam(value = "id") Integer userId){
+        ResponseBase responseBase = ptUserClientService.deleteUserById(userId);
+        return responseBase;
+    }
 
     @ResponseBody
     @RequestMapping("/pagequery")
@@ -50,6 +66,7 @@ public class PtUserController {
         model.addAttribute(responseBase);
         return  "/user/index";
     }
+    @ResponseBody
     @RequestMapping(value = "pt/login", method = RequestMethod.POST)
     public Object login(PtUser ptUser, Model model,HttpSession session){
         ResultVO<Object> objectResultVO = new ResultVO<>();

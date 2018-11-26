@@ -7,7 +7,6 @@ import com.bid.springcloud.mapper.CoUserMapper;
 import com.bid.springcloud.mapper.PtUserMapper;
 import com.bid.springcloud.mapper.PtUserRoleMapper;
 import com.bid.springcloud.service.PtUserClientService;
-import com.bid.springcloud.utils.EasyUIDataGrid;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -81,7 +80,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase insertUser(@ModelAttribute PtUser ptUser) {
+    public ResponseBase insertUser(@RequestBody PtUser ptUser) {
 
         int i = ptUserMapper.insertSelective(ptUser);
         if(i>0){
@@ -101,7 +100,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase deleteUserById(@PathVariable(value = "userId") Integer userId) {
+    public ResponseBase deleteUserById(@RequestParam(value = "userId") Integer userId) {
         int i = ptUserMapper.deleteByPrimaryKey(userId);
         if(i>0){
             return  setResultSuccess("删除用户成功");
@@ -110,7 +109,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase insertUserRoles(@ModelAttribute PtUserRole ptUserRole) {
+    public ResponseBase insertUserRoles(@RequestBody PtUserRole ptUserRole) {
 
         int i = ptUserRoleMapper.insertSelective(ptUserRole);
         if(i>0){
@@ -120,7 +119,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase deleteUserRoles(@ModelAttribute PtUserRole ptUserRole) {
+    public ResponseBase deleteUserRoles(@RequestBody PtUserRole ptUserRole) {
         PtUserRoleExample ptUserRoleExample = new PtUserRoleExample();
         ptUserRoleExample.createCriteria().andUserIdEqualTo(ptUserRole.getUserId())
                 .andRoleIdEqualTo(ptUserRole.getRoleId());
@@ -144,7 +143,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
 
-    public ResponseBase updateUser(@ModelAttribute PtUser ptUser) {
+    public ResponseBase updateUser(@RequestBody PtUser ptUser) {
         int i = ptUserMapper.updateByPrimaryKeySelective(ptUser);
         if(i>0){
             return  setResultSuccess("更新用户成功");
