@@ -169,28 +169,6 @@
 					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
 				  </td>
                 </tr>
-			  <script>
-                  var totalRecord,currentPage;
-                  //1、页面加载完成以后，直接去发送ajax请求,要到分页数据
-                  $(function () {
-					  //去首页
-					  to_page(1);
-                  })
-
-				  function to_page(page) {
-					  $.ajax({
-                          url:"user/list",
-                          data:"page="+page,
-                          type:"GET",
-						  success: function (result) {
-							  alert("sssssssss")
-                          }
-					  })
-                  }
-
-
-			  </script>
-
               </tbody>
 			  <tfoot>
 			     <tr >
@@ -216,11 +194,12 @@
       </div>
     </div>
 
-    <script src="jquery/jquery-2.1.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="script/docs.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js" th:src="@{/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script src="script/docs.min.js" th:src="@{script/docs.min.js}"></script>
         <script type="text/javascript">
             $(function () {
+                alert("sss")
 			    $(".list-group-item").click(function(){
 				    if ( $(this).find("ul") ) {
 						$(this).toggleClass("tree-closed");

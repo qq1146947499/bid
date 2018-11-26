@@ -19,17 +19,35 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.POST;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+
+@Controller
 public class PtUserController {
 
 
     @Resource
     private PtUserClientService ptUserClientService;
 
+
+
+    @ResponseBody
+    @RequestMapping("/pagequery")
+    public Object getEmpsWithJson(
+            @RequestParam(value = "page", defaultValue = "1") Integer page) {
+        ResponseBase responseBase = ptUserClientService.queryAll(page, 2);
+
+        return responseBase;
+    }
+
+
+
+    @RequestMapping("/user/list")
+    public String  getUserIndex(){
+
+        return  "/user/index";
+    }
     @RequestMapping(value = "pt/login", method = RequestMethod.POST)
     public Object login(PtUser ptUser, Model model,HttpSession session){
         ResultVO<Object> objectResultVO = new ResultVO<>();
