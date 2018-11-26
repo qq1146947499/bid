@@ -144,12 +144,12 @@
 <br>
  <hr style="clear:both;">
           <div class="table-responsive">
+			  <form id="userForm">
             <table class="table  table-bordered">
               <thead>
 			  <tr >
 				  <th width="30">#</th>
 				  <th width="30"><input type="checkbox"></th>
-				  <th>用戶id</th>
 				  <th>用戶名</th>
 				  <th>用戶類型</th>
 				  <th>用戶狀態</th>
@@ -160,15 +160,18 @@
 				<tbody id="userData">
 
 				</tbody>
-			  <tfoot>
-			  <tr >
-				  <td colspan="6" align="center">
-					  <ul class="pagination">
+				<tfoot>
+				<tr >
+					<td colspan="6" align="center">
+						<ul class="pagination" id="demo">
 
-					  </ul>
-				  </td>
-			  </tr>
+						</ul>
+					</td>
+				</tr>
+
+				</tfoot>
             </table>
+			  </form>
           </div>
 			  </div>
 			</div>
@@ -182,7 +185,7 @@
 	<script src="/layer/layer.js" th:src="@{/layer/layer.js}"></script>
         <script type="text/javascript">
             $(function () {
-                to_page(1);
+                to_page(2);
 			    $(".list-group-item").click(function(){
 				    if ( $(this).find("ul") ) {
 						$(this).toggleClass("tree-closed");
@@ -213,47 +216,65 @@
                     beforeSend : function(){
                         loadingIndex = layer.msg('处理中', {icon: 16});
                     },
-                    success:function(result){
+                    success:function(result) {
+                        if (result.rtnCode = 200) {
+                            var context = ""
+                            var pageContent = "";
+                            $("#emps_table tbody").empty();
+                            var users = result.data.list;
+                            $.each(users, function (i, users) {
+                                context += '<tr>';
+                                context += '  <td>' + (i + 1) + '</td>';
+                                context += '  <td><input type="checkbox" name="userid" value="' + users.userId + '"></td>';
+                                context += '  <td>' + users.userName + '</td>';
+                                context += '  <td>' + users.userType + '</td>';
+                                context += '  <td>' + users.userStatus + '</td>';
+                                context += '  <td>' + users.realName + '</td>';
+                                context += '  <td>'
+                                context += '      <button type="button" onclick="goAssignPage(' + users.userId + ')" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
+                                context += '      <button type="button" onclick="goUpdatePage(' + users.userId + ')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
+                                context += '	  <button type="button" onclick="deleteUser(' + users.userId + ', \'' + users.userName + '\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
+                                context += '  </td>';
+                                context += '</tr>';
 
-                        //console.log(result);
-                        //1、解析并显示员工数据
-                        build_emps_table(result);
-                        //2、解析并显示分页信息
-                        build_page_info(result);
-                        //3、解析显示分页条数据
-                        build_page_nav(result);
+                            });
+                            if ( page > 1 ) {
+                                pageContent += '<li><a href="#" onclick="to_page('+(page-1)+')">上一页</a></li>';
+                            }
+
+                            for ( var i = 1; i <= result.data.pages; i++ ) {
+                                if ( i == page ) {
+                                    pageContent += '<li class="active"><a  href="#">'+i+'</a></li>';
+                                } else {
+                                    pageContent += '<li ><a href="#" onclick="to_page('+i+')">'+i+'</a></li>';
+                                }
+                            }
+
+                            if ( page < result.data.pages ) {
+                                pageContent += '<li><a href="#" onclick="to_page('+(page+1)+')">下一页</a></li>';
+                            }
+
+                            $("#userData").html(context);
+                            $("#demo").html(pageContent);
+
+                        }
+                        esle
+                        {
+                            layer.msg("用户信息分页查询失败", {time: 2000, icon: 5, shift: 6}, function () {
+
+                            });
+
+                        }
+
+
+
                     }
 
 
                 });
             }
 
-            function build_emps_table(result){
-                //清空table表格
-				var context = ""
-                $("#emps_table tbody").empty();
-                var users = result.data.list;
-                $.each(users,function(i,users){
-                    context += '<tr>';
-                    context += '  <td>'+(i+1)+'</td>';
-                    context += '  <td><input type="checkbox" name="userid" value="'+users.userId+'"></td>';
-                    context += '  <td>'+users.userName+'</td>';
-                    context += '  <td>'+users.userType+'</td>';
-                    context += '  <td>'+users.userStatus+'</td>';
-                    context += '  <td>'+users.realName+'</td>';
-                    context += '  <td>';
-                    context += '      <button type="button" onclick="goAssignPage('+users.userId+')" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
-                    context += '      <button type="button" onclick="goUpdatePage('+users.userId+')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
-                    context += '	  <button type="button" onclick="deleteUser('+users.userId+', \''+users.userName+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
-                    context += '  </td>';
-                    context += '</tr>';
 
-                });
-
-
-
-                $("#userData").html(context);
-            }
 
 
 

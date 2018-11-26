@@ -56,7 +56,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
 //        userPage.setTotalsize(totalsize);
 //        userPage.setPageno(pageno);
         List<PtUser> list = ptUserMapper.selectByExample(new PtUserExample());
-        PageInfo<PtUser> pageInfo = new PageInfo<>(list);
+        PageInfo<PtUser> pageInfo = new PageInfo<>(list,4);
 
         if (pageInfo != null) {
             return setResultSuccess(pageInfo);

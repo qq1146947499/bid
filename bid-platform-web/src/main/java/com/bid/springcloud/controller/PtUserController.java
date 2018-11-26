@@ -34,9 +34,10 @@ public class PtUserController {
 
     @ResponseBody
     @RequestMapping("/pagequery")
-    public Object getEmpsWithJson(
-            @RequestParam(value = "page", defaultValue = "1") Integer page) {
+    public Object getEmpsWithJson(Model model,
+            @RequestParam(value = "page", defaultValue = "1") Integer page ) {
         ResponseBase responseBase = ptUserClientService.queryAll(page, 2);
+        model.addAttribute(responseBase);
 
         return responseBase;
     }
@@ -44,8 +45,9 @@ public class PtUserController {
 
 
     @RequestMapping("/user/list")
-    public String  getUserIndex(){
-
+    public String  getUserIndex(Model model){
+        ResponseBase responseBase = ptUserClientService.queryAll(1, 5);
+        model.addAttribute(responseBase);
         return  "/user/index";
     }
     @RequestMapping(value = "pt/login", method = RequestMethod.POST)
