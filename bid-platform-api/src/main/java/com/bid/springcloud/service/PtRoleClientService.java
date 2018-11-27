@@ -11,11 +11,16 @@ import com.bid.springcloud.entities.RoleResource;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.GET;
+
 
 @FeignClient(value = "MICROSERVICECLOUD-DEPT")
 public interface PtRoleClientService {
 
 
+
+    @RequestMapping("/queryAllRole")
+    ResponseBase queryAllRole();
 
     @PostMapping("/addRoleResource")
     ResponseBase addRoleResource(@ModelAttribute RoleResource roleResource);

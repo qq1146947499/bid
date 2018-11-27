@@ -35,9 +35,18 @@ public class PtRoleServiceImpl extends BaseApiService implements PtRoleClientSer
     public ResponseBase demo(Integer userId){
 
         //List<PtRole> ptRoles = roleResourceMapper.selRoleAll();
-        List<PtRole> ptRoles = ptRoleMapper.queryRoleByUId(userId);
+        List<Integer> ptRoles = ptRoleMapper.queryRoleByUId(userId);
 
         return setResultSuccess(ptRoles);
+    }
+
+    @Override
+    public ResponseBase queryAllRole() {
+        List<PtRole> ptRoles = ptRoleMapper.queryAll();
+        if (isNotNull(ptRoles)){
+            return  setResultSuccess(ptRoles);
+        }
+        return setResultError("用户查询失败");
     }
 
     @Override

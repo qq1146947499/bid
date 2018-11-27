@@ -1,9 +1,11 @@
 package com.bid.springcloud.mapper;
 
+import com.bid.springcloud.entities.PtRole;
 import com.bid.springcloud.entities.RoleResource;
 import com.bid.springcloud.entities.RoleResourceExample;
 import com.bid.springcloud.entities.RoleResourceKey;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -31,4 +33,9 @@ public interface RoleResourceMapper {
     int updateByPrimaryKeySelective(RoleResource record);
 
     int updateByPrimaryKey(RoleResource record);
+
+    @Select("SELECT * from pt_role")
+    List<PtRole> selRoleAll();
+
+    List<PtRole> queryRoleByUId();
 }

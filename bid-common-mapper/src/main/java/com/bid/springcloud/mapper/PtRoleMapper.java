@@ -3,6 +3,7 @@ package com.bid.springcloud.mapper;
 import com.bid.springcloud.entities.PtRole;
 import com.bid.springcloud.entities.PtRoleExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -28,4 +29,13 @@ public interface PtRoleMapper {
     int updateByPrimaryKeySelective(PtRole record);
 
     int updateByPrimaryKey(PtRole record);
+
+    @Select("SELECT role_id from pt_user_role WHERE user_id =#{userId}")
+    List<Integer>  queryRoleByUId(@Param("userId") Integer userId);
+
+    @Select("select * from pt_role")
+    List<PtRole> queryAll();
+
+
+    List<Integer> notUserRole(@Param("userId") Integer userId);
 }

@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -139,7 +140,10 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
 
     @Override
     public ResponseBase queryRoleidsByUserid(@PathVariable(value = "id") Integer id) {
-
+        List<Integer> UserRoles = ptRoleMapper.queryRoleByUId(id);
+        if(isNotNull(UserRoles)){
+            return  setResultSuccess(UserRoles);
+        }
         return setResultError("没找到用户角色");
     }
 

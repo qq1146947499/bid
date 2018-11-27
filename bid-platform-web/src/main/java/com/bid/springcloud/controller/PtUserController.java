@@ -4,17 +4,21 @@ package com.bid.springcloud.controller;/*
 
 */
 
+import com.alibaba.fastjson.JSONObject;
 import com.bid.springcloud.VO.ResultVO;
 import com.bid.springcloud.base.ResponseBase;
+import com.bid.springcloud.entities.PtRole;
 import com.bid.springcloud.entities.PtUser;
+import com.bid.springcloud.service.PtRoleClientService;
 import com.bid.springcloud.service.PtUserClientService;
+import com.bid.springcloud.utils.JsonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.*;
 
 
 @Controller
@@ -24,13 +28,41 @@ public class PtUserController {
     @Resource
     private PtUserClientService ptUserClientService;
 
+    @Resource
+    private PtRoleClientService ptRoleClientService;
+
     @RequestMapping("/pt/user/assign")
     public  String ptuserAssign(@RequestParam("id") Integer id,Model model) {
-        ResponseBase responseBase = ptUserClientService.queryRoleidsByUserid(id);
-        if (responseBase != null) {
-            model.addAttribute("user", responseBase);
+        List<PtRole> assingedRoles = new ArrayList<>();
+        List<PtRole> unassignRoles = new ArrayList<>();
+        ResponseBase role = ptRoleClientService.queryAllRole();
+        ResponseBase userRoleId = ptUserClientService.queryRoleidsByUserid(id);
+        List<PtRole> roleList = (List<PtRole>) role.getData();
+        System.out.println(roleList);
+        List<Integer> userRoleIdData = (List<Integer>) userRoleId.getData();
+        List<PtRole> tmp = new ArrayList<>();
+        for (int i =0;i<roleList.size();i++ ){
+            String s = JsonUtils.objectToJson(roleList.get(i));
+            PtRole ptRole1 = JsonUtils.jsonToPojo(s, PtRole.class);
+            tmp.add(ptRole1);
         }
-        return "/user/assign";
+
+        for (PtRole ptRole:tmp ){
+            if (userRoleIdData.contains(ptRole.getRoleId())){
+                assingedRoles.add(ptRole);
+            }else {
+                unassignRoles.add(ptRole);
+            }
+
+
+        }
+
+
+
+        model.addAttribute("role", unassignRoles);
+            model.addAttribute("userRole", assingedRoles);
+            model.addAttribute("userId",id);
+            return "/user/assign";
     }
 
 
