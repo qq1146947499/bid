@@ -4,12 +4,15 @@ import com.bid.springcloud.base.BaseApiService;
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.*;
 import com.bid.springcloud.mapper.CoUserMapper;
+import com.bid.springcloud.mapper.PtRoleMapper;
 import com.bid.springcloud.mapper.PtUserMapper;
 import com.bid.springcloud.mapper.PtUserRoleMapper;
 import com.bid.springcloud.service.PtUserClientService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.github.pagehelper.PageHelper;
@@ -26,6 +29,10 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
 
     @Resource
     private PtUserRoleMapper ptUserRoleMapper;
+
+
+    @Resource
+    private PtRoleMapper ptRoleMapper;
 
     public CoUser get(@PathVariable(value = "id") Integer id) {
         System.out.println("coUserService");
@@ -133,12 +140,6 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     @Override
     public ResponseBase queryRoleidsByUserid(@PathVariable(value = "id") Integer id) {
 
-        PtUserRoleExample ptUserRoleExample = new PtUserRoleExample();
-        ptUserRoleExample.createCriteria().andUserIdEqualTo(id);
-        List<PtUserRole> ptUserRoles = ptUserRoleMapper.selectByExample(ptUserRoleExample);
-        if (isNotNull(ptUserRoles)){
-            return setResultSuccess(ptUserRoles);
-        }
         return setResultError("没找到用户角色");
     }
 

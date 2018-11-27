@@ -31,6 +31,15 @@ public class PtRoleServiceImpl extends BaseApiService implements PtRoleClientSer
     @Resource
     private RoleResourceMapper roleResourceMapper;
 
+
+    public ResponseBase demo(Integer userId){
+
+        //List<PtRole> ptRoles = roleResourceMapper.selRoleAll();
+        List<PtRole> ptRoles = ptRoleMapper.queryRoleByUId(userId);
+
+        return setResultSuccess(ptRoles);
+    }
+
     @Override
     public ResponseBase addRoleResource(@ModelAttribute RoleResource roleResource) {
         int i = roleResourceMapper.insertSelective(roleResource);

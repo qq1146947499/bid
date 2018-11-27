@@ -11,6 +11,7 @@ import com.bid.springcloud.service.PtUserClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -23,11 +24,28 @@ public class PtUserController {
     @Resource
     private PtUserClientService ptUserClientService;
 
+    @RequestMapping("/pt/user/assign")
+    public  String ptuserAssign(@RequestParam("id") Integer id,Model model) {
+        ResponseBase responseBase = ptUserClientService.queryRoleidsByUserid(id);
+        if (responseBase != null) {
+            model.addAttribute("user", responseBase);
+        }
+        return "/user/assign";
+    }
+
+
+
 
     @RequestMapping("/pt/user/update")
     @ResponseBody
     public ResponseBase userDdit(PtUser ptUser){
         ResponseBase responseBase = ptUserClientService.updateUser(ptUser);
+        return responseBase;
+    }
+    @RequestMapping("/pt/user/insert")
+    @ResponseBody
+    public ResponseBase userAdd(PtUser ptUser){
+        ResponseBase responseBase = ptUserClientService.insertUser(ptUser);
         return responseBase;
     }
 
