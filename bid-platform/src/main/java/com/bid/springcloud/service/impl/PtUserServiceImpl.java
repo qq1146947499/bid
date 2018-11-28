@@ -54,6 +54,15 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
         return ptUserMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public ResponseBase deleteUserRoles(@RequestBody Map<String, Object> map) {
+        int i = ptUserRoleMapper.deleteUserRoles(map);
+        if(i>0){
+            return  setResultSuccess("删除角色成功");
+        }
+        return setResultSuccess("删除角色失败");
+    }
+
 
     @Override
     public ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "rows") Integer rows) {
@@ -117,7 +126,18 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase insertUserRoles(@RequestBody PtUserRole ptUserRole) {
+    public ResponseBase insertUserRoles( Map<String, Object> map) {
+
+      int i =   ptUserRoleMapper.insertUserRoles(map);
+      if (i>0){
+          return setResultSuccess("插入角色成功");
+      }
+
+        return setResultError("插入角色失败");
+    }
+
+    @Override
+    public ResponseBase insertUserRole(@RequestBody PtUserRole ptUserRole) {
 
         int i = ptUserRoleMapper.insertSelective(ptUserRole);
         if(i>0){
@@ -126,8 +146,9 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
         return setResultError("增加角色失败");
     }
 
+
     @Override
-    public ResponseBase deleteUserRoles(@RequestBody PtUserRole ptUserRole) {
+    public ResponseBase deleteUserRole(@RequestBody PtUserRole ptUserRole) {
         PtUserRoleExample ptUserRoleExample = new PtUserRoleExample();
         ptUserRoleExample.createCriteria().andUserIdEqualTo(ptUserRole.getUserId())
                 .andRoleIdEqualTo(ptUserRole.getRoleId());

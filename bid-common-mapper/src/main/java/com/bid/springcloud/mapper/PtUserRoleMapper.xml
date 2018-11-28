@@ -114,6 +114,23 @@
         values (#{roleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userSourceType,jdbcType=VARCHAR}
             )
     </insert>
+    <!--删除用户角色-->
+
+    <delete id="deleteUserRoles">
+        delete from pt_user_role   where  user_id = #{userId} AND  role_id in
+        <foreach collection="roleids" item="roleId" open="(" close=")" separator=",">
+            #{roleId}
+        </foreach>
+    </delete>
+
+
+    <!--插入用户角色-->
+    <insert id="insertUserRoles">
+        INSERT INTO pt_user_role(user_id,role_id) VALUE
+        <foreach collection="roleids" item="roleId" separator=",">
+            ( #{userId}, #{roleId} )
+        </foreach>
+    </insert>
 
     <insert id="insertSelective" parameterType="com.bid.springcloud.entities.PtUserRole" >
         insert into pt_user_role

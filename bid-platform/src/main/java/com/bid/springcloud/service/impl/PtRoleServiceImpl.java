@@ -3,21 +3,14 @@ package com.bid.springcloud.service.impl;
 import com.bid.springcloud.base.BaseApiService;
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtRole;
-import com.bid.springcloud.entities.PtRoleExample;
 import com.bid.springcloud.entities.RoleResource;
 import com.bid.springcloud.entities.RoleResourceExample;
 import com.bid.springcloud.mapper.PtRoleMapper;
 import com.bid.springcloud.mapper.RoleResourceMapper;
 import com.bid.springcloud.service.PtRoleClientService;
-import com.bid.springcloud.utils.EasyUIDataGrid;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

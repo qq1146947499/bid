@@ -12,6 +12,8 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 @Component
 @FeignClient(value = "MICROSERVICECLOUD-DEPT")
@@ -20,6 +22,29 @@ public  interface PtUserClientService {
 
     @GetMapping("/query1/{id}")
     PtUser query1(@PathVariable("id") Integer id);
+
+    @PostMapping("/delete/userRoles")
+    ResponseBase deleteUserRoles(@RequestBody Map<String,Object> map);
+
+
+    /**
+     * 增加用户角色
+     * @param
+     * @return
+     */
+
+    @PostMapping("/userRole")
+    ResponseBase insertUserRoles( Map<String,Object> map);
+
+
+
+    /**
+     * 单个角色
+     * @param ptUserRole
+     * @return
+     */
+    @PostMapping("/insertUserRole")
+    ResponseBase insertUserRole(@RequestBody PtUserRole ptUserRole);
 
 
     /**
@@ -81,14 +106,6 @@ public  interface PtUserClientService {
     ResponseBase deleteUserById(@RequestParam(value = "userId") Integer userId);
 
 
-    /**
-     * 增加用户角色
-     * @param
-     * @return
-     */
-
-    @PostMapping("/insertUserRoles")
-    ResponseBase insertUserRoles(@RequestBody PtUserRole ptUserRole);
 
 
     /**
@@ -98,7 +115,7 @@ public  interface PtUserClientService {
      */
 
     @DeleteMapping("/deleteUserRoles1")
-    ResponseBase deleteUserRoles(@RequestBody PtUserRole ptUserRole);
+    ResponseBase deleteUserRole(@RequestBody PtUserRole ptUserRole);
 
 
 

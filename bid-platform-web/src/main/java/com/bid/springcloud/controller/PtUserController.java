@@ -9,6 +9,8 @@ import com.bid.springcloud.VO.ResultVO;
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtRole;
 import com.bid.springcloud.entities.PtUser;
+import com.bid.springcloud.entities.PtUserRole;
+import com.bid.springcloud.entities.PtUserRoleKey;
 import com.bid.springcloud.service.PtRoleClientService;
 import com.bid.springcloud.service.PtUserClientService;
 import com.bid.springcloud.utils.JsonUtils;
@@ -30,6 +32,24 @@ public class PtUserController {
 
     @Resource
     private PtRoleClientService ptRoleClientService;
+
+    @RequestMapping("/pt/user/dounAssign")
+    public ResponseBase ptUserdounAssign( Integer userId, Integer[] assignroleids  ){
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("roleids",assignroleids);
+        ResponseBase base = ptUserClientService.deleteUserRoles(map);
+        return base;
+    }
+
+    @RequestMapping("/pt/user/doAssign")
+    public ResponseBase ptUserDoAssignAdd( Integer userId, Integer[] unassignroleids  ){
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("roleids",unassignroleids);
+        ResponseBase base = ptUserClientService.insertUserRoles(map);
+        return base;
+    }
 
     @RequestMapping("/pt/user/assign")
     public  String ptuserAssign(@RequestParam("id") Integer id,Model model) {

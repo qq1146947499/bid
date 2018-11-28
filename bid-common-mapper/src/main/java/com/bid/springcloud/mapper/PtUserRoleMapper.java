@@ -6,6 +6,7 @@ import com.bid.springcloud.entities.PtUserRoleKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PtUserRoleMapper {
     int countByExample(PtUserRoleExample example);
@@ -29,4 +30,8 @@ public interface PtUserRoleMapper {
     int updateByPrimaryKeySelective(PtUserRole record);
 
     int updateByPrimaryKey(PtUserRole record);
+
+    int insertUserRoles(Map<String, Object> map);
+
+    int deleteUserRoles(Map<String, Object> map);
 }
