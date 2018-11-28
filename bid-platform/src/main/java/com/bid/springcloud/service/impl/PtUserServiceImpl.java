@@ -11,8 +11,6 @@ import com.bid.springcloud.service.PtUserClientService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +20,7 @@ import com.github.pagehelper.PageInfo;
 @RestController
 public class PtUserServiceImpl extends BaseApiService implements PtUserClientService {
 
-    @Resource
-    private CoUserMapper coUserMapper;
+
 
     @Resource
     private PtUserMapper ptUserMapper;
@@ -35,19 +32,8 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     @Resource
     private PtRoleMapper ptRoleMapper;
 
-    public CoUser get(@PathVariable(value = "id") Integer id) {
-        System.out.println("coUserService");
-        CoUser coUser = coUserMapper.selectByPrimaryKey(id);
-        System.out.println(coUser.toString());
-        return coUser;
-    }
 
-    public PtUser get1(@PathVariable(value = "id") Integer id) {
-        System.out.println("coUserService");
-        PtUser coUser = ptUserMapper.selectByPrimaryKey(id);
-        System.out.println(coUser.toString());
-        return coUser;
-    }
+
 
     @Override
     public PtUser query1(@PathVariable("id") Integer id) {
@@ -67,10 +53,6 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     @Override
     public ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "rows") Integer rows) {
         PageHelper.startPage(page, rows);
-//        userPage.setDatas(users);
-//        userPage.setTotalno(totalno);
-//        userPage.setTotalsize(totalsize);
-//        userPage.setPageno(pageno);
         List<PtUser> list = ptUserMapper.selectByExample(new PtUserExample());
         PageInfo<PtUser> pageInfo = new PageInfo<>(list,4);
 
@@ -126,7 +108,7 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
     @Override
-    public ResponseBase insertUserRoles( Map<String, Object> map) {
+    public ResponseBase insertUserRoles( @RequestBody Map<String, Object> map) {
 
       int i =   ptUserRoleMapper.insertUserRoles(map);
       if (i>0){
@@ -146,18 +128,6 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
         return setResultError("增加角色失败");
     }
 
-
-    @Override
-    public ResponseBase deleteUserRole(@RequestBody PtUserRole ptUserRole) {
-        PtUserRoleExample ptUserRoleExample = new PtUserRoleExample();
-        ptUserRoleExample.createCriteria().andUserIdEqualTo(ptUserRole.getUserId())
-                .andRoleIdEqualTo(ptUserRole.getRoleId());
-        int i = ptUserRoleMapper.deleteByExample(ptUserRoleExample);
-        if(i>0){
-            return  setResultSuccess("删除角色成功");
-        }
-        return setResultError("删除角色失败");
-    }
 
     @Override
     public ResponseBase queryRoleidsByUserid(@PathVariable(value = "id") Integer id) {

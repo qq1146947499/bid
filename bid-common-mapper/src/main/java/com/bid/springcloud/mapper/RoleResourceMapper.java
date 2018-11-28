@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RoleResourceMapper {
 
@@ -37,5 +38,8 @@ public interface RoleResourceMapper {
     @Select("SELECT * from pt_role")
     List<PtRole> selRoleAll();
 
-    List<PtRole> queryRoleByUId();
+
+    int deleteRoleResources(Map<String, Object> map);
+
+    int insertRoleResources(Map<String, Object> map);
 }

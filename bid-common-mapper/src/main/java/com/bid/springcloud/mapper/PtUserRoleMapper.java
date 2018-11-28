@@ -31,6 +31,10 @@ public interface PtUserRoleMapper {
 
     int updateByPrimaryKey(PtUserRole record);
 
+
+
+
+
     int insertUserRoles(Map<String, Object> map);
 
     int deleteUserRoles(Map<String, Object> map);

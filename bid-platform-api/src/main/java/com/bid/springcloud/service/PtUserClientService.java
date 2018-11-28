@@ -23,18 +23,24 @@ public  interface PtUserClientService {
     @GetMapping("/query1/{id}")
     PtUser query1(@PathVariable("id") Integer id);
 
+
+    /**
+     * 删除多个用户角色
+     * @param map
+     * @return
+     */
     @PostMapping("/delete/userRoles")
     ResponseBase deleteUserRoles(@RequestBody Map<String,Object> map);
 
 
     /**
-     * 增加用户角色
+     * 增加用户多个角色
      * @param
      * @return
      */
 
     @PostMapping("/userRole")
-    ResponseBase insertUserRoles( Map<String,Object> map);
+    ResponseBase insertUserRoles( @RequestBody Map<String,Object> map);
 
 
 
@@ -104,20 +110,6 @@ public  interface PtUserClientService {
 
     @PostMapping("/deleteUserById/")
     ResponseBase deleteUserById(@RequestParam(value = "userId") Integer userId);
-
-
-
-
-    /**
-     * 删除用户角色
-     * @param
-     * @return
-     */
-
-    @DeleteMapping("/deleteUserRoles1")
-    ResponseBase deleteUserRole(@RequestBody PtUserRole ptUserRole);
-
-
 
     /**
      * 查询用户角色

@@ -2,15 +2,16 @@ package com.bid.springcloud.service.impl;
 
 import com.bid.springcloud.base.BaseApiService;
 import com.bid.springcloud.base.ResponseBase;
-import com.bid.springcloud.entities.PtRole;
-import com.bid.springcloud.entities.RoleResource;
-import com.bid.springcloud.entities.RoleResourceExample;
+import com.bid.springcloud.entities.*;
 import com.bid.springcloud.mapper.PtRoleMapper;
 import com.bid.springcloud.mapper.RoleResourceMapper;
 import com.bid.springcloud.service.PtRoleClientService;
 
 import java.util.List;
+import java.util.Map;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,13 +26,6 @@ public class PtRoleServiceImpl extends BaseApiService implements PtRoleClientSer
     private RoleResourceMapper roleResourceMapper;
 
 
-    public ResponseBase demo(Integer userId){
-
-        //List<PtRole> ptRoles = roleResourceMapper.selRoleAll();
-        List<Integer> ptRoles = ptRoleMapper.queryRoleByUId(userId);
-
-        return setResultSuccess(ptRoles);
-    }
 
     @Override
     public ResponseBase queryAllRole() {
@@ -43,32 +37,43 @@ public class PtRoleServiceImpl extends BaseApiService implements PtRoleClientSer
     }
 
     @Override
-    public ResponseBase addRoleResource(@ModelAttribute RoleResource roleResource) {
-        int i = roleResourceMapper.insertSelective(roleResource);
-        if (i>0){
-            return  setResultSuccess("增加用户权限成功");
+    public ResponseBase deleteRoleResources(@RequestBody Map<String, Object> map) {
+
+        int i = roleResourceMapper.deleteRoleResources(map);
+        if(i>0){
+            return  setResultSuccess("删除权限成功");
         }
-
-        return setResultError("增加用户权限失败");
-    }
-
-    @Override
-    public ResponseBase updateRoleResource(@RequestParam("roleIdX") Integer roleIdX, @ModelAttribute RoleResource roleResource) {
-        RoleResourceExample roleResourceExample = new RoleResourceExample();
-        roleResourceExample.createCriteria()
-                .andRoleIdEqualTo(roleIdX);
-
-        int i = roleResourceMapper.updateByExampleSelective(roleResource,roleResourceExample);
-        if (i>0){
-            return  setResultSuccess("更新角色权限成功");
-        }
-
-        return setResultError("更新角色权限失败");
+        return setResultSuccess("删除权限失败");
 
     }
 
     @Override
-    public ResponseBase insertRole(@ModelAttribute PtRole ptRole) {
+    public ResponseBase insertRoleResources(@RequestBody Map<String, Object> map) {
+        int i =   roleResourceMapper.insertRoleResources(map);
+        if (i>0){
+            return setResultSuccess("插入权限成功");
+        }
+
+        return setResultError("插入权限失败");
+
+    }
+
+    @Override
+    public ResponseBase queryAll(@PathVariable(value = "page") Integer page, @PathVariable(value = "rows") Integer rows) {
+        PageHelper.startPage(page, rows);
+        List<PtRole> list = ptRoleMapper.selectByExample(new PtRoleExample());
+        PageInfo<PtRole> pageInfo = new PageInfo<>(list,4);
+
+        if (pageInfo != null) {
+            return setResultSuccess(pageInfo);
+        }
+        return setResultError("查询失败");
+
+    }
+
+
+    @Override
+    public ResponseBase insertRole(@RequestBody PtRole ptRole) {
         int i = ptRoleMapper.insertSelective(ptRole);
         if (i > 0) {
             return setResultSuccess("添加成功");

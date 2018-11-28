@@ -34,6 +34,7 @@ public class PtUserController {
     private PtRoleClientService ptRoleClientService;
 
     @RequestMapping("/pt/user/dounAssign")
+    @ResponseBody
     public ResponseBase ptUserdounAssign( Integer userId, Integer[] assignroleids  ){
         Map<String, Object> map = new HashMap<>();
         map.put("userId",userId);
@@ -43,7 +44,8 @@ public class PtUserController {
     }
 
     @RequestMapping("/pt/user/doAssign")
-    public ResponseBase ptUserDoAssignAdd( Integer userId, Integer[] unassignroleids  ){
+    @ResponseBody
+    public ResponseBase ptUserDoAssignAdd( @RequestParam("userId") Integer userId, @RequestParam("unassignroleids")Integer[] unassignroleids  ){
         Map<String, Object> map = new HashMap<>();
         map.put("userId",userId);
         map.put("roleids",unassignroleids);
@@ -76,10 +78,7 @@ public class PtUserController {
 
 
         }
-
-
-
-        model.addAttribute("role", unassignRoles);
+            model.addAttribute("role", unassignRoles);
             model.addAttribute("userRole", assingedRoles);
             model.addAttribute("userId",id);
             return "/user/assign";
@@ -124,7 +123,6 @@ public class PtUserController {
             @RequestParam(value = "page", defaultValue = "1") Integer page ) {
         ResponseBase responseBase = ptUserClientService.queryAll(page, 2);
         model.addAttribute(responseBase);
-
         return responseBase;
     }
 
@@ -132,8 +130,6 @@ public class PtUserController {
 
     @RequestMapping("/user/list")
     public String  getUserIndex(Model model){
-        ResponseBase responseBase = ptUserClientService.queryAll(1, 5);
-        model.addAttribute(responseBase);
         return  "/user/index";
     }
     @ResponseBody
