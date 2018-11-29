@@ -159,15 +159,6 @@ public class PtUserController {
     }
 
 
- /*   @RequestMapping(value = "/user/list/{page}/{rows}",method = RequestMethod.GET)
-    public String getUserList(@RequestParam(defaultValue = "1") Integer page,@RequestParam(defaultValue = "3") Integer row
-            ,Model model
-    )
-    {
-        ResponseBase responseBase = ptUserClientService.queryAll(page, row);
-        model.addAttribute()
-            return responseBase;
-    }*/
 
 
 

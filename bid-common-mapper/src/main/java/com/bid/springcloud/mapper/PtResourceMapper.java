@@ -19,6 +19,8 @@ public interface PtResourceMapper {
 
     int insertSelective(PtResource record);
 
+    int insertIcon(PtResource record);
+
     List<PtResource> selectByExample(PtResourceExample example);
 
     PtResource selectByPrimaryKey(Integer resourceId);
@@ -39,4 +41,7 @@ public interface PtResourceMapper {
 
 
     PtResource queryPtResourcesByUser(PtUser ptUser);
+
+    @Select("SELECT * FROM pt_resource")
+    List<PtResource> queryAll();
 }

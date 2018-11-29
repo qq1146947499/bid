@@ -1,5 +1,7 @@
 package com.bid.springcloud.entities;
 
+import lombok.Data;
+
 /**
  * ƽ̨
  * 
@@ -7,6 +9,7 @@ package com.bid.springcloud.entities;
  * 
  * @date 2018-11-15
  */
+@Data
 public class PtResource {
     private Integer resourceId;
 
@@ -18,10 +21,14 @@ public class PtResource {
 
     private String pResourceId;
 
-    /**
-     * C
-     */
     private String ptType;
+
+
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
 
     public Integer getResourceId() {
         return resourceId;

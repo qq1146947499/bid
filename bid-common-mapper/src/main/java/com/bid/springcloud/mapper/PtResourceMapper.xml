@@ -125,6 +125,17 @@
             )
     </insert>
 
+    <insert id="insertIcon" parameterType="com.bid.springcloud.entities.PtResource" >
+       insert into pt_resource ( resource_name, resource_path,
+         p_resource_id, pt_type,icon
+        )
+        values (#{resourceName}, #{resourcePath},
+         #{pResourceId}, #{ptType},#{icon}
+        )
+    </insert>
+
+
+
     <insert id="insertSelective" parameterType="com.bid.springcloud.entities.PtResource" >
         insert into pt_resource
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -145,6 +156,9 @@
             </if>
             <if test="ptType != null" >
                 pt_type,
+            </if>
+            <if test="icon != null" >
+                icon,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
