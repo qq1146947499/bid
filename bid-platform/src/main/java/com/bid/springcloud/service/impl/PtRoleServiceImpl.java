@@ -49,6 +49,7 @@ public class PtRoleServiceImpl extends BaseApiService implements PtRoleClientSer
 
     @Override
     public ResponseBase insertRoleResources(@RequestBody Map<String, Object> map) {
+        roleResourceMapper.deleteRoleResources(map);
         int i =   roleResourceMapper.insertRoleResources(map);
         if (i>0){
             return setResultSuccess("插入权限成功");

@@ -98,10 +98,7 @@
 
     <!--删除角色权限-->
     <delete id="deleteRoleResources">
-        delete from role_resource   where  role_id = #{roleId} AND  resource_id in
-        <foreach collection="resourceIds" item="resourceId" open="(" close=")" separator=",">
-            #{resourceId}
-        </foreach>
+        delete from role_resource   where  role_id = #{roleId}
     </delete>
     <!--插入角色权限-->
     <insert id="insertRoleResources">

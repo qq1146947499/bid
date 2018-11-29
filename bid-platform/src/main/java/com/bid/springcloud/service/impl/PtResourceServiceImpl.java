@@ -30,6 +30,7 @@ public class PtResourceServiceImpl extends BaseApiService implements PtResourceC
 
 
 
+
     @Override
     public ResponseBase queryAll() {
         List<PtResource> ptResources = ptResourceMapper.queryAll();
@@ -66,6 +67,17 @@ public class PtResourceServiceImpl extends BaseApiService implements PtResourceC
             return  setResultSuccess("更新成功");
         }
         return setResultError("更新失败");
+    }
+
+    @Override
+    public List<Integer> queryByRoleId(@RequestParam("roleId") Integer roleId) {
+
+        List<Integer> integers = ptResourceMapper.queryPtResourcesByRoleid(roleId);
+        if (isNotNull(integers)){
+            return integers;
+        }
+        integers.clear();
+        return integers;
     }
 
 

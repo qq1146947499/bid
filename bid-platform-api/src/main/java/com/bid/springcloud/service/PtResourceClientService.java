@@ -38,4 +38,6 @@ public interface PtResourceClientService {
     @PostMapping("/edit/resource")
     ResponseBase editResource(@RequestBody PtResource ptResource);
 
+    @PostMapping("/query/ByRoleId")
+    List<Integer> queryByRoleId(@RequestParam("roleId") Integer roleId);
 }
