@@ -65,17 +65,19 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
 
 
     @Override
-    public ResponseBase query4Login(@RequestBody PtUser ptUser) {
-        System.out.println(ptUser);
-        PtUserExample ptUserExample = new PtUserExample();
-        ptUserExample.createCriteria().andUserNameEqualTo(ptUser.getUserName())
-                .andUserPassEqualTo(ptUser.getUserPass());
-        List<PtUser> ptUsers = ptUserMapper.selectByExample(ptUserExample);
-        if (isNotNull(ptUsers)) {
-            return setResultSuccess(ptUsers.get(0));
+    public PtUser query4Login(@RequestBody PtUser ptUser) {
+        try {
+            PtUserExample ptUserExample = new PtUserExample();
+            ptUserExample.createCriteria().andUserNameEqualTo(ptUser.getUserName())
+                    .andUserPassEqualTo(ptUser.getUserPass());
+            List<PtUser> ptUsers = ptUserMapper.selectByExample(ptUserExample);
+            if (isNotNull(ptUsers)) {
+               return ptUsers.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return setResultError("查询失败");
-
+        return null;
     }
 
     @Override

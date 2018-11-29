@@ -8,7 +8,6 @@ import com.bid.springcloud.base.BaseApiService;
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.*;
 import com.bid.springcloud.mapper.PtResourceMapper;
-import com.bid.springcloud.mapper.RoleResourceMapper;
 import com.bid.springcloud.service.PtResourceClientService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,11 +24,21 @@ public class PtResourceServiceImpl extends BaseApiService implements PtResourceC
     @Resource
     private PtResourceMapper ptResourceMapper;
 
-    @Resource
-    private RoleResourceMapper roleResourceMapper;
 
 
+    @Override
+    public List<PtResource> queryResourceByUserId(@RequestBody PtUser ptUser) {
+        try {
+            List<PtResource> ptResources = ptResourceMapper.queryResourceByUserId(ptUser);
+            if (ptResources!=null){
+                return ptResources;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
 
+        }
+        return  null;
+    }
 
     @Override
     public ResponseBase queryAll() {

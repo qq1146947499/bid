@@ -22,6 +22,9 @@ public interface PtResourceClientService {
 
 
 
+    @RequestMapping("/query/Resource/ByUserId")
+    List<PtResource> queryResourceByUserId(@RequestBody PtUser ptUser);
+
     @RequestMapping("/queryAll/resource")
     ResponseBase queryAll();
 

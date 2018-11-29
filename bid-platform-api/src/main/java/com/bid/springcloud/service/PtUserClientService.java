@@ -69,7 +69,7 @@ public  interface PtUserClientService {
      */
 
     @RequestMapping(value = "/dept/add")
-     ResponseBase query4Login(@RequestBody PtUser ptUser);
+    PtUser query4Login(@RequestBody PtUser ptUser);
 
 
     /**

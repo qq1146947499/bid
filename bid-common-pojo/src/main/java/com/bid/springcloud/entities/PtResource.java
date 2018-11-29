@@ -2,6 +2,8 @@ package com.bid.springcloud.entities;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * ƽ̨
  * 
@@ -10,7 +12,7 @@ import lombok.Data;
  * @date 2018-11-15
  */
 @Data
-public class PtResource {
+public class PtResource implements Serializable {
     private Integer resourceId;
 
     private String resourceName;

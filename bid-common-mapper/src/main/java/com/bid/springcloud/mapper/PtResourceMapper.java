@@ -43,5 +43,5 @@ public interface PtResourceMapper {
     List<PtResource> queryAll();
 
 
-
+    List<PtResource> queryResourceByUserId(PtUser ptUser);
 }
