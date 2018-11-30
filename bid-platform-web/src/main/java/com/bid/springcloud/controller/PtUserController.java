@@ -12,7 +12,12 @@ import com.bid.springcloud.entities.*;
 import com.bid.springcloud.service.PtResourceClientService;
 import com.bid.springcloud.service.PtRoleClientService;
 import com.bid.springcloud.service.PtUserClientService;
+import com.bid.springcloud.shiro.PtRoleShiro;
+import com.bid.springcloud.shiro.PtUserShiro;
 import com.bid.springcloud.utils.JsonUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -35,6 +40,16 @@ public class PtUserController {
 
     @Resource
     private PtResourceClientService ptResourceClientService;
+
+
+
+    @RequestMapping(value = "/demo/finauser",method = RequestMethod.GET)
+    public PtUser demo(@RequestParam("userName") String userName)
+    {
+        return ptUserClientService.findByUsername(userName);
+    }
+
+
 
     @RequestMapping("/pt/user/dounAssign")
     @ResponseBody
@@ -137,24 +152,6 @@ public class PtUserController {
     }
 
 
- /*   @ResponseBody
-    @RequestMapping(value = "pt/login", method = RequestMethod.POST)
-    public Object login(PtUser ptUser, Model model,HttpSession session){
-        ResultVO<Object> objectResultVO = new ResultVO<>();
-        ResponseBase responseBase = ptUserClientService.query4Login(ptUser);
-        Integer rtnCode = responseBase.getRtnCode();
-        if(rtnCode==200){
-            //登陆成功，防止表单重复提交，可以重定向到主页
-            session.setAttribute("username",ptUser.getUserName());
-            objectResultVO.setCode(200);
-            return objectResultVO;
-        }else{
-            //登陆失败
-
-            return  "login";
-        }
-
-    }*/
 
     @RequestMapping(value = "/user/get/{id}",method = RequestMethod.GET)
     public PtUser get2(@PathVariable Integer id)
@@ -168,17 +165,15 @@ public class PtUserController {
     @ResponseBody
     @RequestMapping(value = "pt/login", method = RequestMethod.POST)
     public Object login(PtUser ptUser,HttpSession session){
-        ResultVO<Object> resultVO = new ResultVO<>();
 
-
-        PtUser ptUsers = ptUserClientService.query4Login(ptUser);
-
-            session.setAttribute("username",ptUser.getUserName());
+                ResultVO<Object> resultVO = new ResultVO<>();
+                 PtUser ptUsers = ptUserClientService.query4Login(ptUser);
 
             //获取用户权限信息
             List<PtResource> ptResources = ptResourceClientService.queryResourceByUserId(ptUsers);
             Map<Integer, Permission> permissionMap = new HashMap<Integer, Permission>();
             List<PtResource> tmp = new ArrayList<>();
+
 
             for (int i =0;i<ptResources.size();i++ ){
                 String s = JsonUtils.objectToJson(ptResources.get(i));
@@ -196,8 +191,6 @@ public class PtUserController {
                 permission.setIcon(ptResource.getIcon());
                 ps.add(permission);
             }
-
-
             Permission root=null;
             for (Permission p :ps){
                 permissionMap.put(p.getId(),p);
@@ -212,9 +205,20 @@ public class PtUserController {
                 }
             }
             session.setAttribute("root",root);
-             resultVO.setCode(200);
-        return  resultVO;
+
+
+        UsernamePasswordToken token = new UsernamePasswordToken(ptUser.getUserName(), ptUser.getUserPass());
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+            PtUserShiro ptUserShiro= (PtUserShiro) subject.getPrincipal();
+            session.setAttribute("ptUserShiro", ptUserShiro);
+            resultVO.setCode(200);
+            return  resultVO;
+        } catch (Exception e) {
+            return "login";
+        }
+
+
     }
-
-
 }

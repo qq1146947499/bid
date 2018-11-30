@@ -7,6 +7,7 @@ package com.bid.springcloud.service;/*
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.entities.PtUserRole;
+import com.bid.springcloud.shiro.PtUserShiro;
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -120,6 +121,12 @@ public  interface PtUserClientService {
     @GetMapping("/queryRoleidsByUserid/{id}")
     ResponseBase queryRoleidsByUserid(@PathVariable(value = "id") Integer id);
 
+    @PostMapping("/find/ByUsername")
+    PtUserShiro findByUsername(@RequestParam("userName") String userName);
+
+
+    @PostMapping("/query/ByUsernameLogin")
+    PtUserShiro findByUsernameLogin(@RequestParam("userName") String userName);
 }
 
 

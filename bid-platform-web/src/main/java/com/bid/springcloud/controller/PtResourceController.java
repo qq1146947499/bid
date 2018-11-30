@@ -33,6 +33,11 @@ public class PtResourceController extends BaseApiService {
 
 
 
+
+
+
+
+
     @ResponseBody
     @RequestMapping("/resource/role/list")
     public Object ptroleLstResourec(@RequestParam("roleId") Integer roleId){
@@ -207,6 +212,7 @@ public class PtResourceController extends BaseApiService {
         }
 
     }
+
 
 
 }

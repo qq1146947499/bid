@@ -8,6 +8,7 @@ import com.bid.springcloud.mapper.PtRoleMapper;
 import com.bid.springcloud.mapper.PtUserMapper;
 import com.bid.springcloud.mapper.PtUserRoleMapper;
 import com.bid.springcloud.service.PtUserClientService;
+import com.bid.springcloud.shiro.PtUserShiro;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -141,12 +142,28 @@ public class PtUserServiceImpl extends BaseApiService implements PtUserClientSer
     }
 
 
+
     public ResponseBase updateUser(@RequestBody PtUser ptUser) {
         int i = ptUserMapper.updateByPrimaryKeySelective(ptUser);
         if(i>0){
             return  setResultSuccess("更新用户成功");
         }
         return setResultError("更新用户失败");
+    }
+
+    @Override
+    public PtUserShiro findByUsername(@RequestParam("userName") String userName) {
+        PtUserShiro byUsername = ptUserMapper.findByUsername(userName);
+        if(byUsername!=null){
+            return  byUsername;
+        }
+        return null;
+    }
+
+    @Override
+    public PtUserShiro findByUsernameLogin(@RequestParam("userName") String userName) {
+        PtUserShiro byUsernameLogin = ptUserMapper.findByUsernameLogin(userName);
+        return byUsernameLogin;
     }
 
 }

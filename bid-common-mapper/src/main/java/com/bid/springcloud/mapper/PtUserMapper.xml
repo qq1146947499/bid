@@ -2,6 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bid.springcloud.mapper.PtUserMapper" >
 
+
+
+    <resultMap id="shiroMap" type="com.bid.springcloud.shiro.PtUserShiro" >
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="user_pass" property="userPass" jdbcType="VARCHAR" />
+        <result column="user_type" property="userType" jdbcType="LONGVARCHAR" />
+        <result column="is_super" property="isSuper" jdbcType="VARCHAR" />
+        <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
+        <result column="person_phone" property="personPhone" jdbcType="LONGVARCHAR" />
+        <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+        <result column="college_name" property="collegeName" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="co_department_id" property="coDepartmentId" jdbcType="VARCHAR" />
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+        <result column="compus_id" property="compusId" jdbcType="INTEGER" />
+        <result column="compus_name" property="compusName" jdbcType="VARCHAR" />
+        <result column="institue_id" property="institueId" jdbcType="INTEGER" />
+        <result column="institue_name" property="institueName" jdbcType="VARCHAR" />
+        <result column="apply_priv" property="applyPriv" jdbcType="VARCHAR" />
+        <result column="apply_oneself" property="applyOneself" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="audit_userid" property="auditUserid" jdbcType="INTEGER" />
+        <result column="audit_username" property="auditUsername" jdbcType="VARCHAR" />
+        <result column="auditor_time" property="auditorTime" jdbcType="TIMESTAMP" />
+        <collection property="ptRoleShiro" ofType="com.bid.springcloud.shiro.PtRoleShiro">
+            <id column="role_id" property="roleId" jdbcType="INTEGER" />
+            <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+            <result column="is_college_defsult" property="isCollegeDefsult" jdbcType="VARCHAR" />
+            <result column="is_first_audit" property="isFirstAudit" jdbcType="VARCHAR" />
+            <result column="is_second_audit" property="isSecondAudit" jdbcType="VARCHAR" />
+            <result column="is_company" property="isCompany" jdbcType="VARCHAR" />
+            <result column="pt_type" property="ptType" jdbcType="VARCHAR" />
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+            <result column="create_userid" property="createUserid" jdbcType="INTEGER" />
+            <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
+            <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
+            <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+            <collection property="ptResource" ofType="com.bid.springcloud.entities.PtResource">
+                <id column="resource_id" property="resourceId" jdbcType="INTEGER" />
+                <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+                <result column="resource_path" property="resourcePath" jdbcType="VARCHAR" />
+                <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
+                <result column="p_resource_id" property="pResourceId" jdbcType="VARCHAR" />
+                <result column="pt_type" property="ptType" jdbcType="VARCHAR" />
+            </collection>
+        </collection>
+    </resultMap>
+
     <resultMap id="BaseResultMap" type="com.bid.springcloud.entities.PtUser" >
         <id column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="user_name" property="userName" jdbcType="VARCHAR" />
@@ -110,6 +161,22 @@
             order by ${orderByClause}
         </if>
     </select>
+
+
+    <select id="findByUsername" resultMap="shiroMap" >
+
+SELECT
+	u.*, r.*,p.*
+FROM
+	pt_user u
+LEFT JOIN pt_user_role ur ON ur.user_id = u.user_id
+LEFT JOIN pt_role r on r.role_id = ur.role_id
+LEFT JOIN role_resource pr on pr.role_id = r.role_id
+LEFT JOIN pt_resource p on pr.resource_id = p.resource_id
+WHERE
+	u.user_name = #{userName}
+    </select>
+
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
