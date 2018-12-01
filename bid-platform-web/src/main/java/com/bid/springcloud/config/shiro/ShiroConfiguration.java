@@ -27,7 +27,7 @@ public class ShiroConfiguration {
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/role/index", "roles[二级管理员]");
+       /* filterChainDefinitionMap.put("/role/index", "roles[二级管理员]");*/
         filterChainDefinitionMap.put("/**", "anon");
 
 

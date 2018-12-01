@@ -1,3 +1,4 @@
+/*
 package com.bid.springcloud.config;
 
 import com.alibaba.druid.support.http.StatViewServlet;
@@ -66,3 +67,4 @@ public class DruidConfiguration {
         return bean;
     }
 }
+*/
