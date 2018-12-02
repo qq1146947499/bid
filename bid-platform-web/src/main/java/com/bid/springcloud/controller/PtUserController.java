@@ -4,7 +4,6 @@ package com.bid.springcloud.controller;/*
 
 */
 
-import com.alibaba.fastjson.JSONObject;
 import com.bid.springcloud.VO.Permission;
 import com.bid.springcloud.VO.ResultVO;
 import com.bid.springcloud.base.ResponseBase;
@@ -12,7 +11,6 @@ import com.bid.springcloud.entities.*;
 import com.bid.springcloud.service.PtResourceClientService;
 import com.bid.springcloud.service.PtRoleClientService;
 import com.bid.springcloud.service.PtUserClientService;
-import com.bid.springcloud.shiro.PtRoleShiro;
 import com.bid.springcloud.shiro.PtUserShiro;
 import com.bid.springcloud.utils.JsonUtils;
 import org.apache.shiro.SecurityUtils;
@@ -20,7 +18,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -152,11 +149,10 @@ public class PtUserController {
     }
 
 
-
     @RequestMapping(value = "/user/get/{id}",method = RequestMethod.GET)
     public PtUser get2(@PathVariable Integer id)
     {
-        System.out.println("sss");
+
         return ptUserClientService.query1(id);
     }
 
@@ -218,7 +214,5 @@ public class PtUserController {
         } catch (Exception e) {
             return "login";
         }
-
-
     }
 }

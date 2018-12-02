@@ -3,6 +3,7 @@ package com.bid.springcloud.mapper;
 import com.bid.springcloud.entities.CoUser;
 import com.bid.springcloud.entities.CoUserExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -28,4 +29,9 @@ public interface CoUserMapper {
     int updateByPrimaryKeySelective(CoUser record);
 
     int updateByPrimaryKey(CoUser record);
+
+    @Select("SELECT * from co_user WHERE create_username = #{createName}")
+    List<CoUser> selectByPtuserName(@Param("createName") String createName);
+
+    CoUser selectByCouser(CoUser coUser);
 }

@@ -22,7 +22,7 @@ public class LogAspectServiceApi {
 	private JSONObject jsonObject = new JSONObject();
 
 	// 申明一个切点 里面是 execution表达式
-	@Pointcut("execution(public * com.bid.springcloud.base.*.*(..))")
+	@Pointcut("execution(public * com.bid.springcloud.*.*(..))")
 	private void controllerAspect() {
 	}
 
@@ -56,4 +56,5 @@ public class LogAspectServiceApi {
 		}
 		log.info("--------------返回内容----------------");
 	}
+
 }

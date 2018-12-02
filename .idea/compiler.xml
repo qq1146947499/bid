@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="bid-colleage" />
         <module name="bid-colleage-api" />
+        <module name="bid-colleage-web" />
         <module name="bid-common-mapper" />
         <module name="bid-common-pojo" />
         <module name="bid-enterprise" />
@@ -23,6 +24,7 @@
       <module name="bid" target="1.8" />
       <module name="bid-colleage" target="1.8" />
       <module name="bid-colleage-api" target="1.8" />
+      <module name="bid-colleage-web" target="1.8" />
       <module name="bid-common-api" target="1.8" />
       <module name="bid-common-mapper" target="1.8" />
       <module name="bid-common-pojo" target="1.8" />

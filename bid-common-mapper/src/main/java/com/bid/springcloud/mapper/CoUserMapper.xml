@@ -113,6 +113,14 @@
         </if>
     </select>
 
+    <select id="selectByCouser" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from co_user
+        where user_account=#{userAccount} AND user_pass=#{userPass}
+    </select>
+
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select 
         <include refid="Base_Column_List" />

@@ -20,6 +20,7 @@
         <module>bid-common-mapper</module>
         <module>bid-common-pojo</module>
         <module>bid-platform-web</module>
+        <module>bid-colleage-web</module>
     </modules>
 
     <properties>

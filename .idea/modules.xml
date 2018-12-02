@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/bid.iml" filepath="$PROJECT_DIR$/bid.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-colleage/bid-colleage.iml" filepath="$PROJECT_DIR$/bid-colleage/bid-colleage.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-colleage-api/bid-colleage-api.iml" filepath="$PROJECT_DIR$/bid-colleage-api/bid-colleage-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-colleage-web/bid-colleage-web.iml" filepath="$PROJECT_DIR$/bid-colleage-web/bid-colleage-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-common-mapper/bid-common-mapper.iml" filepath="$PROJECT_DIR$/bid-common-mapper/bid-common-mapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-common-pojo/bid-common-pojo.iml" filepath="$PROJECT_DIR$/bid-common-pojo/bid-common-pojo.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-enterprise/bid-enterprise.iml" filepath="$PROJECT_DIR$/bid-enterprise/bid-enterprise.iml" />
