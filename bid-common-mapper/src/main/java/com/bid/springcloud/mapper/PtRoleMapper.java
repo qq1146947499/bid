@@ -38,4 +38,7 @@ public interface PtRoleMapper {
 
 
     List<Integer> notUserRole(@Param("userId") Integer userId);
+
+    List<PtRole> getRoleByUser(@Param("userId") Integer userId);
+
 }

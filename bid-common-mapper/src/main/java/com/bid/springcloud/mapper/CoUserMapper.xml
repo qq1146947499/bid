@@ -113,11 +113,17 @@
         </if>
     </select>
 
+
+
+
+
     <select id="selectByCouser" resultMap="BaseResultMap"  >
-        select
-        <include refid="Base_Column_List" />
-        from co_user
-        where user_account=#{userAccount} AND user_pass=#{userPass}
+       SELECT * from co_user WHERE user_account=#{userAccount}
+
+        <if test="userPass != null" >
+            AND user_pass=#{userPass}
+        </if>
+
     </select>
 
 

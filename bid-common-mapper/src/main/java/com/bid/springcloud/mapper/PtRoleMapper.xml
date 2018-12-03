@@ -97,6 +97,15 @@
         </if>
     </select>
 
+
+    <!--获取用户角色-->
+    <select id="getRoleByUser" resultMap="BaseResultMap">
+        select *
+        FROM pt_user_role ur
+        INNER JOIN pt_role r ON r.role_id = ur.role_id
+        WHERE ur.user_id =#{userId}
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select 
         <include refid="Base_Column_List" />

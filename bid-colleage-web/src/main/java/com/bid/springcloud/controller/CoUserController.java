@@ -4,6 +4,7 @@ package com.bid.springcloud.controller;/*
 
 */
 
+import com.bid.springcloud.VO.Permission;
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.CoUser;
 import com.bid.springcloud.entities.PtUser;
@@ -11,12 +12,16 @@ import com.bid.springcloud.enums.ResultEnum;
 import com.bid.springcloud.enums.UserType;
 import com.bid.springcloud.exception.SellException;
 import com.bid.springcloud.service.CouserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -43,7 +48,7 @@ public class CoUserController{
     @RequestMapping("/getUserList")
     @ResponseBody
     public Object getUserList(@RequestParam("userName") String userName){
-        ResponseBase base = couserServiceImpl.queryByPtuserName(userName);
+        ResponseBase base = couserServiceImpl.queryByuserName(userName);
         if(base!=null){
             return  base;
         }
@@ -52,21 +57,25 @@ public class CoUserController{
 
     @RequestMapping("/login")
     @ResponseBody
-    public Object login(CoUser coUser, HttpServletRequest request){
-        if(coUser.getUserType().equals(UserType.COLLEAGE.getCode())){
-            PtUser ptUser = new PtUser();
-            ptUser.setUserName(coUser.getUserAccount());
-            ptUser.setUserPass(coUser.getUserPass());
-            ResponseBase base = couserServiceImpl.queryByPtuser(ptUser);
-            request.getSession().setAttribute("userNmae",ptUser.getUserName());
-            return base;
+    public Object login(CoUser coUser, HttpSession session){
+
+
+        UsernamePasswordToken token = new UsernamePasswordToken(coUser.getUserAccount(), coUser.getUserPass());
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            CoUser base = couserServiceImpl.queryLoginByCouser(coUser);
+            Permission presource = couserServiceImpl.findPermsByUserId(base.getUserId());
+            subject.login(token);
+            CoUser user = (CoUser) subject.getPrincipal();
+            session.setAttribute("root",presource);
+            session.setAttribute("user", user);
+            return "main";
+        } catch (Exception e) {
+            throw new SellException(ResultEnum.PARAM_ERROR);
         }
-        if(coUser.getUserType().equals(UserType.COLLEAGESON.getCode())){
-            ResponseBase base = couserServiceImpl.updateCouserByUserId(coUser);
-            request.getSession().setAttribute("userNmae",coUser.getUserAccount());
-            return base;
-        }
-        throw new SellException(ResultEnum.PARAM_ERROR);
+
+
+
     }
 
     @RequestMapping("/delete/CoUserById")

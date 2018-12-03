@@ -2,6 +2,8 @@ package com.bid.springcloud.mapper;
 
 import com.bid.springcloud.entities.CoUser;
 import com.bid.springcloud.entities.CoUserExample;
+import com.bid.springcloud.entities.PtResource;
+import com.bid.springcloud.entities.PtRole;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -34,4 +36,9 @@ public interface CoUserMapper {
     List<CoUser> selectByPtuserName(@Param("createName") String createName);
 
     CoUser selectByCouser(CoUser coUser);
+
+
+    List<PtRole> getRoleByUser(@Param("userId") Integer userId);
+
+    List<PtResource> findPermsByRoleId(@Param("userId") Integer roleId);
 }

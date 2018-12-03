@@ -1,12 +1,10 @@
 package com.bid.springcloud.config.shiro;
 
 import com.bid.springcloud.entities.PtResource;
-import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.service.PtUserClientService;
 import com.bid.springcloud.shiro.PtRoleShiro;
 import com.bid.springcloud.shiro.PtUserShiro;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

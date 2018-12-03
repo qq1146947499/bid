@@ -33,15 +33,16 @@ public interface PtResourceMapper {
 
     int updateByPrimaryKey(PtResource record);
 
-    @Select("SELECT * FROM pt_resource WHERE p_resource_id = #{pResourceId}")
-    List<PtResource> queryChildPermissions(Integer pid);
-
     @Select("SELECT resource_id FROM role_resource WHERE role_id = #{roleId}")
     List<Integer> queryPtResourcesByRoleid(@Param("roleId") Integer roleId);
 
     @Select("SELECT * FROM pt_resource")
     List<PtResource> queryAll();
 
+    List<PtResource> queryResourceByUserIdCurrency(@Param("userId") Integer  userId);
+
 
     List<PtResource> queryResourceByUserId(PtUser ptUser);
+
+    List<PtResource> findPermsByRoleId(@Param("roleId") Integer roleId);
 }
