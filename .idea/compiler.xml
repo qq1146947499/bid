@@ -13,6 +13,7 @@
         <module name="bid-common-pojo" />
         <module name="bid-enterprise" />
         <module name="bid-enterprise-api" />
+        <module name="bid-enterprise-web" />
         <module name="bid-eureka" />
         <module name="bid-platform" />
         <module name="bid-platform-api" />
@@ -30,6 +31,7 @@
       <module name="bid-common-pojo" target="1.8" />
       <module name="bid-enterprise" target="1.8" />
       <module name="bid-enterprise-api" target="1.8" />
+      <module name="bid-enterprise-web" target="1.8" />
       <module name="bid-eureka" target="1.8" />
       <module name="bid-platform" target="1.8" />
       <module name="bid-platform-api" target="1.8" />

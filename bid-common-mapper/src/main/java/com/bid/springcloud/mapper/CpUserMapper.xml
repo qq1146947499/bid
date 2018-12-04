@@ -11,6 +11,8 @@
         <result column="status" property="status" jdbcType="VARCHAR" />
         <result column="is_dx_center" property="isDxCenter" jdbcType="VARCHAR" />
         <result column="is_dx_college" property="isDxCollege" jdbcType="VARCHAR" />
+        <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+        <result column="create_username" property="createUsername" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -73,6 +75,9 @@
         </where>
     </sql>
 
+
+
+
     <sql id="Base_Column_List" >
         user_id, company_id, user_pass, real_name, user_type, status, is_dx_center, is_dx_college
     </sql>
@@ -92,9 +97,21 @@
         </if>
     </select>
 
+
+
+
+    <select id="selectCpuser" resultMap="BaseResultMap">
+        select
+       *
+        from cp_user
+        where user_account = #{userAccount,jdbcType=INTEGER}
+        <if test="userPass != null">
+            AND user_pass=#{userPass}
+        </if>
+    </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select 
-        <include refid="Base_Column_List" />
+        *
         from cp_user
         where user_id = #{userId,jdbcType=INTEGER}
     </select>
@@ -119,6 +136,77 @@
             #{realName,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
             #{isDxCenter,jdbcType=VARCHAR}, #{isDxCollege,jdbcType=VARCHAR})
     </insert>
+
+
+
+    <insert id="insertSelectiveZ" parameterType="com.bid.springcloud.entities.CpUser" >
+        insert into cp_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="companyId != null" >
+                company_id,
+            </if>
+            <if test="userPass != null" >
+                user_pass,
+            </if>
+            <if test="realName != null" >
+                real_name,
+            </if>
+            <if test="userType != null" >
+                user_type,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="isDxCenter != null" >
+                is_dx_center,
+            </if>
+            <if test="isDxCollege != null" >
+                is_dx_college,
+            </if>
+            <if test="createUsername != null" >
+                create_username,
+            </if>
+            <if test="userAccount != null" >
+                user_account,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="userPass != null" >
+                #{userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null" >
+                #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCenter != null" >
+                #{isDxCenter,jdbcType=VARCHAR},
+            </if>
+            <if test="isDxCollege != null" >
+                #{isDxCollege,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null" >
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="userAccount != null" >
+                #{userAccount,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
 
     <insert id="insertSelective" parameterType="com.bid.springcloud.entities.CpUser" >
         insert into cp_user
@@ -234,6 +322,12 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.bid.springcloud.entities.CpUser" >
         update cp_user
         <set >
+            <if test="createUsername != null" >
+                create_username = #{createUsername,jdbcType=INTEGER},
+            </if>
+            <if test="userAccount != null" >
+                user_account = #{userAccount,jdbcType=INTEGER},
+            </if>
             <if test="companyId != null" >
                 company_id = #{companyId,jdbcType=INTEGER},
             </if>

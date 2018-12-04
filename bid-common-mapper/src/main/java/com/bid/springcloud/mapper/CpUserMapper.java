@@ -3,6 +3,7 @@ package com.bid.springcloud.mapper;
 import com.bid.springcloud.entities.CpUser;
 import com.bid.springcloud.entities.CpUserExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -28,4 +29,14 @@ public interface CpUserMapper {
     int updateByPrimaryKeySelective(CpUser record);
 
     int updateByPrimaryKey(CpUser record);
+
+
+
+
+    @Select("SELECT * from co_user WHERE create_username = #{createName}")
+    List<CpUser> selectByPtuserName(@Param("userName") String userName);
+
+    int insertSelectiveZ(CpUser cpUser);
+
+    CpUser selectCpuser(CpUser cpUser);
 }

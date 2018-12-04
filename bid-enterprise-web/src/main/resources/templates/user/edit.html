@@ -1,0 +1,150 @@
+﻿<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/font-awesome.min.css" th:href="@{/css/font-awesome.min.csss}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+    <script src="jquery/jquery-2.1.1.min.js" th:src="@{/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="script/docs.min.js" th:src="@{script/docs.min.js}"></script>
+    <script src="/layer/layer.js" th:src="@{/layer/layer.js}"></script>
+
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div th:replace="/common/managebar::container-fluid"></div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="/common/managebar::#sidebar"></div>
+        <input th:value="${user.userId}" hidden id="userId">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <ol class="breadcrumb">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">数据列表</a></li>
+                <li class="active">修改</li>
+            </ol>
+            <div class="panel panel-default">
+                <div class="panel-heading">表单数据
+                    <div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i
+                            class="glyphicon glyphicon-question-sign"></i></div>
+                </div>
+                <div class="panel-body">
+                    <form id="userForm" role="form">
+                        <div class="form-group">
+                            <label for="userAccount">登陆账号</label>
+                            <input type="text" class="form-control" id="userAccount"
+                                   th:value="${user.userAccount}" placeholder="请输入登陆账号">
+                        </div>
+                        <div class="form-group">
+                            <label for="realName">用户名称</label>
+                            <input type="text" class="form-control" id="realName"
+                                   th:value="${user.realName}" placeholder="请输入用户名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="userPass">密码</label>
+                            <input type="password" class="form-control" id="userPass"  th:value="${user.userPass}" placeholder="请输入密码">
+                        </div>
+                        <input th:value="${session.user.userAccount}" id="createUserName" hidden="hidden">
+                        <div class="form-group">
+                            <label for="status">用户状态</label>
+                            <select class="form-control" name="status" id="status">
+                                <option th:value="1">激活</option>
+                                <option th:value="0">不激活</option>
+                            </select>
+                        </div>
+                        <input hidden="hidden" th:value="${user.userId}" id="userId">
+
+                        <button id="updateBtn" type="button" class="btn btn-success"><i
+                                class="glyphicon glyphicon-pencil"></i> 确定
+                        </button>
+                        <button id="resetBtn" type="button" class="btn btn-danger"><i
+                                class="glyphicon glyphicon-refresh"></i> 重置
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/common/managebar::fade"></div>
+<script type="text/javascript">
+    $(function () {
+        $(".list-group-item").click(function () {
+            if ($(this).find("ul")) {
+                $(this).toggleClass("tree-closed");
+                if ($(this).hasClass("tree-closed")) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
+
+        $("#resetBtn").click(function () {
+            // Jquery[0] ==> DOM
+            // $(DOM) ==> Jquery
+            $("#userForm")[0].reset();
+        });
+
+        $("#updateBtn").click(function () {
+            var loginacct = $("#userAccount").val();
+            if (loginacct == "") {
+                layer.msg("登录账号不能为空，请输入", {time: 2000, icon: 5, shift: 6}, function () {
+
+                });
+                return;
+            }
+
+            var loadingIndex = null;
+            $.ajax({
+                type: "POST",
+                url: "/enterprise/user/update",
+                data: {
+                    "userId":$("#userId").val(),
+                    "userAccount": $("#userAccount").val(),
+                    "realName": $("#realName").val(),
+                    "userPass": $("#userPass").val(),
+                    "status": $("#status").val(),
+                    "userType": "EC",
+                    "createUsername":$("#createUserName").val()
+                },
+                beforeSend: function () {
+                    loadingIndex = layer.msg('处理中', {icon: 16});
+                },
+                success: function (result) {
+                    layer.close(loadingIndex);
+                    if (result.rtnCode == 200) {
+                        layer.msg("用户信息修改成功", {time: 1000, icon: 6}, function () {
+                            window.location.href = "/enterprise/get/userIndex";
+                        });
+                    } else {
+                        layer.msg("用户信息修改失败，请重新操作", {time: 2000, icon: 5, shift: 6}, function () {
+
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+<script>
+
+</script>
+</html>

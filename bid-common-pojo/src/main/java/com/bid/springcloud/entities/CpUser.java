@@ -8,6 +8,28 @@ package com.bid.springcloud.entities;
  * @date 2018-11-15
  */
 public class CpUser {
+
+    private  String createUsername;
+
+
+    private  String userAccount;
+
+    public String getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public String getCreateUsername() {
+        return createUsername;
+    }
+
+    public void setCreateUsername(String createUsername) {
+        this.createUsername = createUsername;
+    }
+
     private Integer userId;
 
     private Integer companyId;

@@ -21,6 +21,7 @@
         <module>bid-common-pojo</module>
         <module>bid-platform-web</module>
         <module>bid-colleage-web</module>
+        <module>bid-enterprise-web</module>
     </modules>
 
     <properties>

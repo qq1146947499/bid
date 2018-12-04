@@ -1,5 +1,6 @@
 package com.bid.springcloud.mapper;
 
+import com.bid.springcloud.entities.CpUser;
 import com.bid.springcloud.entities.PtResource;
 import com.bid.springcloud.entities.PtResourceExample;
 import com.bid.springcloud.entities.PtUser;
@@ -45,4 +46,7 @@ public interface PtResourceMapper {
     List<PtResource> queryResourceByUserId(PtUser ptUser);
 
     List<PtResource> findPermsByRoleId(@Param("roleId") Integer roleId);
+
+    @Select("SELECT * FROM cp_user WHERE create_username = #{userAccount}")
+    List<CpUser> selectByUserAccount(@Param("userAccount") String userAccount);
 }
