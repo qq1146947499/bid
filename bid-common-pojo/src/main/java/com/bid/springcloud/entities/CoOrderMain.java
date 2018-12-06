@@ -1,5 +1,8 @@
 package com.bid.springcloud.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -10,9 +13,15 @@ import java.util.Date;
  * @date 2018-11-15
  */
 public class CoOrderMain {
+
+
+
     private Integer orderMainId;
 
+
+
     private String orderCode;
+
 
     private String orderTitle;
 
@@ -29,6 +38,8 @@ public class CoOrderMain {
 
     private String isDeliver;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private String deliverTime;
 
     private String isTax;
@@ -41,6 +52,8 @@ public class CoOrderMain {
 
     private String budget;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private String adviceExpiredTime;
 
     /**
@@ -51,11 +64,13 @@ public class CoOrderMain {
     /**
      * 1
      */
+
     private String currentProcee;
 
     /**
      * 1
      */
+
     private String orderStatus;
 
     /**
@@ -73,9 +88,12 @@ public class CoOrderMain {
 
     private String orderPerson;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private String orderTime;
 
     private String personPhone;
+
 
     private String itemNum;
 
@@ -85,10 +103,15 @@ public class CoOrderMain {
 
     private String bidCount;
 
+
     private String orderProcess;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startBidtime;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date endBidtime;
 
     private String auditSuggestion;
@@ -97,8 +120,12 @@ public class CoOrderMain {
 
     private String auditUsername;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date auditTime;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastEndBidtime;
 
     private String isExtend;
@@ -109,6 +136,8 @@ public class CoOrderMain {
 
     private String extendUsername;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private String chooseTime;
 
     private String chooseOption;
@@ -122,6 +151,8 @@ public class CoOrderMain {
     /**
      * һ
      */
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date firstTime;
 
     /**
@@ -152,6 +183,8 @@ public class CoOrderMain {
 
     private String secondAuditUserName;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private String secondTime;
 
     private String bidAmount;
@@ -163,6 +196,8 @@ public class CoOrderMain {
      */
     private String isPublishBidresult;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date publishBidresultTime;
 
     private String publishBidresultUserid;
@@ -174,6 +209,8 @@ public class CoOrderMain {
      */
     private String bidFinished;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date stopBidTime;
 
     private String stopBidReason;
@@ -182,8 +219,11 @@ public class CoOrderMain {
 
     private String stopBidUsername;
 
+
     private String remark;
 
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String createUserid;
@@ -200,12 +240,14 @@ public class CoOrderMain {
      */
     private String isDxCollege;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastUpdateTime;
 
     private String lastUpdateUserid;
 
     private String lastUpdateUsername;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date reAuditTime;
 
     private String reAuditUserid;
@@ -230,6 +272,7 @@ public class CoOrderMain {
 
     private String agentRealName;
 
+
     private String payType;
 
     private String invoiceType;
@@ -239,6 +282,7 @@ public class CoOrderMain {
     private String transportType;
 
     private String installationgSite;
+
 
     private String packLevel;
 

@@ -7,9 +7,7 @@ package com.bid.springcloud.controller;/*
 import com.bid.springcloud.VO.Permission;
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.CoUser;
-import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.enums.ResultEnum;
-import com.bid.springcloud.enums.UserType;
 import com.bid.springcloud.exception.SellException;
 import com.bid.springcloud.service.CouserService;
 import org.apache.shiro.SecurityUtils;
@@ -20,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -30,7 +27,7 @@ public class CoUserController{
 
 
     @Resource
-    private  CouserService couserServiceImpl;
+    private CouserService couserServiceImpl;
 
 
 

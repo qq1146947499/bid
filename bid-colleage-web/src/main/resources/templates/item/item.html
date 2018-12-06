@@ -1,0 +1,291 @@
+<html lang="ch"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="${APP_PATH}/ztree/zTreeStyle.css" th:href="@{/ztree/zTreeStyle.css}">
+
+    <script src="jquery/jquery-2.1.1.min.js" th:src="@{/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="script/docs.min.js" th:src="@{/script/docs.min.js}"></script>
+    <script src="/layer/layer.js" th:src="@{/layer/layer.js}"></script>
+    <script src="${APP_PATH}/ztree/jquery.ztree.all-3.5.min.js" th:src="@{/ztree/jquery.ztree.all-3.5.min.js}"></script>
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor:pointer;
+        }
+        table tbody tr:nth-child(odd){background:#F4F4F4;}
+        table tbody td:nth-child(even){color:#C00;}
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div th:replace="/common/managebar::container-fluid"></div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="/common/managebar::#sidebar"></div>
+
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 新增采购需求</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="oneFrom">
+
+                        <!-以拥有处理流程--->
+                        <input name="orderProcess" hidden th:value="提交">
+                       <input name="currentProcee" hidden th:value="1">
+                        <input name="orderStatus" hidden th:value="1">
+
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="hongdian" class="col-sm-2 control-label">申购主题</label>
+                                <div class="col-sm-10">
+                                    <input  name="orderTitle" required="required" type="text" required /><span id="hongdian" style="color: red;">*</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>采购部门</label>
+                                <select name="departmentId">
+                                    <option th:value="C">一部门</option>
+                                    <option th:value="CZ">二部门</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>采购人</label>
+                                <input  name="orderPerson" required="required" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>联系电话</label>
+                                <input name="personPhone"  required="required" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>采购预算</label>
+                                <input name="orderTotalAmount" required="required" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>报价要求</label>
+                                <input type="radio" name="isTax"  value="Y"> 含税
+                                <input type="radio" name="isTax"  value="N"> 不含税
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label style="width: 80px;">送货时间</label>
+                                <input type="radio" id="" value="发布结果">
+                                发布结果后<input style="width: 30px;" name="bidCount">天内送货
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>送货方式</label>
+                                <input    type="radio" name="deliverType" id="" value="不限"> 不限
+                                <input    type="radio" name="deliverType" id="" value="送货上门"> 送货上门
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>安装要求</label>
+                                <input type="radio" name="packLevel" > 免费安装(不可用)
+                                <input type="radio" name="packLevel" > 免费安装(不含材料费)
+                                <input type="radio" name="packLevel" > 有偿提供安装
+                                <input type="radio" name="packLevel"> 无需安装
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>送货地址</label>
+                                <input type="text" name="installationgSite" required="required" />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>付款方式</label>
+                                <input type="text" name="payType" required="required" />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>竞价开始时间</label>
+                                <input name="startBidtime" type="date"/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>竞价结束时间</label>
+                                <input name="endBidtime" type="date"/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>售后服务</label>
+                                <input type="text" name="remark" required="required" />
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <form method="post" class="form-horizontal"id="twoFrom">
+                                <table class='table table-striped table-bordered table-hover'>
+                                    <thead>
+                                    <tr>
+                                        <th> 序号</th>
+                                        <th >采购项目名</th>
+                                        <th>数量</th>
+                                        <th>品牌</th>
+                                        <th>规格参数</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td> <input type="text" name="orderCode" required="required" /></td>
+                                        <td><input type="text" name="unit" required="required" /></td>
+                                        <td><input type="text" name="isStandard" required="required" /></td>
+                                        <td><input type="text" name="afterService" required="required" /></td>
+
+                                    </tr>
+
+                                    </thead>
+                                </table>
+
+                                <input type="button" hidden="hidden" id="twoFromBtn">
+                            </form>
+                            <button class="btn btn-default" id="btnSub">确定提交</button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+    $(function() {
+        $(".list-group-item").click(function() {
+            if ($(this).find("ul")) {
+                $(this).toggleClass("tree-closed");
+                if ($(this).hasClass("tree-closed")) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
+    });
+
+
+
+    $("#btnSub").click(function () {
+        alert("sss")
+        var form = $("form").serialize()
+       var coOrderDmand = decodeURIComponent(form,true);
+            alert(coOrderDmand)
+            $.ajax({
+                type : "POST",
+                url  : "/colleage/add/order",
+                data:coOrderDmand,
+
+                success : function(result) {
+                    layer.close(loadingIndex);
+                    if (result.rtnCode == 200) {
+                        layer.msg("用户信息保存成功", {time:1000, icon:6}, function(){
+                            window.location.href = "/colleage/get/userIndex";
+                        });
+                    } else {
+                        layer.msg("用户信息保存失败，请重新操作", {time:2000, icon:5, shift:6}, function(){
+
+                        });
+                    }
+                }
+            })
+
+
+    })
+
+    $("#insertBtn").click(function(){
+        var userAccount = $("#userAccount").val();
+        if ( userAccount == "" ) {
+            layer.msg("登录账号不能为空，请输入", {time:2000, icon:5, shift:6}, function(){
+
+            });
+            return;
+        }
+
+        var loadingIndex = null;
+        $.ajax({
+            type : "POST",
+            url  : "/colleage//add/couser",
+            data : {
+                "userAccount": $("#userAccount").val(),
+                "userId": $("#userId").val(),
+                "userName": $("#userName").val(),
+                "userPass": $("#userPass").val(),
+                "status": $("#status").val(),
+                "userType": "ZC",
+                "realName": $("#realName").val(),
+                "createUsername":$("#createUserName").val()
+
+            },
+            beforeSend : function() {
+                loadingIndex = layer.msg('处理中', {icon: 16});
+            },
+            success : function(result) {
+                layer.close(loadingIndex);
+                if (result.rtnCode == 200) {
+                    layer.msg("用户信息保存成功", {time:1000, icon:6}, function(){
+                        window.location.href = "/colleage/get/userIndex";
+                    });
+                } else {
+                    layer.msg("用户信息保存失败，请重新操作", {time:2000, icon:5, shift:6}, function(){
+
+                    });
+                }
+            }
+        });
+    });
+
+
+
+    $("tbody .btn-success").click(function() {
+        window.location.href = "assignPermission.html";
+    });
+
+
+
+</script>
+</body>
+</html>

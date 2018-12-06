@@ -8,7 +8,6 @@ import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.PtUser;
 import com.bid.springcloud.entities.PtUserRole;
 import com.bid.springcloud.shiro.PtUserShiro;
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
