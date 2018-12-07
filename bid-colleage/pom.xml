@@ -17,7 +17,7 @@
 
     <dependencies>
 
-
+<!--
         <dependency>
             <groupId>com.codingapi</groupId>
             <artifactId>transaction-springcloud</artifactId>
@@ -40,7 +40,7 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.bid</groupId>
