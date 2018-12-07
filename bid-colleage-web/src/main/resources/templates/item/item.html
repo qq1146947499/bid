@@ -78,7 +78,9 @@
                                 <input name="personPhone"  required="required" />
                             </div>
                         </div>
+                        <input hidden="hidden" th:value="${session.user.collegeId}">
                         <div class="row">
+                           <!-- <i class="glyphicon glyphicon-user" th:text="${session.user.userAccount}"></span>-->
                             <div class="col-md-6">
                                 <label>采购预算</label>
                                 <input name="orderTotalAmount" required="required" />
@@ -148,13 +150,13 @@
                                 <input type="text" name="remark" required="required" />
                             </div>
                         </div>
-                    </form>
+                  <!--  </form>-->
 
 
                     <div class="row">
 
                         <div class="col-md-12">
-                            <form method="post" class="form-horizontal"id="twoFrom">
+                        <!--    <form method="post" class="form-horizontal"id="twoFrom">-->
                                 <table class='table table-striped table-bordered table-hover'>
                                     <thead>
                                     <tr>
@@ -167,7 +169,7 @@
 
                                     <tr>
                                         <td>1</td>
-                                        <td> <input type="text" name="orderCode" required="required" /></td>
+                                        <td> <input type="text" name="orderCode" required="required"/></td>
                                         <td><input type="text" name="unit" required="required" /></td>
                                         <td><input type="text" name="isStandard" required="required" /></td>
                                         <td><input type="text" name="afterService" required="required" /></td>
@@ -178,12 +180,14 @@
                                 </table>
 
                                 <input type="button" hidden="hidden" id="twoFromBtn">
-                            </form>
+
                             <button class="btn btn-default" id="btnSub">确定提交</button>
 
                         </div>
 
                     </div>
+                    </form>
+
                 </div>
 
             </div>
@@ -210,23 +214,24 @@
 
 
     $("#btnSub").click(function () {
-        alert("sss")
+        var loadingIndex = null;
         var form = $("form").serialize()
        var coOrderDmand = decodeURIComponent(form,true);
-            alert(coOrderDmand)
             $.ajax({
                 type : "POST",
                 url  : "/colleage/add/order",
                 data:coOrderDmand,
 
                 success : function(result) {
-                    layer.close(loadingIndex);
-                    if (result.rtnCode == 200) {
-                        layer.msg("用户信息保存成功", {time:1000, icon:6}, function(){
+
+
+                    if (result.rtnCode==200) {
+                        layer.close(loadingIndex);
+                        layer.msg("添加订单成功", {time:2000, icon:6}, function(){
                             window.location.href = "/colleage/get/userIndex";
                         });
                     } else {
-                        layer.msg("用户信息保存失败，请重新操作", {time:2000, icon:5, shift:6}, function(){
+                        layer.msg("添加订单失败，请重新操作", {time:2000, icon:5, shift:6}, function(){
 
                         });
                     }

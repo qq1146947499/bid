@@ -1,8 +1,8 @@
 package com.bid.springcloud.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -22,7 +22,7 @@ public class CoOrderMain {
 
     private String orderCode;
 
-
+    @NotBlank(message="申购主题不能为空")
     private String orderTitle;
 
     private String deviceType;
@@ -39,8 +39,11 @@ public class CoOrderMain {
     private String isDeliver;
 
 
+
+
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private String deliverTime;
+
 
     private String isTax;
 

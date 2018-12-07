@@ -1,5 +1,7 @@
 package com.bid.springcloud.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 /**
@@ -14,13 +16,16 @@ public class CoOrderDmand {
 
     private String orderMainId;
 
+
     private String collegeId;
 
+    @NotBlank(message="申购主题不能为空")
     private String orderCode;
 
     private Integer deviceId;
 
     private Integer orderNum;
+
 
     private String unit;
 
