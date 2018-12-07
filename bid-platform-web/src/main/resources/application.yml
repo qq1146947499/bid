@@ -14,3 +14,5 @@ spring:
   thymeleaf:
     mode: LEGACYHTML5
     cache: false
+  application:
+    name: eee
