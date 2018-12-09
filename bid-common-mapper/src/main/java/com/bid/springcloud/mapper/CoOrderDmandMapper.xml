@@ -152,6 +152,20 @@
         </if>
     </select>
 
+    <!--查询申购单相关信息 -->
+    <select id="selectByCollgeId" resultType="com.bid.springcloud.DTD.OrderDTD">
+
+SELECT
+	*
+FROM
+	co_order_main cm
+LEFT JOIN    co_order_dmand p ON  p.order_main_id = cm.order_main_id
+LEFT JOIN   cp_college_info cp ON  cp.college_id = cm.college_id
+LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
+WHERE
+	cm.college_id = #{collegeId}
+	AND   order_status =1
+    </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
         select 
         <include refid="Base_Column_List" />

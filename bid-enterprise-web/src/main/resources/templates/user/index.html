@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+
+    <script src="jquery/jquery-2.1.1.min.js" th:src="@{/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="script/docs.min.js" th:src="@{/script/docs.min.js}"></script>
+    <script src="/layer/layer.js" th:src="@{/layer/layer.js}"></script>
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background: #F4F4F4;
+        }
+
+        table tbody td:nth-child(even) {
+            color: #C00;
+        }
+    </style>
+</head>
+
+<body>
+<div></div>
+<!--<div th:text="${responseBase.getData()}"></div>-->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div th:replace="/common/managebar::container-fluid"></div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="/common/managebar::#sidebar"></div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 用户维护</h3>
+                </div>
+
+                <div class="panel-body">
+                    <form class="form-inline" role="form" style="float:left;">
+                        <div class="form-group has-feedback">
+                            <div class="input-group">
+                                <div class="input-group-addon">查询条件</div>
+                                <input class="form-control has-success" type="text" placeholder="请输入查询条件">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i
+                            class=" glyphicon glyphicon-remove"></i> 删除
+                    </button>
+                    <button type="button" class="btn btn-primary" style="float:right;"
+                            onclick="window.location.href='/enterprise/get/userAdd'"><i class="glyphicon glyphicon-plus"></i> 新增
+                    </button>
+                    <br>
+                    <hr style="clear:both;">
+                    <div class="table-responsive">
+                        <form id="userForm">
+                            <table class="table  table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="30">#</th>
+                                    <th width="30"><input type="checkbox"></th>
+                                    <th>登陆账号</th>
+                                    <th>登陆密码</th>
+                                    <th>用户名</th>
+                                    <th>用户状态</th>
+                                    <th>创建账号者</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="userData">
+
+
+                                </tbody>
+                            <!--    <tfoot>
+                                <tr>
+                                    <td colspan="6" align="center">
+                                        <ul class="pagination" id="demo">
+
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                                </tfoot>-->
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        pageQuery();
+        $(".list-group-item").click(function () {
+            if ($(this).find("ul")) {
+                $(this).toggleClass("tree-closed");
+                if ($(this).hasClass("tree-closed")) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
+    });
+    $("tbody .btn-success").click(function () {
+        window.location.href = "assignRole.html";
+    });
+    $("tbody .btn-primary").click(function () {
+        window.location.href = "edit.html";
+    });
+
+
+    // 分页查询
+    function pageQuery() {
+        $.ajax({
+            url: "/enterprise/getUserList",
+            data: "userName=" + $("#userName").val(),
+            type: "POST",
+            beforeSend: function () {
+                loadingIndex = layer.msg('处理中', {icon: 16});
+            },
+            success: function (result) {
+                if (result.rtnCode = 200) {
+                    var context = ""
+                    var pageContent = "";
+                    $("#emps_table tbody").empty();
+                    var users = result.data;
+                    $.each(users, function (i, users) {
+                        context += '<tr>';
+                        context += '  <td>' + (i + 1) + '</td>';
+                        context += '  <td><input type="checkbox" name="userid" value="' + users.userId + '"></td>';
+                        context += '  <td>' + users.userAccount + '</td>';
+                        context += '  <td>' + users.userPass + '</td>';
+                        context += '  <td>' + users.realName + '</td>';
+                        context += '  <td>' + (users.status==1?'已激活':'未激活')+ '</td>';
+                        context += '  <td>' + users.createUsername + '</td>';
+                        context += '  <td>'
+                        context += '      <button type="button" onclick="goUpdatePage(' + users.userId + ')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';
+                        context += '	  <button type="button" onclick="deleteUser(' + users.userId + ', \'' + users.userAccount + '\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';
+                        context += '  </td>';
+                        context += '</tr>';
+
+                    });
+                    $("#userData").html(context);
+
+
+                }else
+                {
+                    layer.msg("用户信息查询失败", {time: 2000, icon: 5, shift: 6}, function () {
+
+                    });
+
+                }
+
+
+            }
+
+
+        });
+    }
+
+
+    function goUpdatePage(id) {
+        window.location.href = "/enterprise/get/userEdit?id=" + id;
+    }
+
+
+
+    function deleteUser(id, loginacct) {
+        layer.confirm("删除用户信息【" + loginacct + "】, 是否继续", {icon: 3, title: '提示'}, function (cindex) {
+
+            // 删除用户信息
+            $.ajax({
+                type: "POST",
+                url: "/enterprise/delete/CpUserById",
+                data: {userId: id},
+                success: function (result) {
+                    if (result.rtnCode == 200) {
+                        pageQuery(1);
+                    } else {
+                        layer.msg("用户信息删除失败", {time: 2000, icon: 5, shift: 6}, function () {
+
+                        });
+                    }
+                }
+            });
+
+            layer.close(cindex);
+        }, function (cindex) {
+            layer.close(cindex);
+        });
+    }
+
+</script>
+</body>
+</html>

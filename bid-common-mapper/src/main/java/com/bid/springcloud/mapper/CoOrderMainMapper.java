@@ -1,5 +1,6 @@
 package com.bid.springcloud.mapper;
 
+import com.bid.springcloud.DTD.OrderDTD;
 import com.bid.springcloud.entities.CoOrderMain;
 import com.bid.springcloud.entities.CoOrderMainExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,10 @@ public interface CoOrderMainMapper {
     int updateByPrimaryKeySelective(CoOrderMain record);
 
     int updateByPrimaryKey(CoOrderMain record);
+
+    List<OrderDTD> selectOrderMainByOrderMainId(@Param("orderMainId") Integer orderMainId);
+
+    int updateByOrderMainId(@Param("orderMainId") Integer orderMainId);
+
+    List<OrderDTD> selectOrderListByProcessId(@Param("orderProcess") Integer orderProcess);
 }

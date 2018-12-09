@@ -1,0 +1,144 @@
+﻿<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/font-awesome.min.css" th:href="@{/css/font-awesome.min.csss}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+    <script src="jquery/jquery-2.1.1.min.js" th:src="@{/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="script/docs.min.js" th:src="@{script/docs.min.js}"></script>
+    <script src="/layer/layer.js" th:src="@{/layer/layer.js}"></script>
+
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div th:replace="/common/managebar::container-fluid"></div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="/common/managebar::#sidebar"></div>
+        <input th:value="${user.userId}" hidden id="userId">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <ol class="breadcrumb">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">数据列表</a></li>
+                <li class="active">修改</li>
+            </ol>
+            <div class="panel panel-default">
+                <div class="panel-heading">表单数据
+                    <div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i
+                            class="glyphicon glyphicon-question-sign"></i></div>
+                </div>
+                <div class="panel-body">
+                    <form id="userForm" role="form">
+                        <div class="form-group">
+                            <label for="userName">登陆账号</label>
+                            <input type="text" class="form-control" id="userName" th:value="${user.userName}"
+                                   placeholder="请输入登陆账号">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">用户名称</label>
+                            <input type="text" class="form-control" id="realName" th:value="${user.realName}"
+                                   placeholder="请输入用户名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码</label>
+                            <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱地址</label>
+                            <input type="email" class="form-control" id="email" th:value="${user.email}"
+                                   placeholder="请输入邮箱地址">
+                            <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
+                        </div>
+                        <button id="updateBtn" type="button" class="btn btn-success"><i
+                                class="glyphicon glyphicon-pencil"></i> 修改
+                        </button>
+                        <button id="resetBtn" type="button" class="btn btn-danger"><i
+                                class="glyphicon glyphicon-refresh"></i> 重置
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/common/managebar::fade"></div>
+<script type="text/javascript">
+    $(function () {
+        $(".list-group-item").click(function () {
+            if ($(this).find("ul")) {
+                $(this).toggleClass("tree-closed");
+                if ($(this).hasClass("tree-closed")) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
+
+        $("#resetBtn").click(function () {
+            // Jquery[0] ==> DOM
+            // $(DOM) ==> Jquery
+            $("#userForm")[0].reset();
+        });
+
+        $("#updateBtn").click(function () {
+            var loginacct = $("#userName").val();
+            if (loginacct == "") {
+                layer.msg("登录账号不能为空，请输入", {time: 2000, icon: 5, shift: 6}, function () {
+
+                });
+                return;
+            }
+
+            var loadingIndex = null;
+            $.ajax({
+                type: "POST",
+                url: "/pt/user/update",
+                data: {
+                    "realName": $("#realName").val(),
+                    "userId": $("#userId").val(),
+                    "userName": $("#userName").val(),
+                    "userPass": $("#password").val(),
+                    "email": $("#email").val()
+                },
+                beforeSend: function () {
+                    loadingIndex = layer.msg('处理中', {icon: 16});
+                },
+                success: function (result) {
+                    layer.close(loadingIndex);
+                    if (result.rtnCode == 200) {
+                        layer.msg("用户信息修改成功", {time: 1000, icon: 6}, function () {
+                            window.location.href = "/user/index";
+                        });
+                    } else {
+                        layer.msg("用户信息修改失败，请重新操作", {time: 2000, icon: 5, shift: 6}, function () {
+
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+<script>
+
+</script>
+</html>

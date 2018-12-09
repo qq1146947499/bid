@@ -186,6 +186,23 @@
         is_auto_submit, pause_reason, winning_principle
     </sql>
 
+
+
+<!--查询状态在填单信息的表-->
+    <select id="selectOrderListByProcessId" resultType="com.bid.springcloud.DTD.OrderDTD">
+
+        SELECT
+        *
+        FROM
+        co_order_main cm
+        LEFT JOIN    co_order_dmand p ON  p.order_main_id = cm.order_main_id
+        LEFT JOIN   cp_college_info cp ON  cp.college_id = cm.college_id
+        LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
+        WHERE
+        cm.order_process= #{orderProcess}
+        AND   order_status =1
+    </select>
+
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoOrderMainExample" >
         select
         <if test="distinct" >

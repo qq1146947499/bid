@@ -36,7 +36,8 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 registry.addViewController("/role/index").setViewName("/role/index");
                 registry.addViewController("/resource/index").setViewName("/resource/index");
                 registry.addViewController("/role/assign").setViewName("/role/assign");
-                registry.addViewController("/unauthorized").setViewName("/404");
+                registry.addViewController("/role/assign").setViewName("/role/assign");
+                registry.addViewController("//platform/order/releaseAudit").setViewName("/item/releaseAudit");
             }
 
             //注册拦截器

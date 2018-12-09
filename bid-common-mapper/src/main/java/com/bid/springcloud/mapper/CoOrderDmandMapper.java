@@ -1,5 +1,6 @@
 package com.bid.springcloud.mapper;
 
+import com.bid.springcloud.DTD.OrderDTD;
 import com.bid.springcloud.entities.CoOrderDmand;
 import com.bid.springcloud.entities.CoOrderDmandExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface CoOrderDmandMapper {
     int updateByPrimaryKeySelective(CoOrderDmand record);
 
     int updateByPrimaryKey(CoOrderDmand record);
+
+    List<OrderDTD> selectByCollgeId(@Param("collegeId") String collegeId);
 }
