@@ -118,12 +118,12 @@
             var loadingIndex = null;
             $.ajax({
                 type: "POST",
-                url: "/colleage/edit/order",
+                url: "/colleage/user/update",
                 data: {
-                    "orderMainId": $("#orderMainId").val(),
-                    "orderCode": $("#orderCode").val(),
-                    "unit": $("#unit").val(),
-                    "endBidtime": $("#endBidtime").val(),
+                    "userAccount": $("#orderMainId").val(),
+                    "userId": $("#orderCode").val(),
+                    "userName": $("#unit").val(),
+                    "userPass": $("#endBidtime").val(),
                     "personPhone": $("#personPhone").val(),
                     "installationgSite": $("#installationgSite").val()
                 },
@@ -133,11 +133,11 @@
                 success: function (result) {
                     layer.close(loadingIndex);
                     if (result.rtnCode == 200) {
-                        layer.msg("订单信息修改成功", {time: 1000, icon: 6}, function () {
-                            window.location.href = "/colleage/item/index";
+                        layer.msg("用户信息修改成功", {time: 1000, icon: 6}, function () {
+                            window.location.href = "/colleage/get/orderIndex";
                         });
                     } else {
-                        layer.msg("订单   信息修改失败，请重新操作", {time: 2000, icon: 5, shift: 6}, function () {
+                        layer.msg("用户信息修改失败，请重新操作", {time: 2000, icon: 5, shift: 6}, function () {
 
                         });
                     }

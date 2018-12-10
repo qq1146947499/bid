@@ -23,6 +23,6 @@ public class PtOrderClientServiceImplTest {
 
     @Test
     public void queryOrderListByProcessId() {
-        ptOrderClientService.queryOrderListByProcessId(1,4);
+        ptOrderClientService.selectOrderMainByOrderMainId(4);
     }
 }

@@ -34,6 +34,9 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 registry.addViewController("/").setViewName("/login");
                 registry.addViewController("/colleage/get/itemIndex").setViewName("/item/item");
                 registry.addViewController("/colleage/item/index").setViewName("/item/index");
+                registry.addViewController("/colleage/Unpublished/index").setViewName("/item/unpublished");
+                registry.addViewController("/colleage/match/index").setViewName("/item/match");
+
             }
 
             //注册拦截器

@@ -32,7 +32,8 @@ public interface CoOrderMainMapper {
 
     List<OrderDTD> selectOrderMainByOrderMainId(@Param("orderMainId") Integer orderMainId);
 
-    int updateByOrderMainId(@Param("orderMainId") Integer orderMainId);
 
     List<OrderDTD> selectOrderListByProcessId(@Param("orderProcess") Integer orderProcess);
+
+    List<OrderDTD> selectByCollgeIdAndProcess(OrderDTD orderDTD);
 }

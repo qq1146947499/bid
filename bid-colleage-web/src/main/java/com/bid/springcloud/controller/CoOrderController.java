@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,6 +44,46 @@ public class CoOrderController extends BaseApiService{
     @Resource
     private CoOrderDmandServiceClient coOrderDmandServiceClient;
 
+
+
+
+
+
+
+
+    @RequestMapping("order/itemDesc")
+    public String orderItemDesc(Integer orderMainId,Model model){
+        ResponseBase base = coOrderServiceClient.selectOrderMainByOrderMainId(orderMainId);
+        model.addAttribute("order",base);
+        return  "/item/itemDesc";
+    }
+
+    @RequestMapping("/releaseorder/ByOrderMainId")
+    @ResponseBody
+    public Object  releaseorderByOrderMainId(OrderDTD orderDTD){
+
+        ResponseBase orderManList = coOrderServiceClient.orderStateEdit(orderDTD);
+
+        return  orderManList;
+
+    }
+
+
+    @RequestMapping("/get/unauditedorderList")
+    @ResponseBody
+    public Object getunauditedorder(OrderDTD orderDTD,  @RequestParam(value = "page", defaultValue = "1") Integer page){
+
+        ResponseBase orderManList = coOrderServiceClient.getOrderByorderState(orderDTD, page);
+
+        return  orderManList;
+
+    }
+
+    @RequestMapping("/get/unauditedorder")
+    public String getunauditedorder(){
+        return  "/item/unaudited";
+
+    }
 
    @RequestMapping("/edit/order")
    @ResponseBody
@@ -68,6 +109,7 @@ public class CoOrderController extends BaseApiService{
         return  orderManList;
 
     }
+
 
 
     @RequestMapping("/get/orderIndex")

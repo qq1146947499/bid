@@ -8,6 +8,7 @@ import com.bid.springcloud.DTD.OrderDTD;
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.CoOrderDmand;
 import com.bid.springcloud.entities.CoOrderMain;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,6 +61,24 @@ public interface CoOrderMainServiceClient {
      * @param orderDTD
      * @return
      */
-    @PostMapping("/dolleage/edit/ByorderMainId")
+    @PostMapping("/colleage/edit/ByorderMainId")
     ResponseBase editOrderByorderMainId(@RequestBody OrderDTD orderDTD);
+
+
+    /**
+     * 根据订单状态查询订单相关
+     * @param orderDTD
+     * @param page
+     * @return
+     */
+    @PostMapping("/colleage/getOrder/byorderState")
+    ResponseBase getOrderByorderState(@RequestBody OrderDTD orderDTD, @RequestParam("page") Integer page);
+
+    /**
+     * 修改订单状态相关
+     * @param orderDTD
+     * @return
+     */
+    @PostMapping("/colleage/orderStateEdit")
+    ResponseBase orderStateEdit(@RequestBody OrderDTD orderDTD);
 }

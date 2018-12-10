@@ -62,10 +62,10 @@ public class CoOrderMainClientServiceImpl extends BaseApiService implements CoOr
 
     @Override
     public ResponseBase getOrderManList(String collegeId, Integer page) {
-        PageHelper.startPage(page, 4);
+        PageHelper.startPage(page, 8);
 
         List<OrderDTD> dtd = coOrderDmandMapper.selectByCollgeId(collegeId);
-        PageInfo<OrderDTD> pageInfo = new PageInfo<>(dtd,4);
+        PageInfo<OrderDTD> pageInfo = new PageInfo<>(dtd);
         if (pageInfo != null){
             return  setResultSuccess(pageInfo);
         }
@@ -123,5 +123,78 @@ public class CoOrderMainClientServiceImpl extends BaseApiService implements CoOr
        throw  new SellException(ResultEnum.UPDATE);
     }
 
+    @Override
+    public ResponseBase getOrderByorderState(@RequestBody OrderDTD orderDTD, @RequestParam("page") Integer page) {
+        PageHelper.startPage(page, 5);
+        List<OrderDTD> dtd = coOrderMainMapper.selectByCollgeIdAndProcess(orderDTD);
+        PageInfo<OrderDTD> pageInfo = new PageInfo<>(dtd);
+        if (pageInfo!=null){
+            return  setResultSuccess(pageInfo);
+        }
+        return  setResultError("查询失败");
+    }
+
+
+    /**
+     * 订单状态修改
+     * @param orderDTD
+     * @return
+     */
+    @Override
+    public ResponseBase orderStateEdit(@RequestBody OrderDTD orderDTD) {
+        orderDTD.setReadCount(OrderProcessEnum.THENFILL.getMessage()+","+OrderProcessEnum.RELEASEING.getMessage()+
+               ","+ OrderProcessEnum.APPROVAL.getMessage()+","+OrderProcessEnum.BIDDING.getMessage() );
+        orderDTD.setProcessName(OrderProcessEnum.BIDDING.getMessage());
+        ResponseBase base = updateOrderMainUtils(orderDTD);
+
+        return base;
+    }
+
+
+    @Transactional
+    public ResponseBase updateOrderMainUtils(OrderDTD orderDTD) {
+        CoOrderMainExample coOrderMainExampl = new CoOrderMainExample();
+        CoOrderMain coOrderMain  = new CoOrderMain();
+
+        CoOrderProcessExample coOrderProcessExample = new CoOrderProcessExample();
+        CoOrderProcess coOrderProcess = new CoOrderProcess();
+
+
+        Integer orderMainId=null;
+        if (orderDTD.getOrderMainId()!=null){
+            orderMainId = Integer.parseInt(orderDTD.getOrderMainId());
+            coOrderMainExampl.createCriteria().andOrderMainIdEqualTo(orderMainId);
+            coOrderProcessExample.createCriteria().andOrderMainIdEqualTo(String.valueOf(orderMainId));
+        }
+
+        if (orderDTD.getOrderProcess() !=null){
+            String orderProcess = orderDTD.getOrderProcess();
+            coOrderMain.setOrderProcess(orderProcess);
+        }
+
+        if (orderDTD.getReadCount()!=null){
+            String readCount = orderDTD.getReadCount();
+            coOrderMain.setReadCount(readCount);
+        }
+        if (orderDTD.getProcessName()!=null){
+            String processName = orderDTD.getProcessName();
+            coOrderProcess.setProcessName(processName);
+
+        }
+
+        if (orderDTD.getUserId()!=null){
+            Integer userId = orderDTD.getUserId();
+            coOrderProcess.setProcessId(String.valueOf(userId));
+        }
+
+        int i = coOrderMainMapper.updateByExampleSelective(coOrderMain, coOrderMainExampl);
+        int i1 = coOrderProcessMapper.updateByExampleSelective(coOrderProcess, coOrderProcessExample);
+
+
+        if (i >0 || i1>0 ){
+            return  setResultSuccess("修改成功");
+        }
+        throw  new  SellException(ResultEnum.UPDATE);
+    }
 }
 

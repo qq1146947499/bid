@@ -21,6 +21,7 @@ import java.util.Date;
 public class OrderDTD{
 
 
+    private Integer userId;
 
     private String processId;
 

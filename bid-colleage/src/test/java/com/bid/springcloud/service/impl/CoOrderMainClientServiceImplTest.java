@@ -1,6 +1,7 @@
 package com.bid.springcloud.service.impl;
 
 
+import com.bid.springcloud.DTD.OrderDTD;
 import com.bid.springcloud.base.ResponseBase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,5 +36,13 @@ public class CoOrderMainClientServiceImplTest {
     public void deleteorderByOrderMainId() {
         ResponseBase base = coOrderMainClientService.deleteorderByOrderMainId(12886);
 
+    }
+
+    @Test
+    public void getOrderByorderState() {
+        OrderDTD orderDTD = new OrderDTD();
+        orderDTD.setCollegeId("1");
+        orderDTD.setOrderProcess("1");
+        coOrderMainClientService.getOrderByorderState(orderDTD,5);
     }
 }

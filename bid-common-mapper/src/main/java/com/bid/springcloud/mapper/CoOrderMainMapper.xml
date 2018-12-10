@@ -188,6 +188,46 @@
 
 
 
+
+
+    <!--根据订单状态和订单id和学校id查询订单相关信息-->
+    <select id="selectByCollgeIdAndProcess" resultType="com.bid.springcloud.DTD.OrderDTD">
+
+        SELECT
+        *
+        FROM
+        co_order_main cm
+        LEFT JOIN    co_order_dmand p ON  p.order_main_id = cm.order_main_id
+        LEFT JOIN   cp_college_info cp ON  cp.college_id = cm.college_id
+        LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
+        WHERE 1=1
+        <if test="orderMainId != null" >
+             cm.order_main_id= #{orderMainId}
+        </if>
+        <if test="orderProcess != null" >
+            AND cm.order_process= #{orderProcess}
+        </if>
+        <if test="collegeId != null" >
+           AND cm.college_id= #{collegeId}
+        </if>
+        AND   order_status =1
+    </select>
+
+    <!--查询状态在订单详情的表-->
+    <select id="selectOrderMainByOrderMainId" resultType="com.bid.springcloud.DTD.OrderDTD">
+
+        SELECT
+        *
+        FROM
+        co_order_main cm
+        LEFT JOIN    co_order_dmand p ON  p.order_main_id = cm.order_main_id
+        LEFT JOIN   cp_college_info cp ON  cp.college_id = cm.college_id
+        LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
+        WHERE
+        cm.order_main_id= #{orderMainId}
+        AND   order_status =1
+    </select>
+
 <!--查询状态在填单信息的表-->
     <select id="selectOrderListByProcessId" resultType="com.bid.springcloud.DTD.OrderDTD">
 
@@ -200,7 +240,7 @@
         LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
         WHERE
         cm.order_process= #{orderProcess}
-        AND   order_status =1
+        AND   order_status in(1,2)
     </select>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bid.springcloud.entities.CoOrderMainExample" >

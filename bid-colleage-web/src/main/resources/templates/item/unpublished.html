@@ -47,7 +47,7 @@
                     <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 用户维护</h3>
                 </div>
 
-
+                <input hidden="hidden" id="collegeId" name="collegeId" th:value="${session.user.collegeId}">
                 <div class="panel-body">
                     <form class="form-inline" role="form" style="float:left;">
                         <div class="form-group has-feedback">
@@ -71,6 +71,7 @@
                         <form id="userForm">
                             <table class="table  table-bordered">
                                 <thead>
+                                <input hidden="hidden" th:value="4" id="orderProcess">
                                 <tr>
                                     <th width="30">#</th>
                                     <th width="30"><input type="checkbox"></th>
@@ -141,9 +142,10 @@
     function pageQuery(page) {
 
         $.ajax({
-            url: "/platform/queryOrderList/byProcessId",
-            data: {"processId" : "1",
+            url: "/colleage/get/unauditedorderList",
+            data: {"collegeId" : $("#collegeId").val(),
                 "page" : page,
+                "orderProcess":"3",
                 },
 
             type: "POST",
@@ -161,6 +163,7 @@
                     $.each(orders, function (i, order) {
                         var endtime= order.endBidtime
                         var d = new Date(endtime);
+
                         var time1 = new Date().Format("yyyy-MM-dd");
                         context += '<tr>';
                         context += '  <td>' + (i + 1) + '</td>';
@@ -172,8 +175,8 @@
                         context += '  <td>' + order.processName + '</td>';
                         context += '  <td>' + order.inProvince + '</td>';
                         context += '  <td>'
-                        context += '      <button type="button" onclick="goUpdatePage(' + order.orderMainId + ')" class="btn btn-info"></i>审核</button>';
-                        /*context += '	  <button type="button" onclick="editOrder(' + order.orderMainId + ', \'' + order.orderTitle + '\')" class="btn btn-info">审核通过</button>';*/
+                        /*context += '      <button type="button" onclick="goUpdatePage(' + order.orderMainId + ')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';*/
+                        context += '	  <button type="button" onclick="subOrder(' + order.orderMainId + ', \'' + order.orderTitle + '\')" class="btn btn-info">确认发布</button>';
                         context += '  </td>';
                         context += '</tr>';
 
@@ -186,7 +189,7 @@
                         if (i == page) {
                             pageContent += '<li class="active"><a  href="#">' + i + '</a></li>';
                         } else {
-                            pageContent += '<li ><a href="#" pageQuery="to_page(' + i + ')">' + i + '</a></li>';
+                            pageContent += '<li ><a href="#" onclick="pageQuery(' + i + ')">' + i + '</a></li>';
                         }
                     }
 
@@ -230,26 +233,29 @@
 
 
     function goUpdatePage(id) {
-        window.location.href = "/platform/getReleaseAudit/orderMain?orderMainId=" + id;
+        window.location.href = "/colleage/getEditOrderMain?orderMainId=" + id;
     }
 
     function goAssignPage(id) {
         window.location.href = "/pt/user/assign?id=" + id;
     }
 
-    function editOrder(id, loginacct) {
-        layer.confirm("订单【" + loginacct + "】审核, 是否继续", {icon: 3, title: '提示'}, function (cindex) {
+    function subOrder(id, loginacct) {
+        layer.confirm("订单【" + loginacct + "】, 是否发布", {icon: 3, title: '提示'}, function (cindex) {
 
-
+            // 删除用户信息
             $.ajax({
                 type: "POST",
-                url: "/platform/editOrder/ByOrderMainId",
-                data: {orderMainId: id},
+                url: "/colleage/releaseorder/ByOrderMainId",
+                data: {orderMainId: id,
+                    "orderProcess":$("#orderProcess").val()
+
+                },
                 success: function (result) {
                     if (result.rtnCode == 200) {
                         pageQuery(1);
                     } else {
-                        layer.msg("订单查询", {time: 2000, icon: 5, shift: 6}, function () {
+                        layer.msg("订单发布失败", {time: 2000, icon: 5, shift: 6}, function () {
 
                         });
                     }

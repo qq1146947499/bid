@@ -158,7 +158,7 @@ public class PtUserController {
         ResultVO<Object> resultVO = new ResultVO<>();
         PtUser ptUsers = ptUserClientService.query4Login(ptUser);
 
-
+        session.setAttribute("user",ptUsers);
         //获取用户权限信息
         List<PtResource> ptResources = ptResourceClientService.queryResourceByUserId(ptUsers);
         Map<Integer, Permission> permissionMap = new HashMap<Integer, Permission>();
