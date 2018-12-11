@@ -29,6 +29,7 @@ public class CpUserServiceImpl extends BaseApiService implements CpUserClientSer
 
     @Override
     public CpUser queryCouser(@RequestBody CpUser cpUser) {
+
         CpUser cpUser1 = cpUserMapper.selectCpuser(cpUser);
         if (cpUser != null){
             return cpUser1;

@@ -17,13 +17,16 @@ import java.util.Date;
  * co_order_main
  *
  */
+
 @Data
 public class OrderDTD{
 
 
-    private Integer userId;
 
-    private String processId;
+
+    private Integer bidInfoId;
+
+    private String detailId;
 
     private String orderMainId;
 
@@ -33,6 +36,87 @@ public class OrderDTD{
     private String orderBidType;
 
     private String sourceCollegeId;
+
+    private String sourceCompanyId;
+
+    private Integer deviceId;
+
+
+    private String bidPrice;
+
+    private String totalAmount;
+
+    private String totalAmountRenminbi;
+
+    private String afterService;
+
+    /**
+     * N
+     */
+    private String isFulfil;
+
+    private String diffrencesDesc;
+
+    private String bidPerson;
+
+    private String bidUserId;
+
+    private String companyId;
+
+    private String companyName;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private String bidTime;
+
+    /**
+     * N
+     */
+    private String bidStatus;
+
+    /**
+     * ѡ
+     */
+    private String bidReason;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date createTime;
+
+    private String createUserid;
+
+    private String createUsername;
+
+    /**
+     * Y:
+     */
+    private String isDxCenter;
+
+    /**
+     * Y:
+     */
+    private String isDxCollege;
+
+    /**
+     * Y
+     */
+    private String isInquire;
+
+    private String celNum;
+
+    private String eccNum;
+
+    private String nodeReason;
+
+    private String warrantyPeriod;
+
+
+
+
+
+    private Integer userId;
+
+    private String processId;
+
+
 
     private String processName;
 
@@ -252,22 +336,8 @@ public class OrderDTD{
 
 
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
 
-    private String createUserid;
 
-    private String createUsername;
-
-    /**
-     * Y:
-     */
-    private String isDxCenter;
-
-    /**
-     * Y:
-     */
-    private String isDxCollege;
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastUpdateTime;
@@ -367,7 +437,7 @@ public class OrderDTD{
 
 
 
-    private Integer deviceId;
+
 
     private Integer orderNum;
 
@@ -380,7 +450,7 @@ public class OrderDTD{
 
     private String isStandard;
 
-    private String afterService;
+
 
     /**
      * 1
@@ -405,12 +475,6 @@ public class OrderDTD{
     private String userInitReason;
 
     private String closeReason;
-
-    private String companyId;
-
-    private String companyName;
-
-    private String bidPrice;
 
 
 
@@ -464,7 +528,7 @@ public class OrderDTD{
 
 
 
-    private String diffrencesDesc;
+
 
 
 }

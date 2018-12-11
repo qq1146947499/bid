@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+
+    <script src="jquery/jquery-2.1.1.min.js" th:src="@{/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="script/docs.min.js" th:src="@{/script/docs.min.js}"></script>
+    <script src="/layer/layer.js" th:src="@{/layer/layer.js}"></script>
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background: #F4F4F4;
+        }
+
+        table tbody td:nth-child(even) {
+            color: #C00;
+        }
+    </style>
+</head>
+
+<body>
+<div></div>
+<!--<div th:text="${responseBase.getData()}"></div>-->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div th:replace="/common/managebar::container-fluid"></div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="/common/managebar::#sidebar"></div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 用户维护</h3>
+                </div>
+                <input th:value="${session.user.companyId}" id="companyId" hidden="hidden">
+
+                <div class="panel-body">
+                    <form class="form-inline" role="form" style="float:left;">
+                        <div class="form-group has-feedback">
+                            <div class="input-group">
+                                <div class="input-group-addon">查询条件</div>
+                                <input class="form-control has-success" type="text" placeholder="请输入查询条件">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i
+                            class=" glyphicon glyphicon-remove"></i> 删除
+                    </button>
+                    <button type="button" class="btn btn-primary" style="float:right;"
+                            onclick="window.location.href='/colleage/get/userAdd'"><i class="glyphicon glyphicon-plus"></i> 新增
+                    </button>
+                    <br>
+                    <hr style="clear:both;">
+                    <div class="table-responsive">
+                        <form id="userForm">
+                            <table class="table  table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="30">#</th>
+                                    <th width="30"><input type="checkbox"></th>
+                                    <th>申购主题</th>
+                                    <th>申购项目</th>
+                                    <th>申购人</th>
+                                    <th>申购截至时间</th>
+                                    <th>申购单状态</th>
+                                    <th>所属高校</th>
+                                    <th width="100">操作</th>
+                                </tr>
+
+                                </thead>
+                                <tbody id="userData">
+
+                                </tbody>
+
+
+
+
+
+
+
+                            </table>
+
+                        </form>
+
+                        <div align="center">
+                            <tr>
+                                <td colspan="6">
+                                    <ul class="pagination" id="demo">
+
+                                    </ul>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        pageQuery(1);
+        $(".list-group-item").click(function () {
+            if ($(this).find("ul")) {
+                $(this).toggleClass("tree-closed");
+                if ($(this).hasClass("tree-closed")) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
+    });
+    $("tbody .btn-success").click(function () {
+        window.location.href = "assignRole.html";
+    });
+    $("tbody .btn-primary").click(function () {
+        window.location.href = "edit.html";
+    });
+
+
+    // 分页查询
+    function pageQuery(page) {
+
+        $.ajax({
+            url: "/enterprise/get/orderList",
+            data: {
+                "page" : page,
+                "orderProcess":"4",
+                "companyId":$("#companyId").val()
+            },
+
+            type: "POST",
+            beforeSend: function () {
+                loadingIndex = layer.msg('处理中', {icon: 16});
+            },
+            success: function (result) {
+                if (result.rtnCode = 200) {
+                    var context = ""
+                    var pageContent = "";
+                    $("#emps_table tbody").empty();
+
+
+                    var orders = result.data.list;
+                    $.each(orders, function (i, order) {
+                        var endtime= order.endBidtime
+                        var d = new Date(endtime);
+
+                        var time1 = new Date().Format("yyyy-MM-dd");
+                        context += '<tr>';
+                        context += '  <td>' + (i + 1) + '</td>';
+                        context += '  <td><input type="checkbox" name="orderMainId" value="' + order.orderMainId + '"></td>';
+                        context += '  <td>' + order.orderTitle + '</td>';
+                        context += '  <td>' + order.orderCode + '</td>';
+                        context += '  <td>' + order.orderPerson + '</td>';
+                        context += '  <td>' + time1 + '</td>';
+                        context += '  <td>' + order.processName + '</td>';
+                        context += '  <td>' + order.inProvince + '</td>';
+                        context += '  <td>'
+                        context += '      <button type="button" onclick="goUpdatePage(' + order.orderMainId + ')" class="btn btn-primary btn-xs"><i class="">详情</i></button>';
+                      /*  context += '	  <button type="button" onclick="deleteUser(' + order.orderMainId + ', \'' + order.orderTitle + '\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>';*/
+                        context += '  </td>';
+                        context += '</tr>';
+
+                    });
+                    if (page > 1) {
+                        pageContent += '<li><a href="#" onclick="pageQuery(' + (page - 1) + ')">上一页</a></li>';
+                    }
+
+                    for (var i = 1; i <= result.data.pages; i++) {
+                        if (i == page) {
+                            pageContent += '<li class="active"><a  href="#">' + i + '</a></li>';
+                        } else {
+                            pageContent += '<li ><a href="#" onclick="pageQuery(' + i + ')">' + i + '</a></li>';
+                        }
+                    }
+
+                    if (page < result.data.pages) {
+                        pageContent += '<li><a href="#" onclick="pageQuery(' + (page + 1) + ')">下一页</a></li>';
+                    }
+                    $("#userData").html(context);
+                    $("#demo").html(pageContent);
+
+                }else
+                {
+                    layer.msg("用户信息查询失败", {time: 2000, icon: 5, shift: 6}, function () {
+
+                    });
+
+                }
+
+
+            }
+
+
+        });
+    }
+
+
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "H+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+
+    function goUpdatePage(id) {
+        window.location.href = "/enterprise/get/orderDesc/?orderMainId="+id;
+    }
+
+    function goAssignPage(id) {
+        window.location.href = "/pt/user/assign?id=" + id;
+    }
+
+    function deleteUser(id, loginacct) {
+        layer.confirm("订单【" + loginacct + "】, 是否继续", {icon: 3, title: '提示'}, function (cindex) {
+
+            // 删除用户信息
+            $.ajax({
+                type: "POST",
+                url: "/colleage/delete/orderByOrderMainId",
+                data: {orderMainId: id},
+                success: function (result) {
+                    if (result.rtnCode == 200) {
+                        pageQuery(1);
+                    } else {
+                        layer.msg("订单删除失败", {time: 2000, icon: 5, shift: 6}, function () {
+
+                        });
+                    }
+                }
+            });
+
+            layer.close(cindex);
+        }, function (cindex) {
+            layer.close(cindex);
+        });
+    }
+
+</script>
+</body>
+</html>

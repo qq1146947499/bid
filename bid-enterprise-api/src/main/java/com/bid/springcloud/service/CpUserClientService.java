@@ -15,7 +15,6 @@ import java.util.List;
 
 @Component
 @FeignClient(value = "MICROSERVICECLOUD-ENTERPRISE")
-
 public  interface CpUserClientService {
 
 

@@ -1,5 +1,8 @@
 package com.bid.springcloud.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -27,6 +30,7 @@ public class CpBidOrder {
 
     private Integer deviceId;
 
+    @NotBlank(message="价格不能为空")
     private String bidPrice;
 
     private String totalAmount;
@@ -50,6 +54,7 @@ public class CpBidOrder {
 
     private String companyName;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private String bidTime;
 
     /**
@@ -62,6 +67,7 @@ public class CpBidOrder {
      */
     private String bidReason;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createTime;
 
     private String createUserid;

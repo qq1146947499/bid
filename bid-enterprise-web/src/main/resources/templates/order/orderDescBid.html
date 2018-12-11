@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+
+    <script src="jquery/jquery-2.1.1.min.js" th:src="@{/jquery/jquery-2.1.1.min.js}"></script>
+    <script src="bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="script/docs.min.js" th:src="@{/script/docs.min.js}"></script>
+    <script src="/layer/layer.js" th:src="@{/layer/layer.js}"></script>
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background: #F4F4F4;
+        }
+
+        table tbody td:nth-child(even) {
+            color: #C00;
+        }
+    </style>
+</head>
+
+<body>
+<div></div>
+<!--<div th:text="${responseBase.getData()}"></div>-->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div th:replace="/common/managebar::container-fluid"></div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="/common/managebar::#sidebar"></div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 竞价详情</h3>
+                </div>
+
+
+                <div class="panel-body">
+                    <form class="form-inline" role="form" style="float:left;">
+                        <div class="form-group has-feedback">
+                            <div class="input-group">
+                                <div class="input-group-addon">查询条件</div>
+                                <input class="form-control has-success" type="text" placeholder="请输入查询条件">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i
+                            class=" glyphicon glyphicon-remove"></i> 删除
+                    </button>
+                    <button type="button" class="btn btn-primary" style="float:right;"
+                            onclick="window.location.href='/colleage/get/userAdd'"><i class="glyphicon glyphicon-plus"></i> 新增
+                    </button>
+                    <br>
+                    <hr style="clear:both;">
+                    <div>
+                        <form id="userForm">
+
+
+                            <div class="row">
+                                <input th:value="${session.user.companyId}" id="companyId" hidden="hidden">
+                                <input th:value="${session.user.userAccount}" id="userAccount" hidden="hidden">
+                                <input th:value="${session.user.userId}" id="userId" hidden="hidden">
+                                <th:block th:each="order:${pageInfo.data.list}">
+                                <div class="col-md-6">
+
+                                    <input th:value="${order.orderMainId}" hidden="hidden" id="orderMainId">
+                                    <ul>
+                                        <li>
+                                            申购人   &nbsp &nbsp   <span th:text="${order.orderPerson}"></span>
+                                        </li>
+                                        <li>
+                                            售后服务 &nbsp &nbsp  <span th:text="${order.remark}"></span>
+                                        </li>
+                                        <li>
+                                            申购设备 &nbsp &nbsp  <span th:text="${order.orderCode}"></span>
+                                        </li>
+                                        <li>
+                                            设备数量 &nbsp &nbsp  <span th:text="${order.unit}">自由</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <ul>
+                                        <li>
+                                            预算   &nbsp &nbsp   <span th:text="${order.orderTotalAmount}"></span>
+                                        </li>
+
+                                        <li>
+                                            送货地址   &nbsp &nbsp   <span th:text="${order.installationgSite}"></span>
+                                        </li>
+
+                                        <li>
+                                            设备品牌   &nbsp &nbsp   <span th:text="${order.isStandard}"></span>
+                                        </li>
+
+                                        <li>
+                                            设备参数   &nbsp &nbsp   <span th:text="${order.afterService}"></span>
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+                                </th:block>
+                            </div>
+
+                            <div class="row">
+                                   <div class="col-md-12">
+                                       <label>竞价金额</label>
+                                       <input required name="bidPrice" id="bidPrice">
+                                   </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>差异描述</label>
+                                    <input name="diffrencesDesc" id="diffrencesDesc">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>售后服务</label>
+                                    <input name="afterService" id="afterService">
+                                </div>
+                            </div>
+                            <input id="bidTime" hidden th:value="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd hh')}"/>
+                            <button id="orderSub" type="button" class="btn btn-success"><i
+                                    ></i> 提交竞价
+                            </button>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $(".list-group-item").click(function () {
+            if ($(this).find("ul")) {
+                $(this).toggleClass("tree-closed");
+                if ($(this).hasClass("tree-closed")) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
+
+        $("#resetBtn").click(function () {
+            $("#userForm")[0].reset();
+        });
+
+        $("#orderSub").click(function () {
+            var loginacct = $("#bidPrice").val();
+            if (loginacct == "") {
+                layer.msg("竞价金额不能为空，请输入", {time: 2000, icon: 5, shift: 6}, function () {
+
+                });
+                return;
+            }
+
+            var loadingIndex = null;
+            $.ajax({
+                type: "POST",
+                url: "/enterprise/addCoOrder",
+                data: {
+                    "bidReason":$("#bidPrice").val(),
+                    "diffrencesDesc":$("#diffrencesDesc").val(),
+                    "afterService":$("#afterService").val(),
+                    "bidTime":$("#bidTime").val(),
+                    "orderMainId":$("#orderMainId").val(),
+                    "companyId":$("#companyId").val(),
+                    "bidPerson":$("#userAccount").val(),
+                    "createUsername":$("#userAccount").val(),
+                    "bidUserId":$("#userId").val(),
+                },
+                beforeSend: function () {
+                    loadingIndex = layer.msg('处理中', {icon: 16});
+                },
+                success: function (result) {
+                    layer.close(loadingIndex);
+                    if (result.rtnCode == 200) {
+                        layer.msg("用户信息修改成功", {time: 1000, icon: 6}, function () {
+                            window.location.href = "/colleage/get/orderIndex";
+                        });
+                    } else {
+                        layer.msg("用户信息修改失败，请重新操作", {time: 2000, icon: 5, shift: 6}, function () {
+
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

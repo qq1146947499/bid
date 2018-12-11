@@ -29,6 +29,9 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 
                // registry.addViewController("/unauthorized").setViewName("/404");
                 registry.addViewController("/").setViewName("/login");
+                registry.addViewController("/enterprise/order/orderIndex").setViewName("/order/orderIndex");
+                registry.addViewController("/enterprise/order/orderDescBid").setViewName("/order/orderDescBid");
+                registry.addViewController("/enterprise/order/bidding").setViewName("/order/bidding");
             }
 
             //注册拦截器

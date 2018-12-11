@@ -188,6 +188,56 @@
 
 
 
+    <!--查询未被企业竞价过的订单-->
+    <select id="getOrderByCompanyId" resultType="com.bid.springcloud.DTD.OrderDTD">
+
+        SELECT
+        *
+        FROM
+        co_order_main cm
+        LEFT JOIN    co_order_dmand p ON  p.order_main_id = cm.order_main_id
+        LEFT JOIN   cp_college_info cp ON  cp.college_id = cm.college_id
+        LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
+        WHERE 1=1
+        <if test="companyId != null" >
+            AND cm.order_main_id NOT IN (SELECT  order_main_id FROM cp_bid_order WHERE company_id = #{companyId})
+        </if>
+        <if test="orderMainId != null" >
+            AND cm.order_main_id= #{orderMainId}
+        </if>
+        <if test="orderProcess != null" >
+            AND cm.order_process= #{orderProcess}
+        </if>
+        <if test="collegeId != null" >
+            AND cm.college_id= #{collegeId}
+        </if>
+        AND   order_status =1
+    </select>
+
+    <!--根据订单状态和高校id查询订单相关信息-->
+    <select id="selectBycompanyIdAndProcess" resultType="com.bid.springcloud.DTD.OrderDTD">
+
+        SELECT
+        *
+        FROM
+        co_order_main cm
+        LEFT JOIN    co_order_dmand p ON  p.order_main_id = cm.order_main_id
+        LEFT JOIN   cp_college_info cp ON  cp.college_id = cm.college_id
+        LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
+        LEFT JOIN cp_bid_order cpo ON cm.order_main_id = cop.order_main_id
+        WHERE 1=1
+        <if test="companyId != null" >
+            AND cm.order_main_id IN (SELECT  order_main_id FROM cp_bid_order WHERE company_id = #{companyId})
+        </if>
+        <if test="orderProcess != null" >
+            AND cm.order_process= #{orderProcess}
+        </if>
+        <if test="collegeId != null" >
+            AND cm.college_id= #{collegeId}
+        </if>
+        AND   order_status =1
+    </select>
+
 
 
     <!--根据订单状态和订单id和学校id查询订单相关信息-->
@@ -202,7 +252,7 @@
         LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
         WHERE 1=1
         <if test="orderMainId != null" >
-             cm.order_main_id= #{orderMainId}
+            AND cm.order_main_id= #{orderMainId}
         </if>
         <if test="orderProcess != null" >
             AND cm.order_process= #{orderProcess}
