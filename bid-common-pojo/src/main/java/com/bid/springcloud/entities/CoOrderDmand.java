@@ -12,6 +12,7 @@ import java.util.Date;
  * @date 2018-11-15
  */
 public class CoOrderDmand {
+
     private String dmainId;
 
     private String orderMainId;

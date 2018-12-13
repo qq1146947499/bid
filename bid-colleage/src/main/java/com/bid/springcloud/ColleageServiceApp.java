@@ -13,11 +13,13 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude = {MongoDataAutoConfiguration.class})
 @EnableEurekaClient
 @EnableFeignClients
 @EnableHystrix
+@EnableScheduling
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "com.bid")
 @MapperScan(basePackages = "com.bid.springcloud.mapper")

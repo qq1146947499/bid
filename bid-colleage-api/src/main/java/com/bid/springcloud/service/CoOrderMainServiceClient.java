@@ -81,4 +81,37 @@ public interface CoOrderMainServiceClient {
      */
     @PostMapping("/colleage/orderStateEdit")
     ResponseBase orderStateEdit(@RequestBody OrderDTD orderDTD);
+
+
+    /**
+     * 查询待初选订单
+     * @param orderDTD
+     * @param page
+     * @return
+     */
+    @PostMapping("/colleage/query/TobePrimedList")
+    ResponseBase queryTobePrimedList(@RequestBody OrderDTD orderDTD,@RequestParam("page") Integer page);
+
+
+
+
+
+    /**
+     * 添加初选订单
+     * @param coOrderDmand
+     * @return
+     */
+
+    @PostMapping("/colleage/addOrderPrimary")
+    ResponseBase addOrderPrimary(@RequestBody  CoOrderDmand coOrderDmand);
+
+
+//---------------------------------------暂时
+    /**
+     * 待初选订单详情 暂时
+     * @param orderMainId
+     * @return
+     */
+    @PostMapping("/colleage/query/PrimedListDesc")
+    ResponseBase queryPrimedListDesc(@RequestParam("orderMainId") Integer orderMainId);
 }

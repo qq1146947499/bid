@@ -188,6 +188,51 @@
 
 
 
+
+    <!--查询被企业竞价过的订单待初选的-->
+    <select id="getTobePrimedOrder" resultType="com.bid.springcloud.DTD.OrderDTD">
+
+        SELECT
+        *
+        FROM
+        co_order_main cm
+        LEFT JOIN   cp_college_info cp ON  cp.college_id = cm.college_id
+        LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
+        LEFT JOIN cp_bid_order cpo ON cm.order_main_id = cop.order_main_id
+        LEFT JOIN cp_company_info cpc ON cpc.company_id = cpo.company_id
+        WHERE 1=1
+        <if test="companyId != null" >
+            AND cm.order_main_id NOT IN (SELECT  order_main_id FROM cp_bid_order WHERE company_id = #{companyId})
+        </if>
+        <if test="orderMainId != null" >
+            AND cm.order_main_id= #{orderMainId}
+        </if>
+        <if test="orderProcess != null" >
+            AND cm.order_process= #{orderProcess}
+        </if>
+        <if test="collegeId != null" >
+            AND cm.order_main_id IN (SELECT  order_main_id FROM cp_bid_order WHERE order_main_id IN (
+            SELECT  order_main_id FROM co_order_main WHERE college_id =#{collegeId}
+            ))
+        </if>
+        AND   order_status =1
+    </select>
+
+
+    <!--测试集合-->
+    <select id="demo" resultType="com.bid.springcloud.DTD.OrderDTD">
+        SELECT
+        *
+        FROM
+        co_order_main
+        WHERE
+        order_process IN
+            <foreach collection="orderProcessList" item="orderProcess" open="(" close=")" separator=",">
+                #{orderProcess}
+            </foreach>
+    </select>
+
+
     <!--查询未被企业竞价过的订单-->
     <select id="getOrderByCompanyId" resultType="com.bid.springcloud.DTD.OrderDTD">
 

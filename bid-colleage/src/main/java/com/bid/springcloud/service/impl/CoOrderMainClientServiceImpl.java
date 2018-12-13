@@ -14,14 +14,15 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @RestController
@@ -36,6 +37,25 @@ public class CoOrderMainClientServiceImpl extends BaseApiService implements CoOr
 
     @Resource
     private CoOrderDmandMapper coOrderDmandMapper;
+
+    @Resource
+    private CpBidOrderMapper cpBidOrderMapper;
+
+
+
+
+
+
+    public ResponseBase demo( Map<String , Object> map) {
+
+        List<OrderDTD> dtd = coOrderMainMapper.demo(map);
+
+        if (dtd!=null){
+            return  setResultSuccess(dtd);
+        }
+        return  setResultError("查询失败");
+    }
+
 
 
 
@@ -150,12 +170,66 @@ public class CoOrderMainClientServiceImpl extends BaseApiService implements CoOr
         return base;
     }
 
+    @Override
+    public ResponseBase queryTobePrimedList(@RequestBody  OrderDTD orderDTD, @RequestParam("page") Integer page) {
+        PageHelper.startPage(page,5);
+        List<OrderDTD> tobePrimedOrder = coOrderMainMapper.getTobePrimedOrder(orderDTD);
+        PageInfo<OrderDTD> pageInfo = new PageInfo<>(tobePrimedOrder);
+        if(pageInfo!=null){
+            return  setResultSuccess(pageInfo);
+        }
+        return setResultError("没查询到待初选订单");
+    }
 
+    @Override
     @Transactional
-    public ResponseBase updateOrderMainUtils(OrderDTD orderDTD) {
+    public ResponseBase addOrderPrimary(@RequestBody CoOrderDmand coOrderDmand) {
+        //生成初选订单
+
+        CoOrderDmandExample coOrderDmandExample = new CoOrderDmandExample();
+        coOrderDmandExample.createCriteria().andOrderMainIdEqualTo(coOrderDmand.getOrderMainId());
+        int i1 = coOrderDmandMapper.updateByExampleSelective(coOrderDmand, coOrderDmandExample);
+        //修改订单主表状态
+            //订单主表
         CoOrderMainExample coOrderMainExampl = new CoOrderMainExample();
         CoOrderMain coOrderMain  = new CoOrderMain();
 
+        coOrderMain.setOrderProcess(OrderProcessEnum.PRIMARY.getCode());
+        coOrderMain.setReadCount(
+                OrderProcessEnum.THENFILL.getMessage()+","+OrderProcessEnum.RELEASEING.getMessage()+","+OrderProcessEnum.APPROVAL.getMessage()+","
+                +OrderProcessEnum.BIDDING.getMessage()+","+OrderProcessEnum.SUPPLIERQUOTATION.getMessage()+","+
+                        OrderProcessEnum.AFTERENDING.getMessage()+","+OrderProcessEnum.PRIMARY.getMessage()
+
+        );
+        coOrderMainExampl.createCriteria().andOrderMainIdEqualTo(Integer.parseInt(coOrderDmand.getOrderMainId()));
+
+        int i = coOrderMainMapper.updateByExampleSelective(coOrderMain, coOrderMainExampl);
+            //订单流程参数表
+        CoOrderProcessExample coOrderProcessExample = new CoOrderProcessExample();
+        CoOrderProcess coOrderProcess = new CoOrderProcess();
+        coOrderProcess.setProcessName(OrderProcessEnum.PRIMARY.getMessage());
+        coOrderProcessExample.createCriteria().andOrderMainIdEqualTo(coOrderDmand.getOrderMainId());
+        int i2 = coOrderProcessMapper.updateByExampleSelective(coOrderProcess, coOrderProcessExample);
+        //修改企业端未已中标
+        CpBidOrderExample cpBidOrderExample = new CpBidOrderExample();
+        cpBidOrderExample.createCriteria().andOrderMainIdEqualTo(coOrderDmand.getOrderMainId());
+        CpBidOrder cpBidOrder = new CpBidOrder();
+        cpBidOrder.setBidStatus("1");
+        int i3 = cpBidOrderMapper.updateByExampleSelective(cpBidOrder, cpBidOrderExample);
+        if(i2>0||i1>0||i3>0||i>0){
+            return  setResultSuccess("更新成功");
+        }
+        throw  new SellException(ResultEnum.UPDATE);
+    }
+
+
+    @Transactional
+    public ResponseBase updateOrderMainUtils(OrderDTD orderDTD) {
+        //订单主表
+        CoOrderMainExample coOrderMainExampl = new CoOrderMainExample();
+        CoOrderMain coOrderMain  = new CoOrderMain();
+
+        //订单流程参数表
         CoOrderProcessExample coOrderProcessExample = new CoOrderProcessExample();
         CoOrderProcess coOrderProcess = new CoOrderProcess();
 
@@ -196,5 +270,45 @@ public class CoOrderMainClientServiceImpl extends BaseApiService implements CoOr
         }
         throw  new  SellException(ResultEnum.UPDATE);
     }
+
+
+
+
+    //到达截止时间后,改变申购单状态
+/*
+    @Scheduled(cron = "0/20 * * * * *")
+    public void hello(){
+        long localTime = System.currentTimeMillis();
+        CoOrderMainExample coOrderMainExample = new CoOrderMainExample();
+        List<CoOrderMain> coOrderMains = coOrderMainMapper.selectByExample(coOrderMainExample);
+        for (CoOrderMain coOrderMain : coOrderMains) {
+            Date endBidtime = coOrderMain.getEndBidtime();
+            long endtime = endBidtime.getTime();
+            if (endtime>localTime){
+                OrderDTD orderDTD = new OrderDTD();
+                orderDTD.setOrderMainId(String.valueOf(coOrderMain.getOrderMainId()));
+                orderDTD.setReadCount(OrderProcessEnum.THENFILL.getMessage()+","+OrderProcessEnum.RELEASEING.getMessage()+
+                        ","+ OrderProcessEnum.APPROVAL.getMessage()+","+OrderProcessEnum.BIDDING.getMessage()+","+OrderProcessEnum.SUPPLIERQUOTATION.getMessage()+","+
+                        OrderProcessEnum.AFTERENDING.getMessage()
+                );
+                orderDTD.setProcessName(OrderProcessEnum.AFTERENDING.getMessage());
+                orderDTD.setOrderProcess(OrderProcessEnum.AFTERENDING.getMessage());
+                ResponseBase base = updateOrderMainUtils(orderDTD);
+
+
+            }
+        }
+    }*/
+
+
+    @Override
+    public ResponseBase queryPrimedListDesc(@RequestParam("orderMainId") Integer orderMainId) {
+        OrderDTD orderDTD = cpBidOrderMapper.selectprimaryDescByOrderMainId(orderMainId);
+        if (orderDTD!=null){
+            return  setResultSuccess(orderDTD);
+        }
+        return setResultError("查询失败");
+    }
+
 }
 

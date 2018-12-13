@@ -10,19 +10,16 @@ import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.CoOrderDmand;
 import com.bid.springcloud.entities.CoOrderMain;
 
-import com.bid.springcloud.entities.PtUser;
-import com.bid.springcloud.entities.PtUserExample;
+
 import com.bid.springcloud.service.CoOrderDmandServiceClient;
 import com.bid.springcloud.service.CoOrderMainServiceClient;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,8 +27,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.BitSet;
-import java.util.List;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/colleage")
@@ -46,8 +43,27 @@ public class CoOrderController extends BaseApiService{
 
 
 
+    @RequestMapping(value = "/primary/addOrderDmain")
+    @ResponseBody
+    public Object primaryaddOrderDmain( CoOrderDmand coOrderDmand){
+        ResponseBase base = coOrderServiceClient.addOrderPrimary(coOrderDmand);
+        return  base;
+    }
 
 
+
+    @RequestMapping("/get/primaryBid")
+    public ModelAndView getprimaryBid(@RequestParam("orderMainId") Integer orderMainId, Map<String,Object> map){
+        ResponseBase base = coOrderServiceClient.queryPrimedListDesc(orderMainId);
+        map.put("data",base);
+        return  new ModelAndView("/item/primaryDesc",map);
+    }
+    @RequestMapping("/get/tobePrimedList")
+    @ResponseBody
+    public Object getTobePrimedList(OrderDTD orderDTD,  @RequestParam(value = "page", defaultValue = "1") Integer page){
+        ResponseBase base = coOrderServiceClient.queryTobePrimedList(orderDTD,page);
+        return  base;
+    }
 
 
 

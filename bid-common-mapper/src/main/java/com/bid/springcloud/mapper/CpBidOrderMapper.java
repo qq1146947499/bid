@@ -1,5 +1,6 @@
 package com.bid.springcloud.mapper;
 
+import com.bid.springcloud.DTD.OrderDTD;
 import com.bid.springcloud.entities.CpBidOrder;
 import com.bid.springcloud.entities.CpBidOrderExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,7 @@ public interface CpBidOrderMapper {
     int updateByPrimaryKeySelective(CpBidOrder record);
 
     int updateByPrimaryKey(CpBidOrder record);
+
+    OrderDTD selectprimaryDescByOrderMainId(Integer orderMainId);
+
 }

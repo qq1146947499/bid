@@ -36,6 +36,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 registry.addViewController("/colleage/item/index").setViewName("/item/index");
                 registry.addViewController("/colleage/Unpublished/index").setViewName("/item/unpublished");
                 registry.addViewController("/colleage/match/index").setViewName("/item/match");
+                registry.addViewController("//colleage/tobeprimed/index").setViewName("/item/tobeprimed");
 
             }
 

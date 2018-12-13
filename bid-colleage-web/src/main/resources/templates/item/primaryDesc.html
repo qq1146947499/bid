@@ -72,22 +72,19 @@
 
 
                             <div class="row">
-                                <th:block th:each="order:${pageInfo.data.list}">
+
                                 <div class="col-md-6">
 
-                                    <input th:value="${order.orderMainId}" hidden="hidden" id="orderMainId">
+
                                     <ul>
                                         <li>
-                                            申购人   &nbsp &nbsp   <span th:text="${order.orderPerson}"></span>
+                                            竞价金额   &nbsp &nbsp   <span th:text="${data.data.bidReason}"></span>
                                         </li>
                                         <li>
-                                            售后服务 &nbsp &nbsp  <span th:text="${order.remark}"></span>
+                                            差异描述 &nbsp &nbsp   <span th:text="${data.data.diffrencesDesc}" ></span>
                                         </li>
                                         <li>
-                                            申购设备 &nbsp &nbsp  <span th:text="${order.orderCode}"></span>
-                                        </li>
-                                        <li>
-                                            设备数量 &nbsp &nbsp  <span th:text="${order.unit}">自由</span>
+                                            售后服务 &nbsp &nbsp   <span th:text="${data.data.afterService}"></span>
                                         </li>
                                     </ul>
                                 </div>
@@ -95,48 +92,40 @@
 
                                     <ul>
                                         <li>
-                                            预算   &nbsp &nbsp   <span th:text="${order.orderTotalAmount}"></span>
+                                            竞价企业   &nbsp &nbsp    <span th:text="${data.data.companyName}" ></span>
                                         </li>
 
                                         <li>
-                                            送货地址   &nbsp &nbsp   <span th:text="${order.installationgSite}"></span>
-                                        </li>
-
-                                        <li>
-                                            设备品牌   &nbsp &nbsp   <span th:text="${order.isStandard}"></span>
-                                        </li>
-
-                                        <li>
-                                            设备参数   &nbsp &nbsp   <span th:text="${order.afterService}"></span>
+                                            竞价人   &nbsp &nbsp    <span th:text="${data.data.bidPerson}"></span>
                                         </li>
                                     </ul>
 
 
                                 </div>
-                                </th:block>
+
                             </div>
 
                             <div class="row">
                                    <div class="col-md-12">
-                                       <label>竞价金额</label>
-                                       <input required name="bidPrice" id="bidPrice">
+                                       <label>用户初选理由</label>
+                                       <input required name="userInitReason" id="userInitReason">
                                    </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>差异描述</label>
-                                    <input name="diffrencesDesc" id="diffrencesDesc">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>售后服务</label>
-                                    <input name="afterService" id="afterService">
-                                </div>
-                            </div>
-                            <input id="bidTime" hidden th:value="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd hh')}"/>
+
+
+
+                            <input id="initTime" hidden th:value="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd h h')}"/>
+                            <input id="companyId" hidden th:value="${data.data.companyId}"/>
+                            <input id="bidUserId" hidden th:value="${data.data.bidUserId}"/>
+                            <input id="bidInfoId" hidden th:value="${data.data.bidInfoId}"/>
+                            <input id="companyName" hidden th:value="${data.data.companyName}"/>
+                            <input id="afterService" hidden th:value="${data.data.afterService}"/>
+                            <input id="diffrencesDesc" hidden th:value="${data.data.diffrencesDesc}"/>
+                            <input id="bidReason" hidden th:value="${data.data.bidReason}"/>
+                            <input id="bidPerson" hidden th:value="${data.data.bidPerson}"/>
+                            <input id="orderMainId" hidden th:value="${data.data.orderMainId}"/>
                             <button id="orderSub" type="button" class="btn btn-success"><i
-                                    ></i> 提交竞价
+                                    ></i> 提交审核
                             </button>
                         </form>
 
@@ -175,20 +164,27 @@
                 return;
             }
 
+
+
+
             var loadingIndex = null;
             $.ajax({
                 type: "POST",
-                url: "/enterprise/addCoOrder",
-                data: {
-                    "bidReason":$("#bidPrice").val(),
-                    "diffrencesDesc":$("#diffrencesDesc").val(),
+                url: "/colleage/primary/addOrderDmain",
+                data:{
+
+
+
+                    "bidAmountRenminbi":$("#bidReason").val(),
                     "afterService":$("#afterService").val(),
-                    "bidTime":$("#bidTime").val(),
-                    "orderMainId":$("#orderMainId").val(),
+                    "companyName":$("#companyName").val(),
+                    "initUsername":$("#bidPerson").val(),
+                    "initTime":$("#initTime").val(),
                     "companyId":$("#companyId").val(),
-                    "bidPerson":$("#userAccount").val(),
-                    "createUsername":$("#userAccount").val(),
-                    "bidUserId":$("#userId").val(),
+                    "initUserId":$("#bidUserId").val(),
+                    "userInitReason":$("#userInitReason").val(),
+                    "initBidId":$("#bidInfoId").val(),
+                    "orderMainId":$("#orderMainId").val(),
                 },
                 beforeSend: function () {
                     loadingIndex = layer.msg('处理中', {icon: 16});

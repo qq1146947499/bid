@@ -350,6 +350,19 @@
         </trim>
     </insert>
 
+    <select id="selectprimaryDescByOrderMainId" resultType="com.bid.springcloud.DTD.OrderDTD">
+        SELECT
+        *
+        FROM
+        cp_bid_order cp
+        LEFT JOIN cp_company_info cpc ON cpc.company_id = cp.company_id
+        WHERE
+
+        order_main_id= #{orderMainId}
+
+        AND   status =1
+    </select>
+
     <select id="countByExample" parameterType="com.bid.springcloud.entities.CpBidOrderExample" resultType="java.lang.Integer" >
         select count(*) from cp_bid_order
         <if test="_parameter != null" >

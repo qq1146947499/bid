@@ -4,11 +4,17 @@ package com.bid.springcloud.DTD;/*
 
 */
 
+import com.bid.springcloud.entities.CoOrderDmand;
+import com.bid.springcloud.entities.CpCompanyInfo;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * co_order_dmand
@@ -19,8 +25,86 @@ import java.util.Date;
  */
 
 @Data
-public class OrderDTD{
+public class OrderDTD implements Serializable {
 
+
+    private List<CoOrderDmand> coOrderDmandList;
+
+
+    private CoOrderDmand coOrderDmand;
+
+    private Integer companyId;
+
+    private String regResourceId;
+
+    private String companyName;
+
+    private String companyAbstract;
+
+    private String address;
+
+    private String inProvince;
+
+    private String inCity;
+
+    private String juridicalPerson;
+
+    private String certificateType;
+
+    /**
+     * ֤
+     */
+    private String certificateCode;
+
+    /**
+     * Ӫҵִ
+     */
+    private String registrationCode;
+
+    /**
+     * 0
+     */
+    private String status;
+
+    /**
+     * 0
+     */
+    private String bidRight;
+
+    private String email;
+
+    private String authorizedBidder;
+
+    private String authorizedBidderTel;
+
+    private String authorizedEmail;
+
+    /**
+     * ָ
+     */
+    private String auditCollegeId;
+
+    /**
+     * Y
+     */
+    private String isRecommend;
+
+    private String remark;
+
+    /**
+     * Y:
+     */
+    private String isDxCenter;
+
+    /**
+     * Y:
+     */
+    private String isDxCollege;
+
+    /**
+     * ע
+     */
+    private String registCapital;
 
 
 
@@ -61,9 +145,7 @@ public class OrderDTD{
 
     private String bidUserId;
 
-    private String companyId;
 
-    private String companyName;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private String bidTime;
@@ -85,15 +167,8 @@ public class OrderDTD{
 
     private String createUsername;
 
-    /**
-     * Y:
-     */
-    private String isDxCenter;
 
-    /**
-     * Y:
-     */
-    private String isDxCollege;
+
 
     /**
      * Y
@@ -111,12 +186,9 @@ public class OrderDTD{
 
 
 
-
     private Integer userId;
 
     private String processId;
-
-
 
     private String processName;
 
@@ -124,7 +196,7 @@ public class OrderDTD{
 
     private String auditResult;
 
-    private String remark;
+
 
 
 
@@ -407,9 +479,9 @@ public class OrderDTD{
 
     private String logoPath;
 
-    private String inProvince;
 
-    private String inCity;
+
+
 
     private String auditCompany;
 
