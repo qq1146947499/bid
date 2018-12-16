@@ -14,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -222,6 +223,39 @@ public class CoOrderMainClientServiceImpl extends BaseApiService implements CoOr
         throw  new SellException(ResultEnum.UPDATE);
     }
 
+    @Override
+    @Transactional
+    public ResponseBase editReleaseOrder(Integer orderMainId) {
+
+       OrderDTD orderDTD = new OrderDTD();
+        orderDTD.setOrderMainId(String.valueOf(orderMainId));
+        orderDTD.setReadCount(
+                OrderProcessEnum.THENFILL.getMessage()+","+OrderProcessEnum.RELEASEING.getMessage()+","+OrderProcessEnum.APPROVAL.getMessage()+","
+                        +OrderProcessEnum.BIDDING.getMessage()+","+OrderProcessEnum.SUPPLIERQUOTATION.getMessage()+","+
+                        OrderProcessEnum.AFTERENDING.getMessage()+","+OrderProcessEnum.PRIMARY.getMessage()+","+OrderProcessEnum.APROVAL.getMessage()
+                            +","+OrderProcessEnum.RELEASEBIDDINGRESULTS.getMessage()
+        );
+
+        orderDTD.setProcessName(OrderProcessEnum.RELEASEBIDDINGRESULTS.getMessage());
+        orderDTD.setOrderProcess(OrderProcessEnum.RELEASEBIDDINGRESULTS.getCode());
+        //修改主表状态
+        //修改明细表的的流程名字
+        ResponseBase base = updateOrderMainUtils(orderDTD);
+
+        //修改供应商订单为已经中标
+
+        CpBidOrderExample cpBidOrderExample = new CpBidOrderExample();
+        cpBidOrderExample.createCriteria().andOrderMainIdEqualTo(String.valueOf(orderMainId));
+        CpBidOrder cpBidOrder = new CpBidOrder();
+        cpBidOrder.setIsFulfil("Y");
+        int i = cpBidOrderMapper.updateByExampleSelective(cpBidOrder, cpBidOrderExample);
+        if(i>0||base!=null){
+            return base;
+        }
+            throw  new  SellException(ResultEnum.UPDATE);
+
+    }
+
 
     @Transactional
     public ResponseBase updateOrderMainUtils(OrderDTD orderDTD) {
@@ -235,6 +269,10 @@ public class CoOrderMainClientServiceImpl extends BaseApiService implements CoOr
 
 
         Integer orderMainId=null;
+        if(orderDTD.getReadCount()!=null){
+            String readCount = orderDTD.getReadCount();
+            coOrderMain.setReadCount(readCount);
+        }
         if (orderDTD.getOrderMainId()!=null){
             orderMainId = Integer.parseInt(orderDTD.getOrderMainId());
             coOrderMainExampl.createCriteria().andOrderMainIdEqualTo(orderMainId);

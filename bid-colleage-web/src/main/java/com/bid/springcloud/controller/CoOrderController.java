@@ -43,6 +43,15 @@ public class CoOrderController extends BaseApiService{
 
 
 
+
+    @RequestMapping(value = "/add/ReleaseOrder")
+    @ResponseBody
+    public Object addReleaseOrder( Integer orderMainId){
+        ResponseBase base = coOrderServiceClient.editReleaseOrder(orderMainId);
+        return  base;
+    }
+
+
     @RequestMapping(value = "/primary/addOrderDmain")
     @ResponseBody
     public Object primaryaddOrderDmain( CoOrderDmand coOrderDmand){
@@ -141,7 +150,7 @@ public class CoOrderController extends BaseApiService{
     @RequestMapping("/add/order")
     @ResponseBody
     @Transactional
-    public ResponseBase addCoOrder(@Valid CoOrderMain coOrderMain, @Valid  CoOrderDmand coOrderDmand ,BindingResult result){
+    public ResponseBase         addCoOrder(@Valid CoOrderMain coOrderMain, @Valid  CoOrderDmand coOrderDmand ,BindingResult result){
         boolean b = result.hasErrors();
         if(result.hasErrors()){
             for (ObjectError error : result.getAllErrors()) {

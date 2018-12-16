@@ -59,7 +59,7 @@ public class CpUserController {
     public Object login(CpUser cpUser, HttpSession session){
 
 
-        UsernamePasswordToken token = new UsernamePasswordToken(cpUser.getUserAccount(), cpUser.getUserPass());
+            UsernamePasswordToken token = new UsernamePasswordToken(cpUser.getUserAccount(), cpUser.getUserPass());
         Subject subject = SecurityUtils.getSubject();
         try {
             CpUser base = cpUserServiceImpl.queryByCpUser(cpUser);

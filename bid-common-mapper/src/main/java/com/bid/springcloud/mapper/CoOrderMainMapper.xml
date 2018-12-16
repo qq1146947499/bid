@@ -269,10 +269,13 @@
         LEFT JOIN    co_order_dmand p ON  p.order_main_id = cm.order_main_id
         LEFT JOIN   cp_college_info cp ON  cp.college_id = cm.college_id
         LEFT JOIN co_order_process cop ON  cm.order_main_id = cop.order_main_id
-        LEFT JOIN cp_bid_order cpo ON cm.order_main_id = cop.order_main_id
+        LEFT JOIN cp_bid_order cpo ON cm.order_main_id = cpo.order_main_id
         WHERE 1=1
         <if test="companyId != null" >
             AND cm.order_main_id IN (SELECT  order_main_id FROM cp_bid_order WHERE company_id = #{companyId})
+        </if>
+        <if test="isFulfil != null" >
+            AND cm.order_main_id IN (SELECT  order_main_id FROM cp_bid_order WHERE is_fulfil=#{isFulfil})
         </if>
         <if test="orderProcess != null" >
             AND cm.order_process= #{orderProcess}

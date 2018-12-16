@@ -18,6 +18,8 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
        // super.addViewControllers(registry);
         //浏览器发送 /atguigu 请求来到 success
         registry.addViewController("/atguigu").setViewName("success");
+        registry.addViewController("/colleage/release/index").setViewName("/item/release");
+        registry.addViewController("/colleage/complete/index").setViewName("/item/complete");
     }
 
     //所有的WebMvcConfigurerAdapter组件都会一起起作用

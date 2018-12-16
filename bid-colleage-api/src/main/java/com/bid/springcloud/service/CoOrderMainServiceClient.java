@@ -106,6 +106,15 @@ public interface CoOrderMainServiceClient {
     ResponseBase addOrderPrimary(@RequestBody  CoOrderDmand coOrderDmand);
 
 
+    /**
+     *订单发布
+     * @param orderMainId
+     * @return
+     */
+    @PostMapping("/colleage/update/ReleaseOrder")
+    ResponseBase editReleaseOrder(@RequestParam("orderMainId") Integer orderMainId);
+
+
 //---------------------------------------暂时
     /**
      * 待初选订单详情 暂时
@@ -114,4 +123,9 @@ public interface CoOrderMainServiceClient {
      */
     @PostMapping("/colleage/query/PrimedListDesc")
     ResponseBase queryPrimedListDesc(@RequestParam("orderMainId") Integer orderMainId);
+
+
+
+
+
 }
