@@ -141,8 +141,8 @@
     function pageQuery(page) {
 
         $.ajax({
-                url: "/platform/queryOrderList/byProcessId",
-            data: {"processId" : "1",
+            url: "/platform/queryOrderList/byProcessId",
+            data: {"processId" : "7",
                 "page" : page,
                 },
 
@@ -230,14 +230,12 @@
 
 
     function goUpdatePage(id) {
-        window.location.href = "/platform/getReleaseAudit/orderMain?orderMainId=" + id;
+        window.location.href = "/platform/getToPrimary/orderMains/?orderMainId=" + id;
     }
 
     function goAssignPage(id) {
         window.location.href = "/pt/user/assign?id=" + id;
     }
-
-
 
     function editOrder(id, loginacct) {
         layer.confirm("订单【" + loginacct + "】审核, 是否继续", {icon: 3, title: '提示'}, function (cindex) {
@@ -245,7 +243,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/platform/editOrder/ByOrderMainId",
+                url: "/platform/editPrimary/ByOrderMainId",
                 data: {orderMainId: id},
                 success: function (result) {
                     if (result.rtnCode == 200) {

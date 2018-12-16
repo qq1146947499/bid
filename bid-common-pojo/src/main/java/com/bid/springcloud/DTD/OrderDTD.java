@@ -28,10 +28,12 @@ import java.util.Map;
 public class OrderDTD implements Serializable {
 
 
-    private List<CoOrderDmand> coOrderDmandList;
 
 
-    private CoOrderDmand coOrderDmand;
+
+    private String secondAuditReason;
+
+
 
     private Integer companyId;
 
@@ -363,14 +365,13 @@ public class OrderDTD implements Serializable {
      */
     private String secondAudit;
 
-    private String secondAuditReason;
 
     private String secondAuditUserId;
 
     private String secondAuditUserName;
 
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private String secondTime;
 
     private String bidAmount;

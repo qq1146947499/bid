@@ -55,4 +55,10 @@ public interface CoOrderMainMapper {
     List<OrderDTD> getTobePrimedOrder(OrderDTD orderDTD);
 
 
+    /**
+     *平台审核初选订单详情
+     * @param orderMainId
+     * @return
+     */
+    OrderDTD selectPrimaryTeByOrderMainId(Integer orderMainId);
 }

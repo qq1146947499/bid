@@ -26,6 +26,23 @@ public class PtOrderController {
 
 
 
+
+    @RequestMapping("/editPermary/order")
+    public Object editPeimaryTEOrder(OrderDTD orderDTD){
+
+        ResponseBase base = ptOrderClientService.editPrimaryTEOrder(orderDTD);
+        return base;
+    }
+
+    @RequestMapping("/getToPrimary/orderMains")
+    public  String getToPrimaryorderMains(Integer orderMainId, Model model){
+        ResponseBase coOrder = ptOrderClientService.queryToPrimaryCoOrderByOrderMainId(orderMainId);
+        ResponseBase cpOrder = ptOrderClientService.queryToPrimaryCpOrderByOrderMainId(orderMainId);
+        model.addAttribute("cpOrder",cpOrder.getData());
+        model.addAttribute("coOrder",coOrder.getData());
+        return  "/item/peimaryTE";
+    }
+
     @ResponseBody
     @RequestMapping("/queryOrderList/byProcessId")
     public Object getOrderList(Integer processId,@RequestParam(value = "page",required = false,defaultValue ="1") Integer page){
@@ -34,15 +51,12 @@ public class PtOrderController {
     }
 
 
-
-
     @RequestMapping("/getReleaseAudit/orderMain")
     public  String getEditOrderMain(Integer orderMainId, Model model){
         ResponseBase base = ptOrderClientService.selectOrderMainByOrderMainId(orderMainId);
         model.addAttribute("order",base);
         return  "/item/releaseTE";
     }
-
 
 
     @RequestMapping("/release/order")
