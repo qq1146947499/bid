@@ -20,7 +20,7 @@ public interface CouserService {
 
     Permission findPermsByUserId(Integer userId);
 
-    ResponseBase addCouser(CoUser ptUser);
+    ResponseBase addCouser(CoUser ptUser,boolean isRegiste);
 
 
     ResponseBase queryByuserName(String userName);
@@ -41,5 +41,7 @@ public interface CouserService {
     List<PtRole> getRoleByUser(Integer userId);
 
     List<PtResource> findPermsByRoleId(Integer roleId);
+
+    ResponseBase registerUser(CoUser coUser,boolean isRegister);
 }
 

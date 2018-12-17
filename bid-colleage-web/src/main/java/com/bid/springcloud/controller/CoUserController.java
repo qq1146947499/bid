@@ -15,10 +15,13 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 
 @Controller
@@ -32,10 +35,36 @@ public class CoUserController{
 
 
 
+
+
+
+    @RequestMapping("/userRegiste")
+    public Object userRegister(@Valid CoUser coUser, BindingResult bindingResult, Model model){
+
+        boolean isRegisterr =true;
+
+        if (bindingResult.hasErrors()) {
+
+            for (ObjectError error :bindingResult.getAllErrors() ) {
+                System.out.println(error);
+                model.addAttribute(error);
+            }
+            return model;
+        }
+        ResponseBase base = couserServiceImpl.registerUser(coUser, isRegisterr);
+
+        return base;
+    }
+
+
+
+
+
     @RequestMapping("/add/couser")
     @ResponseBody
     public Object addCouser(CoUser coUser){
-        ResponseBase base = couserServiceImpl.addCouser(coUser);
+        boolean isRegister = false;
+        ResponseBase base = couserServiceImpl.addCouser(coUser,isRegister);
         if(base!=null){
             return  base;
         }

@@ -16,14 +16,12 @@ import com.bid.springcloud.service.CoUserClientService;
 import com.bid.springcloud.service.CouserService;
 import com.bid.springcloud.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -91,8 +89,9 @@ public class CouserServiceImpl extends BaseApiService implements CouserService {
     }
 
     @Override
-    public ResponseBase addCouser(CoUser coUser) {
-        int i = coUserClientService.addCoUser(coUser);
+    public ResponseBase addCouser(CoUser coUser,boolean isRegister) {
+        isRegister=false;
+        int i = coUserClientService.addCoUser(coUser,isRegister);
         if (i>0){
             return  setResultSuccess("插入成功");
         }
@@ -164,5 +163,14 @@ public class CouserServiceImpl extends BaseApiService implements CouserService {
         }
         throw  new SellException(ResultEnum.SELECT);
 
+    }
+
+    @Override
+    public ResponseBase registerUser(CoUser coUser,boolean isRegister) {
+        int orderMainId = RandomUtils.nextInt(1, 1000000);
+        coUser.setUserId(orderMainId);
+        int i = coUserClientService.addCoUser(coUser,isRegister);
+
+        return setResultSuccess("添加成功");
     }
 }

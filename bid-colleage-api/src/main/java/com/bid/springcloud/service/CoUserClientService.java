@@ -26,7 +26,7 @@ public  interface CoUserClientService{
 
 
     @PostMapping("/colleage/add/couser")
-    int addCoUser(@RequestBody CoUser coUser);
+    int addCoUser(@RequestBody CoUser coUser,@RequestParam("isRegister") boolean isRegister);
 
 
     /**

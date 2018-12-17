@@ -1,18 +1,22 @@
 package com.bid.springcloud.service.impl;
 
 import com.bid.springcloud.base.BaseApiService;
+import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.*;
 import com.bid.springcloud.enums.ResultEnum;
 import com.bid.springcloud.exception.SellException;
 import com.bid.springcloud.mapper.CoUserMapper;
 import com.bid.springcloud.mapper.PtResourceMapper;
 import com.bid.springcloud.mapper.PtRoleMapper;
+import com.bid.springcloud.mapper.PtUserRoleMapper;
 import com.bid.springcloud.service.CoUserClientService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -24,7 +28,8 @@ public class CoUserServiceIClientmpl extends BaseApiService implements CoUserCli
 
     @Resource
     private PtRoleMapper ptRoleMapper;
-
+    @Resource
+    private PtUserRoleMapper ptUserRoleMapper;
 
 
     @Resource
@@ -33,8 +38,14 @@ public class CoUserServiceIClientmpl extends BaseApiService implements CoUserCli
 
 
     @Override
-    public int addCoUser(@RequestBody CoUser coUser) {
-
+    @Transactional
+    public int addCoUser(@RequestBody CoUser coUser,boolean isRegister) {
+        if(isRegister){
+            PtUserRole ptUserRole = new PtUserRole();
+            ptUserRole.setUserId(coUser.getUserId());
+            ptUserRole.setRoleId(12);
+            ptUserRoleMapper.insertSelective(ptUserRole);
+        }
         int i = coUserMapper.insertSelective(coUser);
         if(i>0){
            return  i;
@@ -138,6 +149,23 @@ public class CoUserServiceIClientmpl extends BaseApiService implements CoUserCli
         throw  new SellException(ResultEnum.INSERT);
     }
 
+ /*   @Override
+    @Transactional
+    public ResponseBase registerUser(@RequestBody CoUser coUser) {
+        UUID uuid = UUID.randomUUID();
+        String userId = uuid.toString().substring(1, 10);
+        coUser.setUserId(Integer.parseInt(userId));
+        int i = coUserMapper.insertSelective(coUser);
+        PtUserRole ptUserRole = new PtUserRole();
+        ptUserRole.setRoleId(12);
+        ptUserRole.setUserId(Integer.parseInt(userId));
+        int i1 = ptUserRoleMapper.insertSelective(ptUserRole);
+
+        if (i>0||i1>0){
+            return  setResultSuccess("注册成功");
+        }
+       throw new SellException(ResultEnum.INSERT);
+    }*/
 
 
 }

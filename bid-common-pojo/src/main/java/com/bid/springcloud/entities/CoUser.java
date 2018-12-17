@@ -1,5 +1,8 @@
 package com.bid.springcloud.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -10,12 +13,16 @@ import java.util.Date;
  * @date 2018-11-15
  */
 public class CoUser {
+
+
+
     private Integer userId;
-
+    @NotBlank(message = "用户账号不能为空")
     private String userAccount;
-
+    @NotBlank(message = "用户密码不能为空")
     private String userPass;
 
+    @NotBlank(message = "用户名不能为空")
     private String realName;
 
     /**
@@ -26,6 +33,7 @@ public class CoUser {
     /**
      * 0:
      */
+    @NotBlank(message = "用户状态不能为空")
     private String status;
 
     private String officePhone;
@@ -43,6 +51,7 @@ public class CoUser {
     /**
      * ע
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date regTime;
 
     private String auditor;
