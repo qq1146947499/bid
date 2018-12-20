@@ -1,6 +1,7 @@
 package com.bid.springcloud.service.impl;
 
 import com.bid.springcloud.base.BaseApiService;
+import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.*;
 import com.bid.springcloud.mapper.CpUserMapper;
 import com.bid.springcloud.mapper.PtResourceMapper;
@@ -26,6 +27,11 @@ public class CpUserServiceImpl extends BaseApiService implements CpUserClientSer
     @Resource
     private PtResourceMapper ptResourceMapper;
 
+
+    @Override
+    public ResponseBase findByTokenUser(String token) {
+        return null;
+    }
 
     @Override
     public CpUser queryCouser(@RequestBody CpUser cpUser) {

@@ -13,8 +13,8 @@ public interface Constants {
 	Integer HTTP_RES_CODE_201 = 201;
 	// 发送邮件
 	String MSG_EMAIL = "email";
-	// 会员token
-	String TOKEN_MEMBER = "TOKEN_MEMBER";
+	// 采购token
+	String TOKEN_COLLEAGE = "TOKEN_COLLEAGE";
 	// 支付token
 	String TOKEN_PAY = "TOKEN_pay";
 	// 支付成功

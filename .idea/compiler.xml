@@ -15,10 +15,14 @@
         <module name="bid-enterprise-api" />
         <module name="bid-enterprise-web" />
         <module name="bid-eureka" />
+        <module name="bid-messageMq" />
+        <module name="bid-pay-api" />
+        <module name="bid-pay-service" />
         <module name="bid-platform" />
         <module name="bid-platform-api" />
         <module name="bid-platform-web" />
         <module name="bid-protal" />
+        <module name="com-bid-message" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -33,11 +37,15 @@
       <module name="bid-enterprise-api" target="1.8" />
       <module name="bid-enterprise-web" target="1.8" />
       <module name="bid-eureka" target="1.8" />
+      <module name="bid-messageMq" target="1.8" />
+      <module name="bid-pay-api" target="1.8" />
+      <module name="bid-pay-service" target="1.8" />
       <module name="bid-platform" target="1.8" />
       <module name="bid-platform-api" target="1.8" />
       <module name="bid-platform-web" target="1.8" />
       <module name="bid-protal" target="1.8" />
       <module name="bid-provider-service-impl" target="1.8" />
+      <module name="com-bid-message" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

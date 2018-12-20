@@ -12,6 +12,9 @@
       <module fileurl="file://$PROJECT_DIR$/bid-enterprise-api/bid-enterprise-api.iml" filepath="$PROJECT_DIR$/bid-enterprise-api/bid-enterprise-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-enterprise-web/bid-enterprise-web.iml" filepath="$PROJECT_DIR$/bid-enterprise-web/bid-enterprise-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-eureka/bid-eureka.iml" filepath="$PROJECT_DIR$/bid-eureka/bid-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-messageMq/bid-messageMq.iml" filepath="$PROJECT_DIR$/bid-messageMq/bid-messageMq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-pay-api/bid-pay-api.iml" filepath="$PROJECT_DIR$/bid-pay-api/bid-pay-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bid-pay-service/bid-pay-service.iml" filepath="$PROJECT_DIR$/bid-pay-service/bid-pay-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-platform/bid-platform.iml" filepath="$PROJECT_DIR$/bid-platform/bid-platform.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-platform-api/bid-platform-api.iml" filepath="$PROJECT_DIR$/bid-platform-api/bid-platform-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/bid-platform-web/bid-platform-web.iml" filepath="$PROJECT_DIR$/bid-platform-web/bid-platform-web.iml" />

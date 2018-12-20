@@ -14,9 +14,12 @@ import com.bid.springcloud.enums.ResultEnum;
 import com.bid.springcloud.exception.SellException;
 import com.bid.springcloud.service.CoUserClientService;
 import com.bid.springcloud.service.CouserService;
+import com.bid.springcloud.service.RegisterMailboxProducer;
 import com.bid.springcloud.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,6 +33,14 @@ public class CouserServiceImpl extends BaseApiService implements CouserService {
 
     @Resource
     private CoUserClientService coUserClientService;
+
+
+    @Autowired
+    private RegisterMailboxProducer registerMailboxProducer;
+    @Value("${messages.queue}")
+    private String MESSAGESQUEUE;
+
+
 
 
     @Override

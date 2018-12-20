@@ -1,4 +1,3 @@
-package com.bid.springcloud.base;/*
 package com.bid.springcloud.base;
 
 import java.util.concurrent.TimeUnit;
@@ -32,4 +31,3 @@ public class BaseRedisService {
 	}
 
 }
-*/

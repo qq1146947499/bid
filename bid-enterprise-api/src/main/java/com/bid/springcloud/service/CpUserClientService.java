@@ -4,11 +4,14 @@ package com.bid.springcloud.service;/*
 
 */
 
+import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.*;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.POST;
 import java.util.List;
 
@@ -18,6 +21,10 @@ import java.util.List;
 public  interface CpUserClientService {
 
 
+
+
+    @PostMapping("/enterprise/findByTokenUser")
+     ResponseBase findByTokenUser(@RequestParam("token") String token);
     /**
      * 查询企业用户
      * @param cpUser

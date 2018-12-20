@@ -10,6 +10,8 @@ import com.bid.springcloud.entities.CpUser;
 import com.bid.springcloud.entities.PtResource;
 import com.bid.springcloud.entities.PtRole;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 

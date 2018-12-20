@@ -1,7 +1,6 @@
 package com.bid.springcloud.service.impl;
 
 import com.bid.springcloud.base.BaseApiService;
-import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.*;
 import com.bid.springcloud.enums.ResultEnum;
 import com.bid.springcloud.exception.SellException;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.UUID;
 
 
 @RestController
@@ -30,7 +28,6 @@ public class CoUserServiceIClientmpl extends BaseApiService implements CoUserCli
     private PtRoleMapper ptRoleMapper;
     @Resource
     private PtUserRoleMapper ptUserRoleMapper;
-
 
     @Resource
     private PtResourceMapper ptResourceMapper;

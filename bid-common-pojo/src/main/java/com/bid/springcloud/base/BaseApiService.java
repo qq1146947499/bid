@@ -2,6 +2,7 @@ package com.bid.springcloud.base;
 
 import com.bid.springcloud.constants.Constants;
 import com.google.common.collect.Maps;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -11,6 +12,8 @@ import java.util.Map;
 
 @Component
 public class BaseApiService implements Serializable {
+
+
 
 	/**
 	 *
@@ -72,7 +75,7 @@ public class BaseApiService implements Serializable {
 	 *
 	 * 方法描述 判断Map集合非null 非空 返回true 否则返回false
 	 *
-	 * @param list
+	 * @param map
 	 * @return
 	 */
 	public static boolean isNotNull(Map<Object, Object> map){
@@ -85,7 +88,7 @@ public class BaseApiService implements Serializable {
 	 *
 	 * 方法描述 判断Map集合是null或者空 返回true 否则返回false
 	 *
-	 * @param list
+	 * @param map
 	 * @return
 	 */
 	public static boolean isNull(Map<Object, Object> map){

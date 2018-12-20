@@ -6,7 +6,6 @@ package com.bid.springcloud.shiro;/*
 
 import com.bid.springcloud.entities.PtResource;
 import com.bid.springcloud.entities.PtRole;
-import com.bid.springcloud.entities.PtUser;
 import lombok.Data;
 
 import java.util.HashSet;

@@ -12,9 +12,6 @@
     <artifactId>bid-colleage-api</artifactId>
     <dependencies>
 
-
-
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +33,8 @@ public class CpUserServiceImpl extends BaseApiService implements CpuserService {
 
 
     @Override
-    public CpUser queryByCpUser(@RequestBody CpUser cpUser) {
+    public CpUser queryByCpUser(CpUser cpUser) {
+
         CpUser CpUser1 = cpUserClientService.queryCouser(cpUser);
         log.debug(cpUser + "开始查询");
         if (CpUser1 != null) {

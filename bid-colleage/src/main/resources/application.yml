@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8003
 
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml  #mybatis所在路径
@@ -11,31 +11,38 @@ spring:
    application:
     name: microservicecloud-colleage
    datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: org.gjt.mm.mysql.Driver
-    url: jdbc:mysql://localhost:3306/bid
-    username: root
-    password: root
-    dbcp2:
-      min-idle: 5
-      initial-size: 5
-      max-total: 5
-      max-wait-millis: 200
-
+         url: jdbc:mysql://127.0.0.1:3306/bid
+         username: root
+         password: root
+         # 使用druid数据源
+         type: com.alibaba.druid.pool.DruidDataSource
+         driver-class-name: com.mysql.jdbc.Driver
+         filters: stat
+         maxActive: 20
+         initialSize: 1
+         maxWait: 60000
+         minIdle: 1
+         timeBetweenEvictionRunsMillis: 60000
+         minEvictableIdleTimeMillis: 300000
+         validationQuery: select 'x'
+         testWhileIdle: true
+         testOnBorrow: false
+         testOnReturn: false
+         poolPreparedStatements: true
+         maxOpenPreparedStatements: 20
 eureka:
   client: #客户端注册进eureka服务列表内
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
   instance:
-    instance-id: microservicecloud-dept8001-hystrix   #自定义服务名称信息
+    instance-id: microservicecloud-colleage-hystrix   #自定义服务名称信息
     prefer-ip-address: true     #访问路径可以显示IP地址
 
 info:
-  app.name: atguigu-microservicecloud
-  company.name: www.atguigu.com
+  app.name: bid-microservicecloud
+  company.name: www.bid.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
-
-
+debug: true
 
 
