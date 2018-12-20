@@ -4,17 +4,13 @@ package com.bid.springcloud.service;/*
 
 */
 
-import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.entities.CoUser;
 import com.bid.springcloud.entities.PtResource;
 import com.bid.springcloud.entities.PtRole;
-import com.bid.springcloud.entities.PtUser;
-import com.bid.springcloud.shiro.CoUserShiro;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.GET;
 import java.util.List;
 
 

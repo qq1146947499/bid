@@ -54,6 +54,13 @@
                     </exclusions>
                 </dependency>-->
 
+
+        <dependency>
+            <groupId>com.bid</groupId>
+            <artifactId>bid-enterprise-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>com.bid</groupId>
             <artifactId>bid-common-pojo</artifactId>
@@ -161,6 +168,7 @@
         </dependency>
 
 
+
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-autoconfigure</artifactId>
@@ -171,6 +179,11 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bid</groupId>
+            <artifactId>bid-enterprise-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

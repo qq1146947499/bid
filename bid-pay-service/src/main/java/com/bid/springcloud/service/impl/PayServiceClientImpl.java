@@ -1,25 +1,23 @@
-package com.bid.springcloud.service.impl;/*
+/*
+package com.bid.springcloud.service.impl;*/
+/*
 @author zhoucong
 @date ${date}-${time}
 
-*/
+*//*
+
 
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.bid.springcloud.DTD.OrderDTD;
 import com.bid.springcloud.base.BaseApiService;
 import com.bid.springcloud.base.ResponseBase;
 import com.bid.springcloud.config.AlipayConfig;
-import com.bid.springcloud.constants.Constants;
 import com.bid.springcloud.entities.CoOrderMain;
-import com.bid.springcloud.enums.OrderProcessEnum;
 import com.bid.springcloud.mapper.CoOrderMainMapper;
-import com.bid.springcloud.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,15 +43,19 @@ public class PayServiceClientImpl extends BaseApiService implements PayServiceCl
         }
         // 2.判断token有效期
         // 3.使用token 查找redis 找到对应支付id
-       /* String payId = (String) baseRedisService.getString(payToken);
+       */
+/* String payId = (String) baseRedisService.getString(payToken);
         if (StringUtils.isEmpty(payId)) {
             return setResultError("支付请求已经超时!");
-        }*/
+        }*//*
+
         // 4.使用支付id，进行下单
         //Long payIDl = Long.parseLong(payId);
 
         // 5.使用支付id查询支付信息
-        /*PaymentInfo paymentInfo = paymentInfoDao.getPaymentInfo(payIDl);*/
+        */
+/*PaymentInfo paymentInfo = paymentInfoDao.getPaymentInfo(payIDl);*//*
+
         CoOrderMain coOrderMain = coOrderMainMapper.selectByPrimaryKey(Integer.parseInt(ordermainId));
         if (coOrderMain == null) {
             return setResultError("未找到支付信息");
@@ -105,3 +107,4 @@ public class PayServiceClientImpl extends BaseApiService implements PayServiceCl
         }
     }
 }
+*/

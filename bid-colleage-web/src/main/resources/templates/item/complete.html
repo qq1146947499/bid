@@ -144,7 +144,7 @@
             url: "/colleage/get/unauditedorderList",
             data: {"collegeId" : $("#collegeId").val(),
                 "page" : page,
-                "orderProcess":"9",
+                "orderProcess":"10",
                 },
 
             type: "POST",
@@ -174,8 +174,8 @@
                         context += '  <td>' + order.processName + '</td>';
                         context += '  <td>' + order.inProvince + '</td>';
                         context += '  <td>'
-                       /* context += '      <button type="button" onclick="goUpdatePage(' + order.orderMainId + ')" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>';*/
-                        context += '	  <button type="button" onclick="subOrder(' + order.orderMainId + ', \'' + order.orderTitle + '\')" class="btn btn-info btn-xs">确认订单<i class=" glyphicon glyphicon-submit"></i></button>';
+                        context += '      <button type="button" onclick="goUpdatePage(' + order.orderMainId + ')" class="btn btn-primary btn-xs"><i class="">确认支付</i></button>';
+                        /*context += '	  <button type="button" onclick="subOrder(' + order.orderMainId + ', \'' + order.orderTitle + '\')" class="btn btn-info btn-xs">确认支付<i class=" glyphicon glyphicon-submit"></i></button>';*/
                         context += '  </td>';
                         context += '</tr>';
 
@@ -232,7 +232,7 @@
 
 
     function goUpdatePage(id) {
-        window.location.href = "/colleage/getEditOrderMain?orderMainId=" + id;
+        window.location.href = "/colleage/aliPay?orderMainId=" + id;
     }
 
     function goAssignPage(id) {
@@ -240,14 +240,14 @@
     }
 
     function subOrder(id, loginacct) {
-        layer.confirm("生成【" + loginacct + "】订单, 是否继续", {icon: 3, title: '提示'}, function (cindex) {
+        layer.confirm("支付【" + loginacct + "】订单, 是否继续", {icon: 3, title: '提示'}, function (cindex) {
 
             // 删除用户信息
             $.ajax({
                 type: "POST",
-                url: "/colleage/add/ReleaseOrder",
+                url: "/colleage/aliPay",
                 data: {orderMainId: id},
-                success: function (result) {
+             /*   success: function (result) {
                     if (result.rtnCode == 200) {
                         pageQuery(1);
                     } else {
@@ -255,7 +255,7 @@
 
                         });
                     }
-                }
+                }*/
             });
 
             layer.close(cindex);

@@ -24,10 +24,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0ANRsJjU7jf3TJr6jitLbymbef4ByOFbfhtGi34lmlRzQYyorp8VoVtMDpd9UhjfFwwpSnVTHmyM5qtgVu2VjVeg0JCLKy+naFrcXdLWiuTE8vxSm/wCr42d30/J4qexDwxLp5/1Ll9Na0xcCn+jlUytl5ry+xQujKHAnC3IMaY4KT9pqP5MycJrAJmVPIK+sQ3vUkrpQ/pSMO9CDaIojmZxW2vFIoCQ45dsnB8wnR4KkLShmbuTCcGppzG0cjAaiO3AxQ5PDiRonHzHWg06vkrmkAf9KN1p/V0HHEf95oyrKNPBzR/gHwK9mwk23NOhaGD5+NrvgmD/Y59GDU9dUQIDAQAB";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "http://127.0.0.1:8080/notify_url.jsp";
+    public static String notify_url = "http://cq.xuduan.tech:37770//colleage/notifyUrl";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String return_url = "http://127.0.0.1:8080/return_url.jsp";
+    public static String return_url = "http://cq.xuduan.tech:37770//colleage/returnUrl";
 
     // 签名方式
     public static String sign_type = "RSA2";

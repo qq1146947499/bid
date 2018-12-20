@@ -1,8 +1,17 @@
-package java.com.bid.springcloud.service;/*
+/*
+package java.com.bid.springcloud.service;
+
+import com.bid.springcloud.base.ResponseBase;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 @author zhoucong
 @date ${date}-${time}
 
-*/
+
+
 
 import com.bid.springcloud.DTD.OrderDTD;
 import com.bid.springcloud.base.ResponseBase;
@@ -21,3 +30,4 @@ public interface PayServiceClient {
     ResponseBase findPayToken (@RequestParam("ordermainId") String  ordermainId);
 
 }
+*/
